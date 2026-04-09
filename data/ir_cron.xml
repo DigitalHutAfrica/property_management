@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="rent_recurring_invoice" model="ir.cron">
+            <field name="name">Rental Management: Rent Recurring Invoice</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.tenancy_recurring_invoice()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="rent_recurring_invoice_quarterly" model="ir.cron">
+            <field name="name">Rental Management: Rent Recurring Invoice Quarterly</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.tenancy_recurring_quarterly_invoice()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="rent_recurring_invoice_yearly" model="ir.cron">
+            <field name="name">Rental Management: Rent Recurring Invoice Yearly</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.tenancy_yearly_invoice()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="expiring_invoice" model="ir.cron">
+            <field name="name">Rental Management: Contract Status Update Based on the End Date</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.tenancy_expire()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="sale_recurring_invoice" model="ir.cron">
+            <field name="name">Rental Management: Sale Recurring Invoice</field>
+            <field name="model_id" ref="rental_management.model_property_vendor"/>
+            <field name="code" eval="'model.sale_recurring_invoice()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="tenancy_manual_recurring_invoice" model="ir.cron">
+            <field name="name">Rental Management: Manual Recurring Invoice</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.tenancy_manual_invoice()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="property_status_update_if_expired" model="ir.cron">
+            <field name="name">Rental Management: Expired Contract Update</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.property_stage_update()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="expiring_agreement_alert" model="ir.cron">
+            <field name="name">Rental Management: Agreement Expiring in 90 Days, 60 Days &amp; 30 Days Alert</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.action_send_expiry_alert()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="expiring_agreement_list_alert" model="ir.cron">
+            <field name="name">Rental Management: Agreement Expiring in 45 Days List Alert</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.send_expiring_contract_list()'"/>
+            <field name="interval_number">7</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="payment_followup_alert" model="ir.cron">
+            <field name="name">Rental Management: Payment Reminder Alert after 7 Days of Invoice Date</field>
+            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="code" eval="'model.action_payment_reminder_alert()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="payment_prior_alert" model="ir.cron">
+            <field name="name">Rental Management: Installment Payment 15 Days &amp; 3 Days Prior Alert</field>
+            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="code" eval="'model.action_prior_payment_alert()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="add_parent_property_contract" model="ir.cron">
+            <field name="name">Rental Management: Add Parent Property to Contract</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="code" eval="'model.add_parent_property_to_contract()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="add_invoice_period_to_old_invoice" model="ir.cron">
+            <field name="name">Rental Management: Add Invoice Period to Old Invoices</field>
+            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="code" eval="'model.add_invoice_period_to_old_invoices()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="define_person_customer_or_landlord" model="ir.cron">
+            <field name="name">Rental Management: Add Data to Customer &amp; Landlord fields</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="code" eval="'model.compute_customer_or_landlord()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="get_parent_property_data_rent_invoice" model="ir.cron">
+            <field name="name">Rental Management: Get parent property data in rent invoices</field>
+            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="code" eval="'model.get_parent_property()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="get_parent_property_data_account_move_invoice" model="ir.cron">
+            <field name="name">Rental Management: Get parent property data in account move invoices</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="code" eval="'model.get_parent_property_account_move()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="add_tenancy_wise_property_and_parent_property" model="ir.cron">
+            <field name="name">Rental Management: Add tenancy wise property and parent property data</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="code" eval="'model.add_property_and_parent_property()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="update_property_status_lease_contract_based" model="ir.cron">
+            <field name="name">Rental Management: Update property status based on lease contracts</field>
+            <field name="model_id" ref="model_property_details"/>
+            <field name="code" eval="'model.property_status_contract_based()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="update_total_rent_amount_based_on_invoice_period" model="ir.cron">
+            <field name="name">Rental Management: Update the total rent amount based on the invoice period</field>
+            <field name="model_id" ref="model_rent_invoice"/>
+            <field name="code" eval="'model.fix_total_rent_amount()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="rent_increment_percentage_and_date_based" model="ir.cron">
+            <field name="name">Rental Management: Rent increment based on increment date &amp; increment percentage</field>
+            <field name="model_id" ref="model_tenancy_details"/>
+            <field name="code" eval="'model.rent_increment_cron()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="set_company_of_contract_form_property" model="ir.cron">
+            <field name="name">Rental Management: Set company in contract based on property and contract type</field>
+            <field name="model_id" ref="model_tenancy_details"/>
+            <field name="code" eval="'model.set_contract_company_cron()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="set_company_of_rent_invoice_form_contract" model="ir.cron">
+            <field name="name">Rental Management: Set company in rent invoice based on contract</field>
+            <field name="model_id" ref="model_rent_invoice"/>
+            <field name="code" eval="'model.set_company_as_per_contract()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="fix_rent_type_in_properties" model="ir.cron">
+            <field name="name">Rental Management: Fix rent type in properties</field>
+            <field name="model_id" ref="model_property_details"/>
+            <field name="code" eval="'model.fix_rent_type()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="fix_total_service_charge_in_rent_invoices" model="ir.cron">
+            <field name="name">Rental Management: Fix total service charge in rent invoices</field>
+            <field name="model_id" ref="model_rent_invoice"/>
+            <field name="code" eval="'model.fix_total_service_charge()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="rent_increment_for_past_date" model="ir.cron">
+            <field name="name">Rental Management: Rent increment for past increment date in contract</field>
+            <field name="model_id" ref="model_tenancy_details"/>
+            <field name="code" eval="'model.old_contract_invoice_increment()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="fix_rent_per_month_in_rent_invoices" model="ir.cron">
+            <field name="name">Rental Management: Fix rent / month in invoices</field>
+            <field name="model_id" ref="model_rent_invoice"/>
+            <field name="code" eval="'model.fix_new_rent_per_month()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="parent_property_report_mail" model="ir.cron">
+            <field name="name">Rental Management: Parent Property Reports Mail</field>
+            <field name="model_id" ref="model_parent_property"/>
+            <field name="code" eval="'model.send_property_report_mail()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="fix_property_status_based_on_contracts" model="ir.cron">
+            <field name="name">Rental Management: Fix property status</field>
+            <field name="model_id" ref="model_property_details"/>
+            <field name="code" eval="'model.fix_property_status()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="add_properties_and_dates_to_journal_entries" model="ir.cron">
+            <field name="name">Rental Management: Add properties and dates to journal entries</field>
+            <field name="model_id" ref="model_account_move"/>
+            <field name="code" eval="'model.add_properties_and_dates_to_journal_entries()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="link_utility_bill_with_payments" model="ir.cron">
+            <field name="name">Rental Management: Link utility bill with payments</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="code" eval="'model.add_utility_bill_id_to_payments()'"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="expiring_contract_list">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="text-center my-5">
+                                <h2>
+                                    Expiring Contracts
+                                </h2>
+                                <h6 class="fw-light">
+                                    (In 45 Days)
+                                </h6>
+                            </div>
+                            <table class="w-100 text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2">
+                                            Contract Ref.
+                                        </th>
+                                        <th>
+                                            Contract Type
+                                        </th>
+                                        <th>
+                                            Property
+                                        </th>
+                                        <th>
+                                            Tenant
+                                        </th>
+                                        <th>
+                                            Landlord
+                                        </th>
+                                        <th>
+                                            Start Date
+                                        </th>
+                                        <th>
+                                            End Date
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="docs" t-as="doc">
+                                        <t t-if="doc.days_left == 45 and doc.contract_type == 'running_contract'">
+                                            <tr>
+                                                <td class="py-1">
+                                                    <span t-field="doc.tenancy_seq" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="doc.contract_type_name" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="doc.property_id.name"/> - <span t-field="doc.property_id.type"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="doc.tenancy_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="doc.property_landlord_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="doc.start_date"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="doc.end_date"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

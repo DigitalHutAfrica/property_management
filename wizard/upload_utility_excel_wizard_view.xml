@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="upload_utility_excel_view_form" model="ir.ui.view">
+        <field name="name">upload_utility_excel_view_form</field>
+        <field name="model">upload.utility.excel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="file" filename="file_name" widget="binary"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Upload" type="object" class="btn btn-outline-success"
+                                name="upload_file"/>
+                        <button string="Cancel" special="cancel" class="btn btn-outline-danger"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="upload_utility_excel_action" model="ir.actions.act_window">
+        <field name="name">Upload Excel</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">upload.utility.excel</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

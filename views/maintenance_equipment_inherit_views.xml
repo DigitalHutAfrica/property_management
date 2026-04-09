@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="maintenance_equipment_inherit_views" model="ir.ui.view">
+        <field name="name">maintenance.equipment.inherit.views</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//widget[@name='web_ribbon']" position="after">
+                <field name="qr_code" widget="image" class="oe_avatar"/>
+            </xpath>
+
+            <xpath expr="//field[@name='technician_user_id']" position="attributes">
+                <attribute name="domain">[('is_maintenance_team', '=', True)]</attribute>
+            </xpath>
+            <xpath expr="//field[@name='technician_user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='technician_user_id']" position="after">
+                <field name="technician_ids" widget="many2many_tags" domain="[('is_maintenance_team', '=', True)]"/>
+            </xpath>
+
+            <xpath expr="//field[@name='location']" position="after">
+                <field name="main_property_id" required="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="required">True</attribute>
+            </xpath>
+
+
+            <xpath expr="//page[@name='maintenance']" position="after">
+                <page name="inspection_parameter" string="Inspection Parameters">
+                    <field name="inspection_parameter_line_ids">
+                        <list editable="bottom">
+                            <field name="name" required="1"/>
+                            <field name="inspection_frequency" required="1"/>
+                            <field name="param_val"/>
+                            <field name="param_unit_id" required="1"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="property_wise_occupancy_report_mail" model="mail.template">
+            <field name="name">Property Wise Occupancy</field>
+            <field name="model_id" ref="rental_management.model_parent_property"/>
+            <field name="subject">Property Wise Occupancy</field>
+            <field name="body_html" type="html">
+                <style>
+                    .text-right {
+                    text-align: right;
+                    }
+                    .text-center {
+                    text-align: left;
+                    }
+                    tr:nth-child(even) {background-color: #f2f2f2;}
+                    .center {
+                    margin-left: 3rem;
+                    margin-right: 3rem;
+                    padding-left: 3rem;
+                    padding-right:3rem;
+                    }
+                </style>
+                <table class="table center table-bordered border-primary"
+                       style="border:1px solid; border-collapse: collapse; width:90%; vertical-align:center;">
+                    <tr style="border:1px solid; padding:0.625rem; background-color: #f59471;">
+                        <th colspan="7" style="border:1px solid; padding:0.625rem; text-align:center;">
+                            Parent Property Wise Occupancy
+                        </th>
+                    </tr>
+                    <tr style="border:1px solid; padding:0.625rem;background-color: #f7b299;">
+                        <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                            <strong>
+                                Parent Property
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                Total Properties
+                            </strong>
+
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                Sold
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                Booked
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                On Lease
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                Available
+                            </strong>
+                        </td>
+                        <td style="border:1px solid;padding:0.625rem;" class="text-right">
+                            <strong>
+                                Occupancy %
+                            </strong>
+                        </td>
+                    </tr>
+                    <t t-set="total_properties" t-value="0"/>
+                    <t t-set="sold_total_properties" t-value="0"/>
+                    <t t-set="booked_total_properties" t-value="0"/>
+                    <t t-set="on_lease_total_properties" t-value="0"/>
+                    <t t-set="available_total_properties" t-value="0"/>
+                    <t t-foreach="object.env.context.get('properties')" t-as="property">
+                        <tr style="border:1px solid; padding:0.625rem;">
+                            <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                                <t t-esc="property.get('name')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="property.get('property_count')"/>
+                                <t t-set="total_properties"
+                                   t-value="total_properties + property.get('property_count')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="property.get('sold_property_count')"/>
+                                <t t-set="sold_total_properties"
+                                   t-value="sold_total_properties + property.get('sold_property_count')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="property.get('booked_property_count')"/>
+                                <t t-set="booked_total_properties"
+                                   t-value="booked_total_properties + property.get('booked_property_count')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="property.get('on_lease_property_count')"/>
+                                <t t-set="on_lease_total_properties"
+                                   t-value="on_lease_total_properties + property.get('on_lease_property_count')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="property.get('available_property_count')"/>
+                                <t t-set="available_total_properties"
+                                   t-value="available_total_properties + property.get('available_property_count')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-if="(property.get('property_count') - property.get('booked_property_count') - property.get('sold_property_count')) > 0">
+                                    <t t-esc="round((property.get('on_lease_property_count') * 100)/(property.get('property_count') - property.get('booked_property_count') - property.get('sold_property_count')), 2)"/>
+                                </t>
+                                <t t-else="">
+                                    <span>0.0</span>
+                                </t>
+                                %
+                            </td>
+                        </tr>
+                    </t>
+                    <tr style="border:1px solid; padding:0.625rem; background-color: #f59471;">
+                        <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                            <strong>
+                                Total
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <t t-esc="total_properties"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <t t-esc="sold_total_properties"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <t t-esc="booked_total_properties"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <t t-esc="on_lease_total_properties"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <t t-esc="available_total_properties"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong t-if="(total_properties - sold_total_properties - booked_total_properties) > 0">
+                                <t t-esc="round((on_lease_total_properties * 100) / (total_properties - sold_total_properties - booked_total_properties), 2)"/>
+                                %
+                            </strong>
+                            <strong t-else="">
+                                <span>0.0 %</span>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <hr/>
+                <br/>
+                <br/>
+                <table style="border:1px solid; border-collapse: collapse; width:90%;" class="center">
+                    <tr style="border:1px solid; padding:0.625rem;background-color: #f7e481;">
+                        <th colspan="7" style="border:1px solid; padding:0.625rem; text-align:center;">
+                            Parent Property Wise Rent Collection and Outstanding
+                        </th>
+                    </tr>
+                    <tr style="border:1px solid; padding:0.625rem; background-color: #f7eaa8;">
+                        <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                            <strong>
+                                Parent Property
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                YTD (Expected)
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                YTD (Collected)
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                YTD (Outstanding)
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                Last Month (Expected)
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                Last Month (Collected)
+                            </strong>
+                        </td>
+                        <td style="border:1px solid;padding:0.625rem;" class="text-right">
+                            <strong>
+                                Last Month (Outstanding)
+                            </strong>
+                        </td>
+                    </tr>
+                    <t t-foreach="object.env.context.get('collection_records')" t-as="record">
+                        <tr style="border:1px solid; padding:0.625rem;">
+                            <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                                <t t-esc="record.get('parent_property')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="record.get('ytd_expected')" t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="record.get('ytd_collected')" t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="record.get('ytd_outstanding')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="record.get('prev_month_expected')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="record.get('prev_month_collected')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <t t-esc="record.get('prev_month_outstanding')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                        </tr>
+                    </t>
+                    <tr style="background-color: #f7e481;">
+                        <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                            <strong>Total</strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <span>$</span>
+                                <t t-esc="object.env.context.get('total_ytd_expected')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <span>$</span>
+                                <t t-esc="object.env.context.get('total_ytd_collected')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <span>$</span>
+                                <t t-esc="object.env.context.get('total_ytd_outstanding')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <span>$</span>
+                                <t t-esc="object.env.context.get('total_prev_expected')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <span>$</span>
+                                <t t-esc="object.env.context.get('total_prev_collected')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                <span>$</span>
+                                <t t-esc="object.env.context.get('total_prev_outstanding')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+                <hr/>
+                <br/>
+                <br/>
+                <table style="border:1px solid; border-collapse: collapse; width:90%;" class="center">
+                    <tr style="border:1px solid; padding:0.625rem;background-color: #86cffc;">
+                        <th colspan="7" style="border:1px solid; padding:0.625rem; text-align:center;">
+                            Outstanding Ageing
+                        </th>
+                    </tr>
+                    <tr style="border:1px solid; padding:0.625rem;background-color: #a9ddfc;">
+                        <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                            <strong>
+                                Tenant/Customer
+                            </strong>
+                        </td>
+                        <td style="border:1px solid;padding:0.625rem;" class="text-center">
+                            <strong>
+                                Property
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                1-30 Days
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                31-60 Days
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                61-90 Days
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                91-120 Days
+                            </strong>
+                        </td>
+                        <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                            <strong>
+                                >120 Days
+                            </strong>
+                        </td>
+                    </tr>
+                    <t t-foreach="object.env.context.get('ageing_data')" t-as="data">
+                        <tr style="border:1px solid; padding:0.625rem;">
+                            <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                                <t t-esc="data.get('customer')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-center">
+                                <t t-esc="data.get('property')"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <span>$</span>
+                                <t t-esc="data.get('one_to_thirty')" t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <span>$</span>
+                                <t t-esc="data.get('thirty_one_to_sixty')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <span>$</span>
+                                <t t-esc="data.get('sixty_one_to_ninty')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <span>$</span>
+                                <t t-esc="data.get('ninty_one_to_one_twenty')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                            <td style="border:1px solid; padding:0.625rem;" class="text-right">
+                                <span>$</span>
+                                <t t-esc="data.get('greater_than_one_twenty')"
+                                   t-options="{'widget': 'float', 'precision':2}"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

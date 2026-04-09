@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <!-- Property Manager group — scoped to assigned properties only -->
+    <record id="property_manager_own" model="res.groups">
+      <field name="name">Property Manager (Own Properties)</field>
+      <field name="implied_ids" eval="[(4, ref('property_rental_officer'))]"/>
+      <field name="category_id" ref="module_rental_management"/>
+    </record>
+
+    <!-- Record rules for Property Manager group -->
+
+    <!-- Parent properties: only see buildings where they are the manager -->
+    <record id="rule_manager_parent_property" model="ir.rule">
+      <field name="name">Parent Property — manager sees own buildings only</field>
+      <field name="model_id" ref="model_parent_property"/>
+      <field name="groups" eval="[(4, ref('property_manager_own'))]"/>
+      <field name="domain_force">
+        [('property_manager_id', '=', user.id)]
+      </field>
+      <field name="perm_read" eval="True"/>
+      <field name="perm_write" eval="True"/>
+      <field name="perm_create" eval="False"/>
+      <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Property units: only see units under their managed buildings -->
+    <record id="rule_manager_property_details" model="ir.rule">
+      <field name="name">Property Details — manager sees own units only</field>
+      <field name="model_id" ref="model_property_details"/>
+      <field name="groups" eval="[(4, ref('property_manager_own'))]"/>
+      <field name="domain_force">
+        [('property_manager_id', '=', user.id)]
+      </field>
+      <field name="perm_read" eval="True"/>
+      <field name="perm_write" eval="True"/>
+      <field name="perm_create" eval="True"/>
+      <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Contracts: only see contracts for their properties -->
+    <record id="rule_manager_tenancy" model="ir.rule">
+      <field name="name">Tenancy — manager sees own property contracts only</field>
+      <field name="model_id" ref="model_tenancy_details"/>
+      <field name="groups" eval="[(4, ref('property_manager_own'))]"/>
+      <field name="domain_force">
+        [('property_manager_id', '=', user.id)]
+      </field>
+      <field name="perm_read" eval="True"/>
+      <field name="perm_write" eval="True"/>
+      <field name="perm_create" eval="True"/>
+      <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Rent invoices: only see invoices for their properties -->
+    <record id="rule_manager_rent_invoice" model="ir.rule">
+      <field name="name">Rent Invoice — manager sees own properties only</field>
+      <field name="model_id" ref="model_rent_invoice"/>
+      <field name="groups" eval="[(4, ref('property_manager_own'))]"/>
+      <field name="domain_force">
+        [('property_manager_id', '=', user.id)]
+      </field>
+      <field name="perm_read" eval="True"/>
+      <field name="perm_write" eval="True"/>
+      <field name="perm_create" eval="True"/>
+      <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Utility bills: only see bills for their properties -->
+    <record id="rule_manager_utility_bill" model="ir.rule">
+      <field name="name">Utility Bill — manager sees own properties only</field>
+      <field name="model_id" ref="model_utility_bill"/>
+      <field name="groups" eval="[(4, ref('property_manager_own'))]"/>
+      <field name="domain_force">
+        [('property_manager_id', '=', user.id)]
+      </field>
+      <field name="perm_read" eval="True"/>
+      <field name="perm_write" eval="True"/>
+      <field name="perm_create" eval="True"/>
+      <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Handover: only see handovers for their properties -->
+    <record id="rule_manager_handover" model="ir.rule">
+      <field name="name">Handover — manager sees own properties only</field>
+      <field name="model_id" ref="model_handover_property"/>
+      <field name="groups" eval="[(4, ref('property_manager_own'))]"/>
+      <field name="domain_force">
+        [('property_manager_id', '=', user.id)]
+      </field>
+      <field name="perm_read" eval="True"/>
+      <field name="perm_write" eval="True"/>
+      <field name="perm_create" eval="True"/>
+      <field name="perm_unlink" eval="False"/>
+    </record>
+
+  </data>
+</odoo>

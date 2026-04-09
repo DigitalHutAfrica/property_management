@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="tenancy_details_qweb_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="text-center my-5">
+                            <h3 class="display-2">
+                                Contract Details
+                            </h3>
+                        </div>
+                        <table class="w-100 mt-4">
+                            <thead>
+                                <tr>
+                                    <th class="py-2">
+                                        Property
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center py-1">
+                                        <span t-field="doc.property_id" class="fw-bold"/>
+                                        <br/>
+                                        <t t-if="not doc.property_id.is_parent_property">
+                                            <t t-if="doc.property_id.street">
+                                                <span class="col" t-field="doc.property_id.street"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.street2">
+                                                <span class="col" t-field="doc.property_id.street2"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.city_id">
+                                                <span class="col" t-field="doc.property_id.city_id.name"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.state_id">
+                                                <span class="col" t-field="doc.property_id.state_id.code"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.zip">
+                                                <span class="col" t-field="doc.property_id.zip"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.country_id">
+                                                <span class="col" t-field="doc.property_id.country_id.name"/>
+                                            </t>
+                                        </t>
+                                        <t t-if="doc.property_id.is_parent_property">
+                                            <t t-if="doc.property_id.parent_street">
+                                                <span class="col" t-field="doc.property_id.parent_street"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.parent_street2">
+                                                <span class="col" t-field="doc.property_id.parent_street2"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.parent_city_id">
+                                                <span class="col" t-field="doc.property_id.parent_city_id.name"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.parent_state_id">
+                                                <span class="col" t-field="doc.property_id.parent_state_id.code"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.parent_zip">
+                                                <span class="col" t-field="doc.property_id.parent_zip"/>,
+                                            </t>
+                                            <t t-if="doc.property_id.parent_country_id">
+                                                <span class="col" t-field="doc.property_id.parent_country_id.name"/>
+                                            </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="w-100 mt-4">
+                            <thead>
+                                <tr>
+                                    <th class="py-2">
+                                        Tenant Details
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <table class="w-100 table table-borderless"
+                                       style="border-left:1px solid black; border-right:1px solid black; border-bottom:1px solid black; ">
+                                    <tr>
+                                        <td style="width:20%;">
+                                            <strong>Tenant Name</strong>
+                                        </td>
+                                        <td style="width:30%;">
+                                            <span t-field="doc.tenancy_id.name"/>
+                                        </td>
+                                        <td style="width:20%;">
+                                            <strong>TIN No.</strong>
+                                        </td>
+                                        <td style="width:30%;">
+                                            <span t-field="doc.tenancy_id.vat"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:20%;">
+                                            <strong>Address</strong>
+                                        </td>
+                                        <td style="width:30%;">
+                                            <t t-if="doc.tenancy_id.street">
+                                                <span t-field="doc.tenancy_id.street"/>,
+                                            </t>
+                                            <t t-if="doc.tenancy_id.street2">
+                                                <span t-field="doc.tenancy_id.street2"/>,
+                                            </t>
+                                            <t t-if="doc.tenancy_id.city">
+                                                <span t-field="doc.tenancy_id.city"/>,
+                                            </t>
+                                            <t t-if="doc.tenancy_id.state_id">
+                                                <span t-field="doc.tenancy_id.state_id.code"/>,
+                                            </t>
+                                            <t t-if="doc.tenancy_id.zip">
+                                                <span t-field="doc.tenancy_id.zip"/>,
+                                            </t>
+                                            <t t-if="doc.tenancy_id.country_id.name">
+                                                <span t-field="doc.tenancy_id.country_id.name"/>
+                                            </t>
+                                        </td>
+                                        <td style="width:20%;">
+                                            <strong>VRN No.</strong>
+                                        </td>
+                                        <td style="width:30%;">
+                                            <span t-field="doc.tenancy_id.vrn_no"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:20%;">
+                                            <strong>Phone No.</strong>
+                                        </td>
+                                        <td style="width:30%;">
+                                            <span t-field="doc.tenancy_id.phone"/>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:20%;">
+                                            <strong>Email Id</strong>
+                                        </td>
+                                        <td style="width:30%;">
+                                            <span t-field="doc.tenancy_id.email"/>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </tbody>
+                        </table>
+
+                        <table class="w-100 mt-5">
+                            <thead>
+                                <tr>
+                                    <th class="py-2">
+                                        Payment Details
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <table class="w-100 table table-borderless"
+                                       style="border-left:1px solid black; border-right:1px solid black; border-bottom:1px solid black; ">
+                                    <t t-if="doc.contract_type_name == 'lease' ">
+                                        <t t-if="doc.property_type == 'commercial'">
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Rented Area (Sq.M)
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.rented_area"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Rent/Square Meter
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.rent_smtr"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Rent/Month
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.total_rent_month"/><span> + VAT 18%</span>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-else="">
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Rent/Month
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.total_rent"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr>
+                                            <th style="width:30%;">
+                                                Security Deposit
+                                            </th>
+                                            <td style="width:70%;" >
+                                                <span t-field="doc.security_deposite"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-if="doc.property_type == 'commercial'">
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Rented Area (Sq.M)
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.rented_area"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Service Charge/Square Meter
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.rent_smtr"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Service Charge/Month
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.service_charge_month" /> <span> + VAT 18%</span>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-elif="doc.property_type == 'residential'">
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Service Charge/Month
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.service_charge_month"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-else="">
+                                            <tr>
+                                                <th style="width:30%;">
+                                                    Service Charge/Month
+                                                </th>
+                                                <td style="width:70%;">
+                                                    <span t-field="doc.total_rent"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <th style="width:30%;" >
+                                            Agreement Period
+                                        </th>
+                                        <td style="width:70%;" >
+                                            <span t-field="doc.start_date"/> to <span t-field="doc.end_date"/> ( <span t-esc='doc.total_months'/> Months)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%;" >
+                                            Payment Term
+                                        </th>
+                                        <td style="width:70%;">
+                                            <span t-field="doc.payment_term_id.duration"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="tenancy_details_report_id" model="ir.actions.report">
+        <field name="name">Tenancy Details</field>
+        <field name="model">tenancy.details</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rental_management.tenancy_details_qweb_report_template</field>
+        <field name="report_file">rental_management.tenancy_details_qweb_report_template</field>
+        <field name="paperformat_id" ref="rental_management.freight_booking_paper_format"/>
+        <field name="binding_model_id" ref="model_tenancy_details"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'%s Information' %(object.tenancy_seq)</field>
+    </record>
+
+
+</odoo>

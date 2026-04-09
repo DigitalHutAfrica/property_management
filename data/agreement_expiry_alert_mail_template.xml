@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="agreement_expiry_alert_mail_template" model="mail.template">
+            <field name="name">Rental Management: 90 Days, 60 Days &amp; 30 Days Prior Agreement Expiry Alert</field>
+            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="subject">Notice: Lease Agreement Expiry in {{ object.env.context.get('remaining_days') }} Days [{{ object.property_id.name }} - {{ object.property_id.parent_property_id.name }}]</field>
+            <field name="email_from">{{ (object.company_id.email or user.company_id.email or '') }}</field>
+            <field name="partner_to">{{ object.tenancy_id.id }}</field>
+            <!--            <field name="email_to">{{ object.tenancy_id.email }}</field>-->
+            <field name="body_html" type="html">
+                <table style="width:100%">
+                    <br/>
+                    <tr>
+                        <td>
+                            Dear
+                            <strong>
+                                <t t-out="object.tenancy_id.name"/>,
+                            </strong>
+                            <br/>
+                            <br/>
+                            <span>
+                                Greetings!
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <p>
+                    This is to inform you that your current
+                    <span t-field="object.contract_type_name"/>
+                    for
+                    <strong>
+                        <t t-out="object.property_id.name"/>
+                    </strong>
+                    in
+                    <strong>
+                        <t t-out="object.property_id.parent_property_id.name"/>
+                    </strong>
+                    is
+                    set to expire in
+                    <t t-out="object.env.context.get('remaining_days')"/>
+                    days, on
+                    <strong>
+                        <span t-field="object.end_date"/>
+                    </strong>
+                    .
+                </p>
+                <br/>
+                <p>
+                    To ensure a smooth renewal process and to avoid any inconvenience, we kindly request you to initiate
+                    discussions regarding the
+                    <span t-field="object.contract_type_name"/>
+                    renewal. If you intend to extend your tenancy, please reach out to
+                    us at your earliest convenience to begin the renewal process.
+                </p>
+                <br/>
+                <p>
+                    Thank You.
+                </p>
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>
