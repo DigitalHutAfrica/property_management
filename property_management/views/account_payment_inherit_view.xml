@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright (C) 2024-TODAY TechKhedut (<https://www.techkhedut.com>)-->
+<!--Part of TechKhedut. See LICENSE file for full copyright and licensing details.-->
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="utility_bill_account_payment_inherit_form" model="ir.ui.view">
+        <field name="name">utility.bill.account.payment.inherit.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="button_open_utility_bill" type="object" class="oe_stat_button" icon="fa-file-text"
+                        invisible="not utility_bill_id">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">
+                            <span>Utility Bill</span>
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

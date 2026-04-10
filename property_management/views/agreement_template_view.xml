@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="agreement_template_view_form" model="ir.ui.view">
+            <field name="name">agreement.template.view.form</field>
+            <field name="model">agreement.template</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="%(agreement_template_preview_action)d" type="action" class="oe_highlight"
+                                string="Preview" context="{'active_id': id}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" required="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Agreement">
+                                <field name="agreement" placeholder="Agreement" required="1"/>
+                            </page>
+                            <page string="Fields" name="fields">
+                                <field name="template_variable_ids">
+                                    <list editable="bottom" create="false" delete="false">
+                                        <field name="name"/>
+                                        <field name="demo_value" required="1"/>
+                                        <field name="field_type" required="1"/>
+                                        <field name="field_name" widget="DynamicModelFieldSelectorChar"
+                                               required="field_type == 'field'" readonly="field_type != 'field'"
+                                               invisible="field_type != 'field'" options="{'model': 'model'}"/>
+                                        <field name="free_text_value"
+                                               required="field_type == 'free_text'" readonly="field_type != 'free_text'"
+                                               invisible="field_type != 'free_text'"/>
+                                        <field name="model" column_invisible="1"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="agreement_template_view_tree" model="ir.ui.view">
+            <field name="name">agreement.template.view.tree</field>
+            <field name="model">agreement.template</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+        <record id="agreement_template_action" model="ir.actions.act_window">
+            <field name="name">Agreement Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">agreement.template</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

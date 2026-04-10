@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="property_maintenance_inherit_view" model="ir.ui.view">
+            <field name="name">property.maintenance.inherit.view</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='equipment_id']" position="before">
+                    <field name="invoice_state" invisible="1"/>
+                    <field name="property_id"/>
+                    <field name="parent_property_id"/>
+                    <field name="tenant_id" readonly="1"/>
+                    <field name="contract_id" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="invoice_id" readonly="1" invisible="not invoice_state"/>
+                    <field name="maintenance_type_id"/>
+                </xpath>
+                <xpath expr="//field[@name='maintenance_team_id']" position="after">
+                    <field name="landlord_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <field name="invoice_state" invisible="1"/>
+                    <button string="Create Invoice" name="action_crete_invoice" type="object"
+                            invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='close_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='request_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="request_date" readonly="1"/>
+                    <field name="close_date" readonly="1"/>
+                </xpath>
+                <xpath expr="//sheet/group/group[2]" position="inside">
+                    <field name="request_description"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Images">
+                        <field name="attachment_ids">
+                            <form>
+                                <div style="width:40%;height:40%;" class="float-right">
+                                    <field name="image" style="width:40%;height:40%;"
+                                           class="img-thumbnail float-right" widget="image" required="1"/>
+                                </div>
+                            </form>
+                            <kanban>
+                                <field name="id"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_global_click border-0"
+                                             style="width:333px;margin-top: -5px;margin-bottom: 0px;margin-right:-14px;">
+                                            <img alt="Avtar"
+                                                 t-att-src="kanban_image('maintenance.photos','image',record.id.raw_value)"
+                                                 style="width:30rem;height:20rem;" class="img-thumbnail"/>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="property_maintenance_action" model="ir.actions.act_window">
+            <field name="name">Property Maintenance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">maintenance.request</field>
+            <field name="view_mode">list,form,activity</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="property_specification_form_view" model="ir.ui.view">
+            <field name="name">property.specification.form.view</field>
+            <field name="model">property.specification</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="title"/>
+                            <h1>
+                                <field name="title" required="1" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    <b>Description</b>
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="description_line1" nolabel="1" placeholder="Description Line1....."/>
+                                    <br/>
+                                    <field name="description_line2" nolabel="1" placeholder="Description Line2....."/>
+                                    <br/>
+                                    <field name="description_line3" nolabel="1" placeholder="Description Line3....."/>
+                                </div>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="property_specification_tree_view" model="ir.ui.view">
+            <field name="name">property.specification.tree.view</field>
+            <field name="model">property.specification</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="title"/>
+                    <field name="description_line1"/>
+                    <field name="description_line2"/>
+                    <field name="description_line3"/>
+                </list>
+            </field>
+        </record>
+        <record id="property_specification_kanban_view" model="ir.ui.view">
+            <field name="name">property.specification.kanban.view</field>
+            <field name="model">property.specification</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id"/>
+                    <field name="title"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="o_kanban_image_fill_left d-none d-md-block"
+                                     t-attf-style="background-image: url(#{kanban_image('property.specification', 'image', record.id.raw_value)})">
+                                </div>
+                                <div class="oe_kanban_details d-flex flex-column">
+                                    <div class="oe_kanban_details">
+                                        <strong class="o_kanban_record_title oe_partner_heading">
+                                            <h3 style="color:#714B67;">
+                                                <field name="title"/>
+                                            </h3>
+                                            <span>
+                                                <h6>
+                                                    <t t-if="record.description_line1.raw_value">
+                                                        ➸
+                                                        <field name="description_line1"/>
+                                                        <br/>
+                                                    </t>
+                                                    <t t-if="record.description_line2.raw_value">
+                                                        ➸
+                                                        <field name="description_line2"/>
+                                                        <br/>
+                                                    </t>
+                                                    <t t-if="record.description_line3.raw_value">
+                                                        ➸
+                                                        <field name="description_line3"/>
+                                                    </t>
+                                                </h6>
+                                            </span>
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="property_specification_action" model="ir.actions.act_window">
+            <field name="name">Property Specification</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.specification</field>
+            <field name="view_mode">kanban,list,form</field>
+        </record>
+
+
+    </data>
+</odoo>

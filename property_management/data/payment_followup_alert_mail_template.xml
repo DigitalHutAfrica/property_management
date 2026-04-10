@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="payment_followup_alert_mail_template" model="mail.template">
+            <field name="name">Rental Management: Follow up on payment alert after 7 days of invoice date</field>
+            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="subject">Follow-up: Outstanding Payment Reminder [{{ object.property_id.name }}]</field>
+            <field name="email_from">{{object.tenancy_id.property_landlord_id.email}}</field>
+            <field name="partner_to">{{ object.customer_id.id }}</field>
+            <!--            <field name="email_to">{{ object.customer_id.email }}</field>-->
+            <field name="body_html" type="html">
+                <table style="width:100%">
+                    <br/>
+                    <tr>
+                        <td>
+                            Dear
+                            <t t-out="object.customer_id.name"/>,
+                            <br/>
+                            <br/>
+                            <span>
+                                Greetings!
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <p>
+                    This is a polite reminder regarding the pending payment for the recent invoice dated
+                    <span t-field="object.invoice_date"/>
+                    for
+                    <strong>
+                        <t t-out="object.property_id.name"/>
+                    </strong>
+                    in
+                    <strong>
+                        <t t-out="object.property_id.parent_property_id.name"/>
+                    </strong>
+                    .
+                    As of today, the payment remains outstanding.
+                </p>
+                <br/>
+                <p>
+                    Kindly process the payment at the earliest to avoid any inconvenience or late fees. If you've
+                    already made the payment, please disregard this reminder.
+                </p>
+                <br/>
+                <p>
+                    Your prompt attention to this matter is greatly appreciated.
+                </p>
+                <br/>
+                <p>
+                    Thank you.
+                </p>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

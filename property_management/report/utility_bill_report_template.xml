@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_utility_bill_document">
+        <t t-call="web.basic_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.tenant_name.lang)"/>
+            <div class="page">
+                <br/>
+
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <img style="width:60%;" src="/rental_management/static/description/endow_comapny.png"/>
+                    </div>
+                    <div class="col-7 text-center">
+                        <div>
+                            <h5>ENDOW MANAGEMENT COMPANY LIMITED</h5>
+                        </div>
+                        <div>
+                            <span>P.O BOX 19716</span>
+                            <br/>
+                            <span>Dar es Salaam, Tanzania</span>
+                            <br/>
+                            <h6 style="text-align: center;">
+                                <t t-if="doc.tin">
+                                    TIN :
+                                    <span t-esc="doc.tin"/>
+                                </t>
+                                <t t-if="doc.tin and doc.vrn">&amp;</t>
+                                <t t-if="doc.vrn">
+                                    VRN :
+                                    <span t-esc="doc.vrn"/>
+                                </t>
+                            </h6>
+                        </div>
+                        <div>
+                            <h6>Debit Note for Rrimbursement Of Electricity, Water and Sewerage</h6>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-2"/>
+                </div>
+
+                <div class="row">
+                    <div style="padding-top:15px !important;" class="col-9">
+                        <div>
+                            <table style="border: 1px solid;" class="table table-sm o_main_table mt-4">
+                                <tr>
+                                    <td style="border: 1px solid;">Main Property</td>
+                                    <td style="border: 1px solid;" colspan="5">
+                                        <span t-esc="doc.main_property_id.name"/>
+                                        , Plot No.
+                                        <span t-esc="doc.main_property_id.plot_no"/>
+                                        ,
+                                        <t t-esc="doc.main_property_id.state_id.name"/>
+                                        ,
+                                        <t t-esc="doc.main_property_id.country_id.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border: 1px solid;">Apartment No.</td>
+                                    <td style="border: 1px solid;" colspan="3">
+                                        <span t-esc="doc.property_id.name"/>
+                                        -
+                                        <span t-esc="doc.main_property_id.name"/>
+                                        -
+                                        <t t-esc="{False: False, 'land': 'Land', 'residential': 'Residential','commercial': 'Commercial','industrial': 'Industrial'}[doc.property_id.type]"/>
+                                    </td>
+                                    <td style="border: 1px solid;">D.N No.</td>
+                                    <td style="border: 1px solid;">
+                                        <span t-esc="doc.dn_no"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid;">Name</td>
+                                    <td style="border: 1px solid;" colspan="3">
+                                        <span t-esc="doc.tenant_name.name"/>
+                                    </td>
+                                    <td style="border: 1px solid;">Date</td>
+                                    <td t-if="doc.date" style="border: 1px solid;">
+                                        <span t-esc="doc.date.strftime('%d-%m-%Y')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid;">Customer</td>
+                                    <td style="border: 1px solid;" colspan="3">
+                                        <t t-if="doc.tin">
+                                            TIN :
+                                            <span t-esc="doc.tin"/>
+                                        </t>
+                                        <t t-if="doc.tin and doc.vrn">&amp;</t>
+                                        <t t-if="doc.vrn">
+                                            VRN :
+                                            <span t-esc="doc.vrn"/>
+                                        </t>
+                                    </td>
+
+                                    <td style="border: 1px solid;"></td>
+                                    <td style="border: 1px solid;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid;">Month</td>
+                                    <td style="border: 1px solid;" colspan="3">
+                                        <span t-esc="doc.month"/>
+                                    </td>
+                                    <td style="border: 1px solid;"></td>
+                                    <td style="border: 1px solid;"></td>
+                                </tr>
+                            </table>
+
+                            <table style="border: 1px solid;" class="table table-sm o_main_table mt-4">
+                                <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                                <thead style="display: table-row-group">
+                                    <tr>
+                                        <th style="border: 1px solid;" name="th_description" class="text-center">
+                                            Description
+                                        </th>
+                                        <th style="border: 1px solid;" name="th_quantity" class="text-center">Current
+                                            Reading Date
+                                        </th>
+                                        <th style="border: 1px solid;" name="th_priceunit" class="text-center">Previous
+                                            Reading Date
+                                        </th>
+                                        <th style="border: 1px solid;" name="th_taxes" class="text-center">Current
+                                            Reading
+                                        </th>
+                                        <th style="border: 1px solid;" name="th_taxes" class="text-center">Previous
+                                            Reading
+                                        </th>
+                                        <th style="border: 1px solid;" name="th_taxes" class="text-center">Total
+                                            Consume
+                                        </th>
+                                        <th style="border: 1px solid;" name="th_taxes" class="text-center">Rate</th>
+                                        <th style="border: 1px solid;" name="th_taxes" class="text-center">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="sale_tbody">
+
+                                    <t t-set="current_subtotal" t-value="0"/>
+
+                                    <t t-foreach="doc.utility_meter_ids" t-as="line">
+                                        <tr>
+                                            <t>
+                                                <td style="border: 1px solid;" name="td_name">
+                                                    <span t-field="line.meter_type_line_id.meter_type_id.name"/>
+                                                </td>
+                                                <td style="border: 1px solid;" name="td_name">
+                                                    <span t-field="line.curr_reading_date"/>
+                                                </td>
+                                                <td style="border: 1px solid;" name="td_priceunit" class="text-end">
+                                                    <span t-field="line.pre_reading_date"/>
+                                                </td>
+                                                <td style="border: 1px solid;" class="text-end">
+                                                    <span t-field="line.curr_reading"/>
+                                                </td>
+                                                <td style="border: 1px solid;" name="td_name">
+                                                    <span t-field="line.pre_reading"/>
+                                                </td>
+                                                <td style="border: 1px solid;" name="td_name">
+                                                    <span t-field="line.total_consume"/>
+                                                </td>
+                                                <td style="border: 1px solid;" name="td_name">
+                                                    <t t-if="line.currency_id">
+                                                        <span t-esc="line.rate"
+                                                              t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-esc="line.rate"/>
+                                                    </t>
+                                                </td>
+                                                <td style="border: 1px solid;" name="td_name">
+                                                    <t t-if="line.currency_id">
+                                                        <span t-esc="line.amount"
+                                                              t-options='{"widget": "monetary", "display_currency": line.currency_id}'/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-esc="line.amount"/>
+                                                    </t>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <t>
+                                            <td style="border: 1px solid;" name="td_name">Total Amount</td>
+                                            <td style="border: 1px solid;" name="td_name"></td>
+                                            <td style="border: 1px solid;" name="td_priceunit" class="text-end">
+                                            </td>
+                                            <td style="border: 1px solid;" class="text-end">
+                                            </td>
+                                            <td style="border: 1px solid;" name="td_name"></td>
+                                            <td style="border: 1px solid;" name="td_name"></td>
+                                            <td style="border: 1px solid;" name="td_name"></td>
+                                            <td style="border: 1px solid;" name="td_name">
+                                                <t t-if="doc.currency_id">
+                                                    <span t-esc="doc.total_amount"
+                                                          t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-esc="doc.total_amount"/>
+                                                </t>
+                                            </td>
+                                        </t>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6 style="margin-left:82%">*Fix Rate</h6>
+                        <h6>Amount In Word
+                            <span t-esc="doc.total_amount_word"/>
+                            <span t-esc="doc.currency_id.symbol"/>
+                            Only
+                        </h6>
+
+                        <p style="background-color:gray;color:white;font-weight:bold;font-size:18px;"
+                           class="text-center">Pay your Electricity and Water bill before 15th.
+                        </p>
+
+
+                        <b>
+                            <h6 style="font-weight: bold;">For Payment Process:- Call USSD Code -> Send Money -> To
+                                Other Network -> Tigo Pesa -> Enter Lipa Namba -> Enter Amount -> Enter Pin.
+                            </h6>
+                            <h6 style="font-weight: bold;">USSD Code:- Airtel *150*60#, Vodadom *150*00#, Halopesa
+                                *150*88#, Tigopesa *150*01#, Zantel *150*02#, TTCL *150*71#
+                            </h6>
+                        </b>
+
+                    </div>
+
+                    <t t-if="doc.property_id.barcode">
+                        <div class="col-3" style="padding-left:5px;padding-top:45px;">
+                            <img t-att-src="image_data_uri(doc.property_id.barcode)" style="width:100%;" alt="Image"/>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="col-3" style="padding-left:5px;padding-top:45px;">
+                            <img src="/rental_management/static/description/placeholder.png" style="width:100%;"
+                                 alt="Image"/>
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+
+    <template id="report_utility_bill_tmpl">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="rental_management.report_utility_bill_document" t-lang="doc.tenant_name.lang"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

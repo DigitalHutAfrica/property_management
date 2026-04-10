@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tenancy_details_form_view" model="ir.ui.view">
+            <field name="name">tenancy.details.form.view</field>
+            <field name="model">tenancy.details</field>
+            <field name="arch" type="xml">
+                <form string="Tenancy">
+                    <field name="close_contract_state" invisible="1"/>
+                    <field name="active_contract_state" invisible="1"/>
+                    <header>
+                        <field name="contract_type" widget="statusbar" statusbar_visible="new_contract,running_contract"
+                               nolabel="1"/>
+                        <button name='%(active_contract_action)d'
+                                type='action'
+                                string="Active"
+                                class="btn btn-outline-primary"
+                                invisible="contract_type in ['expire_contract','running_contract'] or close_contract_state"/>
+                        <button name="%(property_payment_wizard_action)d"
+                                type='action'
+                                string="Create Invoice"
+                                class="btn btn-outline-primary"
+                                invisible="contract_type in ['new_contract','expire_contract','close_contract','cancel_contract'] or not active_contract_state or close_contract_state"/>
+                        <button name="%(extend_contract_wizard_action)d"
+                                type='action'
+                                string="CREATE ADDENDUM"
+                                class="btn btn-outline-success"
+                                invisible="contract_type not in ['running_contract'] or close_contract_state"/>
+                        <button name='%(property_terminate_wizard_action)d'
+                                type='action'
+                                string="Terminate"
+                                class="btn btn-outline-danger"
+                                invisible="not active_contract_state or contract_type in ['close_contract','expire_contract','cancel_contract']"/>
+                        <button name='action_cancel_contract'
+                                type='object'
+                                string="Cancel"
+                                confirm="Are you sure you want to cancel this Contract?"
+                                class="btn btn-outline-danger"
+                                invisible="contract_type in ['new_contract','expire_contract'] or close_contract_state"/>
+                        <button name='handover_property'
+                                type='object'
+                                string="Handover Property"
+                                class="btn btn-outline-danger"
+                                invisible="contract_type != 'running_contract' or handover_count > 0 or contract_type_name == 'lease'"/>
+                        <button name="create_utility_bill"
+                                type='object'
+                                string="Create Utility Bill"
+                                class="btn btn-outline-dark"
+                                invisible="handover_count == 0 or not is_maintenance_company or contract_type_name == 'lease'"/>
+                    </header>
+                    <field style="float: right;" name="contract_sub_type_id" widget="statusbar"
+                           nolabel="1" options="{'clickable': '1'}"
+                           invisible="contract_type != 'running_contract'"/>
+                    <br/>
+                    <br/>
+
+                    <field name="company_id" invisible="1"/>
+                    <field name="pro_company_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="is_extra_service" invisible="1"/>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="action_invoices"
+                                    icon="fa-pencil-square-o">
+                                <field name="invoice_count" string="Invoices" widget="statinfo"/>
+                            </button>
+
+                            <button class="oe_stat_button" type="object" name="action_handover"
+                                    icon="fa-file-text-o">
+                                <field name="handover_count" string="Handover" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object"
+                                    name="action_property_document_contract" icon="fa-picture-o"
+                                    invisible="1">
+                                <field name="document_count" string='Documents' widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="action_utility_bill"
+                                    icon="fa-list"
+                                    invisible="not is_maintenance_company">
+                                <field name="utility_bill_count" string="Utility Bill"
+                                       widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="tenancy_seq"/>
+                                <field name="is_maintenance_company" invisible="1"/>
+                                <field name="active" invisible="1"/>
+                            </h1>
+                        </div>
+                        <br/>
+                        <group>
+                            <group>
+                                <field name="contract_type_name" required="1"
+                                       readonly="contract_type not in ['new_contract']"
+                                       string="Contract Type"/>
+                                <field name="is_addendum"/>
+                                <field name="contract_includes" widget="radio" options="{'horizontal': True}"
+                                       readonly="contract_type not in ['new_contract']"/>
+                            </group>
+                            <group>
+                                <field name="tag_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+
+                        <group string="Tenancy Information">
+                            <group>
+                                <field name="tenancy_id" required="1"
+                                       options="{'no_quick_create':True,'no_create_edit':True}"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="resident_id"
+                                       readonly="contract_type not in ['new_contract']"/>
+                            </group>
+                            <group>
+                                <field name="is_extended" invisible="1"/>
+                                <field name="is_any_broker" invisible="1"/>
+                            </group>
+                        </group>
+                        <group string="Broker Commission" invisible="1">
+                            <group>
+                                <field name="broker_id"/>
+                            </group>
+                            <group>
+                                <field name="commission"/>
+                            </group>
+                        </group>
+                        <br/>
+
+                        <group string="Property Information">
+                            <group>
+                                <field name="property_id" required="1"
+                                       options="{'no_quick_create':True,'no_create_edit':True}"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="property_type" required="1" widget="radio"
+                                       options="{'horizontal': true}" string='Type'/>
+                            </group>
+                            <group>
+                                <field name="property_landlord_id" force_save="1"/>
+                                <field name="pro_management_company_id"
+                                       options="{'no_create': True, 'no_create_edit':True}"
+                                       invisible="contract_type_name != 'service'"
+                                       required="contract_type_name == 'service'"/>
+                                <field name="company_id" invisible="1"/>
+                                <field name="alert_date" invisible="1"/>
+
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <br/>
+
+                        <group string="Rent Information">
+
+                            <!-- field show for residential -->
+                            <group invisible="property_type != 'residential'">
+                                <field name="rent" widget="radio" options="{'horizontal': True}" string="Rent Type"
+                                       readonly="1" force_save="1"/>
+                                <field name="rented_area" string="Rented Area (Sq.M)"
+                                       invisible="contract_type_name == 'service' or rent == 'fixed'"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="rent_smtr" string="Rent/Square Meter"
+                                       invisible="contract_type_name == 'service' or rent == 'fixed'"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <label for="total_rent" string="Rent/Month"
+                                       invisible="contract_type_name == 'service'"
+                                       readonly="contract_type != 'new_contract'"/>
+                                <div name="total_rent" class="d-flex"
+                                     invisible="contract_type_name == 'service'"
+                                     readonly="contract_type != 'new_contract'">
+                                    <field name="total_rent" required="1" force_save="1"
+                                           readonly="contract_type != 'new_contract' or rent == 'per_square_meter'"
+                                           string="Rent/Month"/>
+                                    <field name="currency_id" required="1" readonly="contract_type != 'new_contract'"/>
+                                </div>
+
+                                <field name="rented_area" string="Rented Area (Sq.M)"
+                                       invisible="contract_type_name != 'service' or rent == 'fixed'"
+                                       readonly="contract_type != 'new_contract'"/>
+                                <field name="rent_smtr" string="Service Charge/Square Meter"
+                                       invisible="contract_type_name != 'service' or rent == 'fixed'"
+                                       readonly="contract_type != 'new_contract'"/>
+                                <label for="service_charge_month"
+                                       invisible="contract_type_name != 'service'"
+                                       string="Service Charge/Month"/>
+                                <div name="service_charge_month" class="d-flex"
+                                     invisible="contract_type_name != 'service'">
+                                    <field name="service_charge_month" required="1" force_save="1"
+                                           readonly="contract_type != 'new_contract' or rent == 'per_square_meter'"
+                                           string="Service Charge/Month"/>
+                                    <field name="currency_id" required="1" readonly="contract_type != 'new_contract'"/>
+                                </div>
+
+                                <field name="service_charge_smtr"
+                                       invisible="contract_type_name != 'lease' or contract_includes != 'rent_and_service' or rent == 'fixed'"
+                                       readonly="contract_type != 'new_contract'"/>
+                                <field name="service_charge_per_month"
+                                       force_save="1"
+                                       invisible="contract_type_name != 'lease' or contract_includes != 'rent_and_service'"
+                                       readonly="contract_type != 'new_contract' or rent == 'per_square_meter'"/>
+
+                                <field name="start_date" required="1"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="end_date" required="1" force_save="1"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="days_left"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="payment_term_id" required="1" string='Payment Term'
+                                       readonly="contract_type not in ['new_contract']"
+                                       options="{'no_create': True, 'no_create_edit':True}"/>
+
+                                <label for="security_deposite" string="Security Deposit"
+                                       readonly="contract_type != 'new_contract'"
+                                       invisible="contract_type_name == 'service'"
+                                />
+                                <div name="security_deposite" class="d-flex"
+                                     readonly="contract_type != 'new_contract'"
+                                     invisible="contract_type_name == 'service'">
+                                    <field name="security_deposite"
+                                           readonly="contract_type != 'new_contract'"
+                                           invisible="contract_type_name == 'service'"
+                                           options="{'currency_field': 'security_deposit_currency_id'}"/>
+                                    <field name="security_deposit_currency_id" string="Currency"
+                                           readonly="contract_type != 'new_contract'"/>
+                                </div>
+                                <field name="signed_agreement" filename="signed_file_name"
+                                       widget="binary" invisible="1"/>
+
+
+                                <!-- invisible fields -->
+
+                                <field name="month" invisible="1"/>
+                                <field name="withholding_tax"
+                                       readonly="contract_type not in ['new_contract']"
+                                       invisible="1"/>
+
+                                <field name="monthly_interest_rate"
+                                       readonly="contract_type not in ['new_contract']"
+                                       invisible="1"/>
+                                <field name="file_name" invisible="True"/>
+                                <field name="contract_agreement" filename="file_name"
+                                       widget="binary"
+                                       readonly="contract_type not in ['new_contract']"
+                                       invisible="1"/>
+                            </group>
+
+                            <group invisible="property_type != 'residential'">
+                                <field name="rent_unit" invisible="1"/>
+                                <field name="type" force_save="1" invisible="1"
+                                       readonly="contract_type not in ['new_contract','running_contract']"/>
+
+                                <field name="late_payment_interest"
+                                       readonly="contract_type not in ['new_contract','running_contract']"/>
+                                <field name="late_payment_interest_amt"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <label for="rent_incremnet_period"/>
+                                <div name="rent_incremnet_period" class="d-flex">
+                                    <field name="rent_incremnet_period"/>
+                                    <field name="rent_time_period"/>
+                                </div>
+                                <field name="rent_increment_date" readonly="1" force_save="1"/>
+                                <label for="rent_incerement" string="Rent Increment %"
+                                       invisible="increment_type == 'fixed'"/>
+                                <label for="rent_incerement" string="Rent Increment Amount"
+                                       invisible="increment_type != 'fixed'"/>
+                                <div name="rent_increment" class="d-flex">
+                                    <field name="rent_incerement"/>
+                                    <field name="increment_type"/>
+                                </div>
+                                <field name="duration_id" required="0" invisible="1"/>
+                                <field name="signed_agreement" filename="signed_file_name"
+                                       widget="binary"/>
+                                <!-- invisible fields -->
+                                <field name="is_any_deposit" invisible="1"/>
+                                <field name="deposit_amount" string="Security Deposit"
+                                       invisible="not is_any_deposit"
+                                       readonly="contract_type != 'new_contract'"/>
+                                <field name="last_invoice_payment_date" invisible="1"/>
+                                <field name="signed_file_name" invisible="True"/>
+                                <field name="withholding_tax_paid"
+                                       readonly="contract_type not in ['new_contract']"
+                                       invisible="1"/>
+
+                                <field name="presently_rate"
+                                       readonly="contract_type not in ['new_contract']"
+                                       invisible="1"/>
+                                <field name="installment_item_id"
+                                       readonly="contract_type not in ['new_contract']" required="1"/>
+                            </group>
+
+                            <!--field
+                            show for the commercial,land,industrial -->
+
+                            <group invisible="property_type == 'residential'">
+                                <field name="rent" widget="radio" options="{'horizontal': True}" string="Rent Type"
+                                       readonly="1" force_save="1"/>
+                                <label for="rented_area" string="Rented Area (Sq.M)"
+                                       invisible="rent == 'fixed'"
+                                       readonly="contract_type != 'new_contract'"/>
+                                <div name="rented_area" class="d-flex"
+                                     invisible="rent == 'fixed'"
+                                     readonly="contract_type != 'new_contract'">
+                                    <field name="rented_area"
+                                           invisible="rent == 'fixed'"
+                                           readonly="contract_type != 'new_contract'"/>
+                                    <field name="square_area" invisible="1"/>
+                                </div>
+
+                                <label for="rent_smtr"
+                                       invisible="rent == 'fixed' or contract_type_name == 'service'"
+                                       readonly="contract_type != 'new_contract'"
+
+                                       string="Rent/Square Meter"/>
+                                <div name="rent_smtr" class="d-flex"
+                                     invisible="rent == 'fixed' or contract_type_name == 'service'"
+                                     readonly="contract_type != 'new_contract'"
+                                     string="Rent/Square Meter">
+                                    <field name="rent_smtr" required="1"
+                                           invisible="rent == 'fixed' or contract_type_name == 'service'"
+                                           readonly="contract_type != 'new_contract'"
+                                           string="Rent/Square Meter"/>
+                                    <field name="currency_id" required="1" readonly="contract_type != 'new_contract'"/>
+                                </div>
+
+
+                                <label for="rent_smtr"
+                                       invisible="rent == 'fixed' or contract_type_name != 'service' or property_type in ['land', 'industrial']"
+                                       readonly="contract_type != 'new_contract'"
+                                       string="Service Charge/Square Meter"/>
+                                <div name="rent_smtr" class="d-flex"
+                                     invisible="rent == 'fixed' or contract_type_name != 'service' or property_type in ['land', 'industrial']"
+                                     readonly="contract_type != 'new_contract'"
+                                     string="Service Charge/Square">
+                                    <field name="rent_smtr" required="1"
+                                           invisible="rent == 'fixed' or contract_type_name != 'service' or property_type in ['land', 'industrial']"
+                                           readonly="contract_type != 'new_contract'"
+                                           string="Service Charge/Square"/>
+                                    <field name="currency_id" required="1" readonly="contract_type != 'new_contract'"/>
+                                </div>
+                                <label for="rent_smtr"
+                                       invisible="rent == 'fixed' or contract_type_name != 'service' or property_type not in ['land', 'industrial']"
+                                       readonly="contract_type != 'new_contract'"
+
+                                       string="Rent/Square Meter"/>
+                                <div name="rent_smtr" class="d-flex"
+                                     invisible="rent == 'fixed' or contract_type_name != 'service' or property_type not in ['land', 'industrial']"
+                                     readonly="contract_type != 'new_contract'"
+                                     string="Rent/Square">
+                                    <field name="rent_smtr" required="1"
+                                           invisible="rent == 'fixed' or contract_type_name != 'service' or property_type not in ['land', 'industrial']"
+                                           readonly="contract_type != 'new_contract'"
+                                           string="Rent/Square"/>
+                                    <field name="currency_id" required="1" readonly="contract_type != 'new_contract'"/>
+                                </div>
+
+
+                                <label for="rent_smtr"
+                                       invisible="square_area != 'square_feet' or contract_type_name == 'service'"
+                                       readonly="contract_type != 'new_contract'"
+
+                                       string="Rent/Square Meter"/>
+                                <div name="rent_smtr" class="d-flex"
+                                     invisible="square_area != 'square_feet' or contract_type_name == 'service'"
+                                     readonly="contract_type != 'new_contract'"
+                                     string="Rent/Square Meter">
+                                    <field name="rent_smtr" required="1"
+                                           invisible="square_area != 'square_feet' or contract_type_name == 'service'"
+                                           readonly="contract_type != 'new_contract'"
+                                           string="Rent/Square Meter"/>
+                                    <field name="currency_id" required="1" readonly="contract_type != 'new_contract'"/>
+                                </div>
+
+                                <label for="total_rent"
+                                       invisible="square_area != 'square_feet' or contract_type_name != 'service'"
+                                       readonly="contract_type != 'new_contract'"
+                                       string="Service Charge/Square Feet"/>
+                                <div name="total_rent" class="d-flex"
+                                     invisible="square_area != 'square_feet' or contract_type_name != 'service'"
+                                     readonly="contract_type != 'new_contract'"
+                                     string="Service Charge/Square">
+                                    <field name="total_rent" required="1" force_save="1"
+                                           invisible="square_area != 'square_feet' or contract_type_name != 'service'"
+                                           readonly="contract_type != 'new_contract' or rent == 'per_square_meter'"
+                                           string="Service Charge/Square"/>
+                                    <field name="currency_id" required="1" readonly="contract_type != 'new_contract'"/>
+                                </div>
+
+                                <field name="total_rent" required="1"
+                                       invisible="property_type == 'commercial'"
+                                       readonly="contract_type != 'new_contract' or rent == 'per_square_meter'"
+                                       string="Rent/Month" force_save="1"/>
+
+                                <field name="total_rent_month" string="Rent/Month"
+                                       invisible="property_type != 'commercial' or contract_type_name == 'service'"
+                                       readonly="contract_type != 'new_contract' or rent == 'per_square_meter'"
+                                       widget="monetary" force_save="1"/>
+                                <field name="service_charge_month"
+                                       invisible="property_type != 'commercial' or contract_type_name != 'service'"
+                                       readonly="contract_type != 'new_contract' or rent == 'per_square_meter'"
+                                       widget="monetary" force_save="1" string="Service Charge/Month"/>
+                                <field name="service_charge_smtr"
+                                       invisible="contract_type_name != 'lease' or contract_includes != 'rent_and_service' or rent == 'fixed'"
+                                       readonly="contract_type != 'new_contract'"/>
+                                <field name="service_charge_per_month"
+                                       force_save="1"
+                                       invisible="contract_type_name != 'lease' or contract_includes != 'rent_and_service'"
+                                       readonly="contract_type != 'new_contract' or rent == 'per_square_meter'"/>
+
+                                <field name="start_date" required="1"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="end_date" required="1" force_save="1"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="days_left"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <field name="payment_term_id" required="1" string='Payment Term'
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <label for="security_deposite" string="Security Deposit"
+                                       readonly="contract_type != 'new_contract'"
+                                       invisible="contract_type_name == 'service'"/>
+                                <div name="security_deposite" class="d-flex"
+                                     readonly="contract_type != 'new_contract'"
+                                     invisible="contract_type_name == 'service'">
+                                    <field name="security_deposite"
+                                           readonly="contract_type != 'new_contract'"
+                                           invisible="contract_type_name == 'service'"
+                                           options="{'currency_field': 'security_deposit_currency_id'}"/>
+                                    <field name="security_deposit_currency_id" string="Currency"
+                                           readonly="contract_type != 'new_contract'"/>
+                                </div>
+
+
+                                <field name="signed_agreement" filename="signed_file_name"
+                                       widget="binary" invisible="1"/>
+
+                            </group>
+
+                            <group invisible="property_type == 'residential'">
+                                <field name="rent_unit" string="Rent/Month" invisible="1"/>
+
+
+                                <field name="type" force_save="1" invisible="1"
+                                       readonly="contract_type not in ['new_contract','running_contract']"/>
+
+                                <field name="late_payment_interest"
+                                       readonly="contract_type not in ['new_contract','running_contract']"/>
+                                <field name="late_payment_interest_amt"
+                                       readonly="contract_type not in ['new_contract']"/>
+                                <label for="rent_incremnet_period"/>
+                                <div name="rent_incremnet_period" class="d-flex">
+                                    <field name="rent_incremnet_period"/>
+                                    <field name="rent_time_period"/>
+                                </div>
+                                <field name="rent_increment_date" readonly="1" force_save="1"/>
+                                <label for="rent_incerement" string="Rent Increment %"
+                                       invisible="increment_type == 'fixed'"/>
+                                <label for="rent_incerement" string="Rent Increment Amount"
+                                       invisible="increment_type != 'fixed'"/>
+                                <div name="rent_increment" class="d-flex">
+                                    <field name="rent_incerement"/>
+                                    <field name="increment_type"/>
+                                </div>
+                                <field name="duration_id" required="0" invisible="1"/>
+                                <field name="signed_agreement" filename="signed_file_name"
+                                       widget="binary"/>
+                                <field name="installment_item_id"
+                                       readonly="contract_type not in ['new_contract']" required="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Extra Services" invisible="not is_extra_service">
+                                <field name="extra_services_ids"
+                                       readonly="contract_type in ['new_contract','cancel_contract','close_contract','expire_contract']"
+                                       force_save="1">
+                                    <list editable="bottom">
+                                        <field name="service_id" required="1"/>
+                                        <field name="service_type" required="1"/>
+                                        <field name="price"/>
+                                        <field name="from_contract" column_invisible="1"/>
+                                        <button name="action_create_service_invoice" type="object"
+                                                invisible="service_type == 'monthly' or from_contract"
+                                                string="Create Invoice"/>
+                                    </list>
+                                </field>
+
+                            </page>
+                            <page string="Tenancy Invoices">
+                                <field name="rent_invoice_ids" readonly="1" force_save="1">
+                                    <list>
+                                        <field name="tenancy_id"/>
+                                        <field name="customer_id"/>
+                                        <field name="invoice_date"/>
+                                        <field name="type"/>
+                                        <field name="description"/>
+                                        <field name="rent_month" string="Rent /Month"
+                                               column_invisible="parent.contract_type_name == 'service' or parent.contract_includes == 'rent_and_service'"/>
+                                        <field name="rent_month" string="Rent + Service Charge /Month"
+                                               column_invisible="parent.contract_type_name == 'service' or parent.contract_includes == 'rent_only'"/>
+                                        <field name="amount" string="Total Rent Amount"
+                                               column_invisible="parent.contract_type_name == 'service'"/>
+                                        <field name="rent_month" string="Service Charge /Month"
+                                               column_invisible="parent.contract_type_name != 'service'"/>
+                                        <field name="amount" string="Total Service Charge"
+                                               column_invisible="parent.contract_type_name != 'service'"/>
+                                        <field name="service_amount"
+                                               column_invisible="not parent.is_extra_service or parent.type == 'automatic'"/>
+                                        <field name="rent_invoice_id" widget="many2one"/>
+                                        <field name="currency_id" column_invisible="1"/>
+                                        <field name="amount_tax"/>
+                                        <field name="payment_state" widget="badge"
+                                               decoration-success="payment_state=='paid'"
+                                               decoration-danger="payment_state=='not_paid'"
+                                               decoration-info="payment_state=='in_payment'"
+                                               decoration-primary="payment_state=='partial'"
+                                               decoration-warning="payment_state=='reversed'"/>
+                                        <button name="action_create_invoice" type="object"
+                                                string="Create Invoice"
+                                                class="btn btn-primary"
+                                                invisible="type == 'automatic' or rent_invoice_id"/>
+                                    </list>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right"
+                                       style="text-align: right">
+                                    <field name="total_tenancy" class="oe_subtotal_footer_separator"/>
+                                    <field name="paid_tenancy" class="oe_subtotal_footer_separator"/>
+                                    <field name="remain_tenancy"
+                                           class="oe_subtotal_footer_separator"/>
+                                </group>
+                            </page>
+                            <page string="Agreement" invisible="1">
+                                <field name="agreement" placeholder="Rental Agreement."
+                                       readonly="contract_type not in ['new_contract']"/>
+                            </page>
+                            <page string="Documents">
+                                <h3 style="color:#714B67;">
+                                    <strong>Documents</strong>
+                                </h3>
+                                <field name="document_ids" widget="many2many"
+                                       options="{'not_delete': True}">
+                                    <kanban quick_create="true" create="true" delete="true">
+                                        <field name="id"/>
+                                        <field name="name"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click">
+                                                    <div class="o_kanban_record_top">
+                                                        <img
+                                                                t-att-src="kanban_image('documents.document', 'file', record.id.raw_value)"
+                                                                height="40"
+                                                                t-att-alt="record.id.raw_value"
+                                                                width="40"
+                                                                class="oe_avatar oe_kanban_avatar_smallbox mb0"/>
+                                                        <div class="o_kanban_record_headings ml8">
+
+                                                            <strong class="o_kanban_record_title">
+                                                                <field name="name"/>
+                                                            </strong>
+                                                        </div>
+                                                        <a t-if="! read_only_mode" type="delete"
+                                                           class="text-danger">
+                                                            <i class="fa fa-times" title="delete"></i>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page string="Terms &amp; Conditions" invisible="1">
+                                <field name="term_condition" widget="html" nolabel="1"
+                                       placeholder="Terms &amp; Conditions.."
+                                       readonly="contract_type not in ['new_contract']"/>
+
+                            </page>
+
+                            <page string="Lease Agreement">
+                                <label for="agreement_template_id"/>
+                                <field name="agreement_template_id"/>
+                                <field name="contract_terms" widget="html" nolabel="1"
+                                       placeholder=" Lease Agreement Terms &amp; Conditions..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="tenancy_details_tree_view" model="ir.ui.view">
+            <field name="name">tenancy.details.tree.view</field>
+            <field name="model">tenancy.details</field>
+            <field name="arch" type="xml">
+                <list string="Tenancy">
+                    <field name="tenancy_seq"/>
+                    <field name="contract_type_name"/>
+                    <field name="property_id"/>
+                    <field name="property_landlord_id"/>
+                    <field name="tenancy_id"/>
+                    <field name="property_type" string='Type' optional="hide"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="total_months"/>
+                    <field name="rented_area" string="Rented Area (Sq.M)" optional="hide"/>
+                    <field name="rent_smtr" string="Rent/Square Meter" optional="hide"/>
+                    <field name="total_rent" string="Rent/Month" column_invisible="1"/>
+                    <field name="rent_smtr" string="Service Charge/Square Meter" optional="hide"/>
+                    <field name="service_charge_month" string="Service Charge/Month" optional="hide"
+                           column_invisible="1"/>
+                    <field name="amount_month" string="Amount/Month"/>
+                    <field name="payment_term_id" string="Payment Terms" optional="hide"/>
+                    <field name="is_addendum" optional="hide"/>
+                    <field name="contract_type" string="Contract Status" widget="badge"
+                           decoration-danger="contract_type == 'close_contract'"
+                           decoration-info="contract_type == 'cancel_contract'"
+                           decoration-primary="contract_type in ['new_contract', 'expire_contract']"
+                           decoration-success="contract_type == 'running_contract'"/>
+                </list>
+            </field>
+        </record>
+        <record id="tenancy_details_calendar_view" model="ir.ui.view">
+            <field name="name">tenancy.details.calendar.view</field>
+            <field name="model">tenancy.details</field>
+            <field name="arch" type="xml">
+                <calendar date_start="start_date"
+                          mode="month"
+                          quick_create="False"
+                          hide_time="True"
+                          create="false"
+                          event_open_popup="True">
+                    <field name="tenancy_seq"/>
+                    <field name="tenancy_id"/>
+                    <field name="property_id"/>
+                    <field name="payment_term_id"/>
+                </calendar>
+            </field>
+        </record>
+        <record id="tenancy_details_kanban_view" model="ir.ui.view">
+            <field name="name">tenancy.details.kanban.view</field>
+            <field name="model">tenancy.details</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" sample="1">
+                    <field name="tenancy_seq"/>
+                    <field name="tenancy_id"/>
+                    <field name="property_id"/>
+                    <field name="payment_term_id"/>
+                    <field name="property_type" string='Type'/>
+                    <field name="contract_type"/>
+                    <field name="total_rent"/>
+                    <field name="total_rent_month"/>
+                    <field name="contract_type_name"/>
+                    <field name="service_charge_month"/>
+                    <field name="end_date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="row mb4">
+                                    <div class="col-6 o_kanban_record_headings">
+                                        <strong>
+                                            <span>
+                                                <field name="tenancy_seq"/>
+                                                <field name="tenancy_id" class="ms-1"/>
+                                            </span>
+                                        </strong>
+                                    </div>
+                                    <div class="col-6" style="text-align:right;">
+                                        <strong>
+                                            <i class="fa fa-clock-o" aria-label="Duration"
+                                               role="img" title="Duration"/>
+                                            <t t-esc="record.payment_term_id.name"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span>
+                                            <field name="property_type" string='Type'/>,
+                                            <field
+                                                    name="property_id"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row align-items-end">
+                                    <div class="col-6">
+                                        <t t-if="record.contract_type_name.raw_value == 'lease'">
+                                            <t t-if="record.property_type.raw_value == 'commercial'">
+                                                <span>
+                                                    <field name="total_rent_month" widget="monetary"/>
+                                                </span>
+                                            </t>
+                                            <t t-else="">
+                                                <span>
+                                                    <field name="total_rent" widget="monetary"/>
+                                                </span>
+                                            </t>
+                                        </t>
+                                        <t t-elif="record.contract_type_name.raw_value == 'service'">
+                                            <t t-if="record.property_type.raw_value == 'residential' or record.property_type.raw_value == 'commercial'">
+                                                <span>
+                                                    <field name="service_charge_month" widget="monetary"/>
+                                                </span>
+                                            </t>
+                                            <t t-else="">
+                                                <span>
+                                                    <field name="total_rent" widget="monetary"/>
+                                                </span>
+                                            </t>
+                                        </t>
+
+                                        <span>
+                                            <field name="currency_id" invisible="1"/>
+                                        </span>
+                                        <div>
+                                            <span>
+                                                End Date:
+                                            </span>
+                                            <field name="end_date"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6" style="text-align:right;">
+                                        <span>
+                                            <field name="contract_type" widget="label_selection"
+                                                   options="{'classes': {'cancel_contract': 'info', 'running_contract': 'success','close_contract': 'danger'}}"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="tenancy_details_search_view" model="ir.ui.view">
+            <field name="name">tenancy.details.search.view</field>
+            <field name="model">tenancy.details</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="tenancy_seq"/>
+                    <field name="tenancy_id"/>
+                    <field name="broker_id" invisible="1"/>
+                    <field name="property_id"/>
+                    <field name="property_type" string='Type'/>
+                    <field name="property_landlord_id"/>
+
+
+                    <separator/>
+                    <filter string="Archived" name="active" domain="[('active', '=', False)]"/>
+                    <filter name="start_date" date="start_date" string="Start Date"/>
+                    <filter name="end_date" date="end_date" string="End Date"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Tenant" name="customer" domain="[]"
+                                context="{'group_by':'tenancy_id'}"/>
+                        <filter string="Landlord" name="landlord" domain="[]"
+                                context="{'group_by':'property_landlord_id'}"/>
+                        <filter string="Property" name="property" domain="[]"
+                                context="{'group_by':'property_id'}"/>
+                        <filter string="Broker" name="broker" domain="[]"
+                                context="{'group_by':'broker_id'}" invisible="1"/>
+                        <filter string="Parent Property" name="parent_property" domain="[]"
+                                context="{'group_by':'parent_property_id'}"/>
+                        <separator/>
+                        <filter string="Start Date" name="start_date" context="{'group_by':'start_date'}"/>
+                        <filter string="End Date" name="end_date" context="{'group_by':'end_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="tenancy_details_pivot_view" model="ir.ui.view">
+            <field name="name">tenancy.details.pivot.view</field>
+            <field name="model">tenancy.details</field>
+            <field name="arch" type="xml">
+                <pivot string="Statistic">
+                    <field name="total_rent" type="measure"/>
+                    <field name="tenancy_seq" type="row"/>
+                    <field name="payment_term_id" type="col" string='Payment Term'/>
+                    <field name="duration_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="tenancy_details_action" model="ir.actions.act_window">
+            <field name="name">Contract</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tenancy.details</field>
+            <field name="view_mode">kanban,list,form,search,calendar,pivot,activity</field>
+        </record>
+    </data>
+</odoo>

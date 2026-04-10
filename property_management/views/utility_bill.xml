@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="utility_bill_form_view" model="ir.ui.view">
+            <field name="name">utility.bill.view</field>
+            <field name="model">utility.bill</field>
+            <field name="arch" type="xml">
+                <form string="Utility">
+                    <header>
+                        <field name="state" widget="statusbar" nolabel="1"/>
+                        <button name="action_register_payment" id="account_invoice_payment_btn"
+                                type="object" class="oe_highlight"
+                                context="{'dont_redirect_to_payments': True}"
+                                string="Register Payment"
+                                invisible="state not in ['posted', 'confirm'] or r_payment_state != 'Unpaid'"/>
+                        <button name="print_utility_bill_report" id="print_utility"
+                                type="object" class="oe_highlight"
+                                string="Print" data-hotkey="g" invisible="1"/>
+                        <button name="action_send_and_print" id="print_send_utility"
+                                type="object" class="oe_highlight"
+                                string="Send &amp; Print" data-hotkey="g"/>
+
+                        <button name="reset_to_draft" type="object" class="oe_highlight" string="Reset To Draft"
+                                invisible="state == 'draft' or r_payment_state == 'Paid'"/>
+
+                        <button name="confirm_uility" type="object" class="oe_highlight" string="Confirm"
+                                invisible="state != 'draft'"/>
+                        <button name="action_post_bill" type="object" class="oe_highlight" string="Post"
+                                invisible="state in ['draft', 'posted']"/>
+                    </header>
+
+                    <sheet>
+
+                        <widget name="web_ribbon" title="Unpaid" bg_color="bg-danger"
+                                invisible="r_payment_state != 'Unpaid'"/>
+
+                        <widget name="web_ribbon" title="Paid"
+                                invisible="r_payment_state != 'Paid'"/>
+
+
+                        <group string="Property Information">
+                            <group>
+                                <field name="bill_seq" invisible="1"/>
+                                <field name="create_date" invisible="1"/>
+                                <field name="contract_id" invisible="1"/>
+                                <field name="property_id" readonly="state == 'posted'" required="1"/>
+                                <field name="main_property_id" readonly="state == 'posted'"/>
+                                <field name="tenant_name" readonly="state == 'posted'" required="1"/>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    <b>Address</b>
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street"
+                                           readonly="state == 'posted'"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                           readonly="state == 'posted'"/>
+                                    <field name="city" placeholder="City" class="o_address_city"
+                                           readonly="state == 'posted'"/>
+                                    <!-- <field name="city_id" placeholder="City" class="o_address_city"/> -->
+                                    <field name="state_id" class="o_address_state" placeholder="State"
+                                           options="{'no_open': True, 'no_quick_create': True}"
+                                           readonly="state == 'posted'"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                           readonly="state == 'posted'"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options="{'no_open': True, 'no_quick_create': True}"
+                                           readonly="state == 'posted'"/>
+                                </div>
+
+                                <field name="tin_vrn" readonly="1"/>
+                                <field name="total_amount_word" invisible="1"/>
+                                <field name="tin" invisible="1"/>
+                                <field name="vrn" invisible="1"/>
+                            </group>
+
+                            <group>
+
+                                <field name="dn_no" readonly="1"/>
+                                <field name="date" readonly="state == 'posted'"/>
+                                <field name="r_payment_state" invisible="1"/>
+                                <field name="month" readonly="1" force_save="1"/>
+                                <field name="payment_id" readonly="1"/>
+                                <field name="meter_type_line_id" invisible="1"/>
+                                <field name="currency_id" invisible="0"
+                                       readonly="state == 'posted'"/>
+                                <field name="lipa_number" readonly="state == 'posted'"/>
+                            </group>
+                        </group>
+
+                        <group string="Meter Reading">
+                        </group>
+                        <field name="utility_meter_ids" nolabel="1" widget="section_and_note_one2many" mode="list"
+                               readonly="state == 'posted'">
+                            <list editable="bottom">
+                                <field name="sr_no"/>
+                                <field name="currency_id" column_invisible="1"/>
+                                <field name="meter_type_line_id" options="{'no_quick_create':True}" required="1"/>
+                                <field name="utility_rate_ids" widget="many2many_tags" column_invisible="1"/>
+                                <field name="curr_reading_date"/>
+                                <field name="pre_reading_date"/>
+                                <field name="curr_reading"/>
+                                <field name="pre_reading"/>
+                                <field name="total_consume" force_save="1"/>
+                                <field name="rate" force_save="1" widget="monetary"/>
+                                <field name="amount" readonly="1" force_save="1" widget="monetary"/>
+                            </list>
+                        </field>
+                        <group col="12" class="oe_invoice_lines_tab">
+                            <group colspan="8">
+                            </group>
+                            <group colspan="4">
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="total_amount" widget="monetary" force_save="1"/>
+                                </group>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="utility_bill_tree_view" model="ir.ui.view">
+            <field name="name">utility.bill.tree.view</field>
+            <field name="model">utility.bill</field>
+            <field name="arch" type="xml">
+                <list string="Utility">
+                    <header>
+                        <button name="confirm_uility"
+                                type="object" class="oe_highlight"
+                                string="Confirm"/>
+                        <button name="action_register_payment"
+                                type="object" class="oe_highlight"
+                                string="Register Payment"/>
+                    </header>
+                    <field name="dn_no"/>
+                    <field name="date"/>
+                    <field name="month"/>
+                    <field name="property_id"/>
+                    <field name="tenant_name"/>
+                    <field name="total_amount"/>
+                    <field name="currency_id" column_invisible="1"/>
+                    <field name="state" column_invisible="1"/>
+                    <field name="r_payment_state" decoration-danger="r_payment_state == 'Unpaid'"
+                           decoration-success="r_payment_state == 'Paid'" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="utility_bill_kanban_view" model="ir.ui.view">
+            <field name="name">utility.bill.kanban.view</field>
+            <field name="model">utility.bill</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" sample="1">
+                    <field name="dn_no"/>
+                    <field name="date"/>
+                    <field name="month"/>
+                    <field name="property_id"/>
+                    <field name="tenant_name"/>
+                    <field name="total_amount"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="row mb4">
+                                    <div class="col-6 o_kanban_record_headings">
+                                        <strong>
+                                            <span>
+                                                <field name="dn_no"/>
+
+                                            </span>
+                                        </strong>
+                                        <br/>
+                                        <field name="date"/>
+                                        <br/>
+                                        <field name="month" force_save="1"/>
+                                        <br/>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span>
+                                            <field name="property_id"/>
+                                            <field name="tenant_name"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span>
+                                            <field name="total_amount" widget="monetary"/>
+                                        </span>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="utility_bill_pivot_view" model="ir.ui.view">
+            <field name="name">utility.bill.pivot.view</field>
+            <field name="model">utility.bill</field>
+            <field name="arch" type="xml">
+                <pivot string="Statistic">
+                    <field name="total_amount" type="measure"/>
+                    <field name="dn_no" type="row"/>
+                    <field name="property_id" type="col"/>
+                    <field name="tenant_name" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_utility_bill_report_graph" model="ir.ui.view">
+            <field name="name">utility.bill.graph</field>
+            <field name="model">utility.bill</field>
+            <field name="arch" type="xml">
+                <graph string="Utility Bill" type="line" sample="1">
+                    <field name="date"/>
+                    <field name="total_amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="utility_bill_search_view" model="ir.ui.view">
+            <field name="name">utility.bill.search.view</field>
+            <field name="model">utility.bill</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="property_id" string="Property"/>
+                    <field name="main_property_id" string="Parent Property"/>
+                    <field name="dn_no" string="Debit Note No."/>
+                    <field name="date" string="Date"/>
+                    <field name="month" string="Month"/>
+                    <field name="tenant_name" string="Tenant"/>
+                    <field name="lipa_number" string="Lipa Number"/>
+                    <filter string="Property" name="property_id" domain="[]" context="{'group_by':'property_id'}"/>
+                    <filter string="Parent Property" name="main_property_id" domain="[]"
+                            context="{'group_by':'main_property_id'}"/>
+                    <filter string="Tenant" name="tenant_name" domain="[]" context="{'group_by':'tenant_name'}"/>
+                    <separator/>
+                    <filter string="Date" name="date" domain="[]" context="{'group_by': 'date'}"/>
+                    <filter name="posted" string="Posted" domain="[('state', '=', 'posted')]"/>
+                    <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <separator/>
+                    <filter name="unpaid" string="Unpaid" domain="[('r_payment_state', '=', 'Unpaid')]"/>
+                    <filter name="paid" string="Paid" domain="[('r_payment_state', '=', 'Paid')]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="utility_bill_action" model="ir.actions.act_window">
+            <field name="name">Utility Bill</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">utility.bill</field>
+            <field name="view_mode">list,form,kanban,pivot,graph,search</field>
+        </record>
+
+    </data>
+</odoo>

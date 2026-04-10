@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="property_payment_wizard_form_view" model="ir.ui.view">
+            <field name="name">property.payment.wizard.form.view</field>
+            <field name="model">property.payment.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+
+
+                        <group invisible="property_type != 'residential'">
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="tenancy_id" invisible="1"/>
+                            <field name="customer_id" invisible="1"/>
+                            <field name="contract_type_name" invisible="1"/>
+                            <field name="property_type" invisible="1"/>
+                            <field name="type"/>
+
+                            <field name="total_rent" required="1"
+                                   string="Rent/Month"
+                                   invisible="contract_type_name == 'service'"/>
+
+                            <field name="service_charge_month" required="1"
+                                   string="Service Charge/Month"
+                                   invisible="contract_type_name != 'service'"/>
+
+
+                            <field name="description" required="1"/>
+                        </group>
+
+                        <group invisible="property_type == 'residential'">
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="tenancy_id" invisible="1"/>
+                            <field name="customer_id" invisible="1"/>
+                            <field name="contract_type_name" invisible="1"/>
+                            <field name="property_type" invisible="1"/>
+                            <field name="type"/>
+
+                            <field name="total_rent" required="1"
+                                   invisible="property_type == 'commercial'"
+                                   string="Rent/Month"/>
+
+                            <field name="total_rent_month" string="Rent/Month"
+                                   invisible="property_type != 'commercial' or contract_type_name == 'service'"
+                                   widget="monetary"/>
+
+                            <field name="service_charge_month"
+                                   invisible="property_type != 'commercial' or contract_type_name != 'service'"
+                                   widget="monetary" string="Service Charge/Month"/>
+                            <field name="description" required="1"/>
+
+
+                        </group>
+
+
+                        <group>
+                            <field name="invoice_date" required="1"/>
+                            <label for="invoice_period_to_date" string="Invoice Period"/>
+                            <div name="invoice_period_to_date" class="d-flex">
+                                <field name="invoice_period_to_date"/>
+                                <span class="oe_inline o_form_label mx-3">To</span>
+                                <field name="invoice_period_from_date"/>
+                            </div>
+                            <field name="total_rent_amount" invisible="contract_type_name == 'service'"
+                                   string="Total Rent Amount"/>
+                            <field name="total_rent_amount" invisible="contract_type_name != 'service'"
+                                   string="Total Service Charge"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button string="Create Invoice" type="object"
+                                class="btn btn-outline-success"
+                                name="property_payment_action"/>
+                        <button string="Cancel" special="cancel" class="btn btn-outline-danger"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="property_payment_wizard_action" model="ir.actions.act_window">
+            <field name="name">Payment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.payment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'default_tenancy_id': active_id}</field>
+        </record>
+    </data>
+</odoo>

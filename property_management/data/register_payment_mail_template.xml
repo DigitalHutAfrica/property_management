@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="register_payment_mail_template" model="mail.template">
+            <field name="name">Rental Management : Bill Payment Register Mail Template</field>
+            <field name="model_id" ref="model_utility_bill"/>
+            <field name="subject">Payment Registration Successful</field>
+            <field name="email_from">{{object.company_id.email}}</field>
+            <!--            <field name="email_to">{{object.tenant_name.email}}</field>-->
+            <field name="partner_to">{{ object.tenant_name.id }}</field>
+            <field name="body_html" type="html">
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            Dear Tenant
+                            <br/>
+                            <h4>
+                                <strong>
+                                    <span t-field="object.tenant_name.name"/>
+                                </strong>
+                            </h4>
+                        </td>
+                    </tr>
+                </table>
+                <hr/>
+                <p>Your utility bill payment for property
+                    (<strong t-field="object.property_id"/>)
+                    has been successfully registered and the payment ref is
+                    <strong t-field="object.payment_id"/>.
+                </p>
+                <h6>
+                    Best Regards
+                </h6>
+                <h5>
+                    <strong>
+                        <t t-out="object.company_id.name"/>
+                    </strong>
+                </h5>
+                <hr/>
+                <span>
+                    <h6>
+                        <t t-out="object.company_id.name"/>
+                    </h6>
+                    <t t-out="object.company_id.phone"/>
+                    <br/>
+                    <t t-out="object.company_id.email"/>
+                    <br/>
+                    <t t-out="object.company_id.website"/>
+                </span>
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>
