@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_excel_report_view_form" model="ir.ui.view">
+            <field name="name">invoice_excel_report_view_form</field>
+            <field name="model">invoice.excel.report</field>
+            <field name="arch" type="xml">
+                <form string="Invoice Excel">
+                    <sheet>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h4>
+                                        Invoice Excel Report
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h4>
+                                        :
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <button name="print_excel" type="object" icon="fa-print"
+                                                string=" Print"
+                                                title="Download Excel file of Invoices"/>
+                                    </h5>
+                                </td>
+                            </tr>
+                        </table>
+                    </sheet>
+                    <footer>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="print_invoice_excel_action" model="ir.actions.act_window">
+            <field name="name">Invoice Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">invoice.excel.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

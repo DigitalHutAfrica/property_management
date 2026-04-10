@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="property_inspection_view_form" model="ir.ui.view">
+            <field name="name">Property Inspection View Form</field>
+            <field name="model">property.maintenance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="status" widget="statusbar" invisible="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title h1 mb-3">
+                            <field name="name" placeholder="Title" required="1" invisible="1"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="project" required="1"/>
+                                <field name="equipment_id" domain="[('main_property_id', '=', project)]" required="1"/>
+                                <field name="inspection_frequency" required="1"/>
+                            </group>
+                            <group>
+                                <field name="month" string="Date" readonly="1"/>
+                                <field name="supervisor_id" string="Technician"
+                                       domain="[('is_maintenance_team', '=', True)]" required="1"/>
+                                <field name="maintenance_template_id" invisible="1"/>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description_of_items" string="Inspection">
+                                <field name="property_maintenance_line_ids" widget="section_and_note_one2many">
+                                    <list editable="bottom">
+                                        <control>
+                                            <create name="add_product_control" string="Add a line"/>
+                                            <create name="add_section_control" string="Add a section"
+                                                    context="{'default_display_type': 'line_section'}"/>
+                                        </control>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="display_type" column_invisible="1"/>
+                                        <field name="inspection_frequency" column_invisible="1"/>
+                                        <field name="inspection_parameter_line_id"/>
+                                        <field name="name" widget="section_and_note_text" column_invisible="1"
+                                               string="Item Description"/>
+                                        <field name="param_val"/>
+                                        <field name="param_unit_id"/>
+                                        <field name="status"/>
+                                        <field name="remark"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="property_inspection_view_tree" model="ir.ui.view">
+            <field name="name">Property Inspection View Tree</field>
+            <field name="model">property.maintenance</field>
+            <field name="arch" type="xml">
+                <list string="property_inspection_tree" sample="1">
+                    <field name="name" column_invisible="1"/>
+                    <field name="project"/>
+                    <field name="equipment_id"/>
+                    <field name="inspection_frequency"/>
+                    <field name="month"/>
+                    <field name="maintenance_template_id" column_invisible="1"/>
+                    <field name="supervisor_id" widget="many2one_avatar_user"/>
+                    <field name="status" column_invisible="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="property_inspection_view_search" model="ir.ui.view">
+            <field name="name">Property Inspection View Search</field>
+            <field name="model">property.maintenance</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="project"/>
+                    <field name="equipment_id"/>
+                    <field name="inspection_frequency"/>
+                    <field name="month"/>
+                    <field name="supervisor_id"/>
+                    <field name="maintenance_template_id"/>
+
+                    <filter name="month" date="month" string="Month"/>
+                    <separator/>
+                    <filter name="monthly" string="Monthly" domain="[('inspection_frequency', '=', 'monthly')]"/>
+                    <filter name="quarterly" string="Quarterly" domain="[('inspection_frequency', '=', 'quarterly')]"/>
+                    <filter name="half_yearly" string="Half Yearly"
+                            domain="[('inspection_frequency', '=', 'half_yearly')]"/>
+                    <filter name="yearly" string="Yearly" domain="[('inspection_frequency', '=', 'yearly')]"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Project" name="project" domain="[]"
+                                context="{'group_by':'project'}"/>
+                        <filter string="Equipment" name="equipment" domain="[]"
+                                context="{'group_by':'equipment_id'}"/>
+                        <filter string="Date" name="month" domain="[]"
+                                context="{'group_by':'month'}"/>
+                        <filter string="Technician" name="supervisor_id" domain="[]"
+                                context="{'group_by':'supervisor_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="property_inspection_action" model="ir.actions.act_window">
+            <field name="name">Property Inspection</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.maintenance</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

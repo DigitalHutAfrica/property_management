@@ -1,0 +1,1948 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="commercial_lease_agreement_template">
+        <t t-call="web.basic_layout">
+            <div class="page" style="page-break-before: always;">
+                <div class="text-center">
+                    <h4 class="text-decoration-underline" style="margin-top:5rem;"> THE
+                        LAND.CAP,113. </h4>
+                    <h4 class="text-decoration-underline" style="margin-bottom:5rem;"> (Revised
+                        Edition of 2019) </h4>
+                    <h4 class="my-5">DATED THIS DAY _________ OF _________ , 2023.</h4>
+                    <h4 class="my-4">LEASE</h4>
+                    <h4 class="my-4">AGREEMENT</h4>
+                    <h4 class="my-4">BETWEEN</h4>
+                    <h4 class="my-5">
+                        <strong>[LANDLORD].</strong>
+                    </h4>
+                    <h4 class="my-5">AND</h4>
+                    <h4 class="my-5">
+                        <strong>[TANENT]</strong>
+                    </h4>
+                    <h4 class="my-5">[IN RESPECT OF THE PREMISES SITUATED AT <strong>[FLOOR], [SUB
+                        PROPERTY],[MAIN PROPERTY WITH ADDRESS].</strong></h4>
+                </div>
+                <div style="margin-bottom:10rem;">
+                    <h5 class="text-decoration-underline mx-5">Drawn by:</h5>
+                    <h5 class="mx-5">
+                        <strong>[Landlord with address],</strong>
+                    </h5>
+                </div>
+            </div>
+            <div class="page">
+                <div><strong>THIS LEASE AGREEMENT</strong> is made this________day of________, 2023</div>
+                <div class="text-center my-5">
+                    <strong>BETWEEN</strong>
+                </div>
+                <p style="text-align: justify;">
+                    <strong>
+                        [LANDLORD]
+                    </strong>, a limited
+                    liability company incorporated in the United Republic of Tanzania whose address
+                    for the purposes hereof is <strong>[Landlord Address]</strong> (hereinafter
+                    referred to as “Lessor” which expression shall include, where the context so
+                    admits, successors and assignees in title) of the One Part. </p>
+                <div class="text-center my-5">
+                    <strong>AND</strong>
+                </div>
+                <p style="text-align: justify;">
+                    <strong>[TANENT]</strong>, a company incorporated in the United Republic of
+                    Tanzania, Dar Es Salaam, Tanzania, (hereinafter referred to as “Lessee”) which
+                    expression shall include, where the context so admits, successors and assignees
+                    in title of the Other Part. </p>
+                <div class="my-4">
+                    <strong>WHEREAS:</strong>
+                </div>
+                <div>
+                    <p style="text-align: justify;"><span class="me-3">A.</span>The Lessor is the
+                        lawful owner of all Premises styled as the <strong>
+                            [Floor], [Main Property with Address].
+                        </strong></p>
+                </div>
+                <div>
+                    <p style="text-align: justify;"><span class="me-3"> B.</span>The Lessee desires
+                        to lease the said premises from the Lessor and the Lessor agrees to Lease
+                        the same for commercial use only.</p>
+                </div>
+                <div class="my-4">
+                    <p style="text-align: justify;"><strong>Wherefore</strong> the Parties agree to
+                        enter Lease Agreement for the said premises on the following terms and
+                        conditions;</p>
+                </div>
+                <strong>
+                    <span class="d-inline-block">1.0</span>
+                    <span class="d-inline-block mx-3">Definitions.</span>
+                </strong>
+                <div>
+                    <p style="text-align: justify;"><span class="me-3">1.1</span>In this Lease
+                        Agreement unless the context otherwise provides: - <strong>
+                            “Agreement"</strong> shall mean this Lease Agreement and shall include
+                        rules and regulations, annexures and any amendments or other novation agreed
+                        and duly signed and executed by the Parties in accordance with the terms of
+                        this Agreement.</p>
+                </div>
+                <table class="table-borderless my-5">
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Confidential Information”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;">
+                                shall mean privileged information shared between the Parties hereto
+                                relating to their business or supplied by any party during their
+                                communication
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Demised Premises”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> shall mean property
+                                situated on the <strong>[Floor]</strong> of <strong>[Main Property
+                                Name]</strong> having approximate area of <strong>[Rented
+                                    Area]</strong> Sqm. </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <table class="table-borderless">
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Fit-Out Works”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;">
+                                shall mean any renovations, fittings, decorations, or
+                                Furnishings carried out by either the Lessor or the Lessor’s
+                                contractor at Lessee’s cost or carried out by the Lessee at its
+                                costs upon consent from Lessor.
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Retail Area”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> means the demised Premises
+                                constituting <strong>[Rented
+                                    Area in words]</strong> square meters <strong>([Rented Area])</strong>
+                                on the <strong>[Floor]</strong> of the Property. </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Rent”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> means Consideration that
+                                lessee has to pay to lessor against leasing demised Premises
+                                constituting <strong>[Rented Area
+                                    in words]</strong> square meters <strong>([Rented Area])</strong>
+                                on the <strong>[Floor]</strong> of the Property <strong>[Main
+                                Property Name]</strong>. </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Parties”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> shall mean <strong>
+                                [LANDLORD]</strong>, and <strong>
+                                    [TANENT]</strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Property”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> shall mean <strong>[Main
+                                Property Name]</strong>, Building located on <strong>[Main Property
+                                Address]</strong>. </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Service Charge”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> shall mean monthly
+                                property management charges. </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “Time of Payment”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> Payment period from the
+                                date of issuing the invoice. </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “USD”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> shall mean United States
+                                Dollars equivalent to Tanzania
+                                Shillings (USD to TSH) at prevailing exchange rate stated in the
+                                invoice. </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “VAT”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> shall mean Value Added
+                                Tax. </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:35%;">
+                            <strong>
+                                “SQM”
+                            </strong>
+                        </td>
+                        <td>
+                            <p class="my-3" style="text-align: justify;"> shall mean Square Meters. </p>
+                        </td>
+                    </tr>
+                </table>
+                <div class="my-4">
+                    <strong>
+                        <span class="d-inline-block me-3"> 2.0</span>
+                        <span>
+                            Citations.
+                        </span>
+                    </strong>
+                </div>
+                <div class="my-3">
+
+                    <p style="text-align: justify;"><span class="me-3">(a)</span>Reference to
+                        singular include, where the context so admits, references to the plural and
+                        vice versa and references to Clauses are references to Clauses of this
+                        Agreement.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-3">(b)</span>Words importing the
+                        masculine gender shall include the feminine gender and vice-versa and words
+                        importing persons shall include companies.</p>
+                </div>
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <span class="me-3">(c)</span>In case any of the provisions of this Agreement
+                        shall for any reason be held to be invalid, illegal or unenforceable, then
+                        such provision shall be deemed to never have existed and in such scenario,
+                        the Parties shall apply their joint input and efforts to achieve the purpose
+                        of such provision by amending the same.</p>
+                </div>
+                <div class="my-4">
+                    <strong>
+                        <span class="d-inline-block me-3"> 3.0</span>
+                        <span>
+                            Duration of the Agreement.
+                        </span>
+                    </strong>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-3">3.1</span>The period of
+                        tenancy herein referred to as the “Contractual Period” shall be for <strong>[Contract
+                        Years in Word]
+                            ([Contract Years])</strong> years, commencing from <strong>[Start
+                            Date(dd
+                            mmm yyyy) format] to [End Date(dd mmm
+                            yyyy) format]</strong>.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-3">3.2</span>The Contractual
+                        Period can further be renewed for another term subject to the terms and
+                        conditions to be agreed by the Parties.</p>
+                </div>
+                <div class="my-4">
+                    <strong>
+                        <span class="d-inline-block me-3"> 4.1</span>
+                        <span>
+                            Rent.
+                        </span>
+                    </strong>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-3">(i)</span>The Lessee shall
+                        pay a total monthly Rent for <strong>[Rented
+                            Area]</strong> sqm as agreed below: </p>
+                    <p style="text-align: justify;"> United States Dollar <strong>[Rent/Sq. M in
+                        word]</strong> (<strong>[Rent/Sq.
+                            M]</strong>) per sqm + Vat, Amounting to United States Dollar <strong>[Rent/Month
+                        in words]</strong> Only (<strong>[Rent/Month]</strong>) + Vat per month and
+                        Totaling to United States Dollar <strong>[Rent/Month in words X
+                            Payment Terms]</strong> Only (<strong>[Rent/Month]</strong>) + Vat per
+                        annum. </p>
+                    <p style="text-indent:5rem;text-align: justify;">
+                        The above rental amount is quoted in USD equivalent to Tanzania Shillings at
+                        the
+                        prevailing exchange rate as shown in the invoice at the time of payment.
+                    </p>
+                </div>
+                <div class="my-4">
+                    <strong>
+                        <span class="d-inline-block me-3"> 4.2</span>
+                        <span>
+                            Service Charges.
+                        </span>
+                    </strong>
+                    <p style="text-align: justify;"> Monthly Service charge shall be paid as per the
+                        attached <strong>Property
+                            Management
+                            Agreement</strong> herein attached to form part of this Agreement which
+                        shall be levied by the Property Management entity duly appointed by the
+                        Lessor. </p>
+                </div>
+                <div class="my-4">
+                    <strong>
+                        <span class="d-inline-block me-3"> 4.3</span>
+                        <span>
+                            Payment terms.
+                        </span>
+                    </strong>
+                    <p style="text-align: justify;"> Rent and Service charges shall be paid <strong>One
+                        month in advance</strong> on the first day of every calendar Month and
+                        strictly within 7 days upon the Lessee's receipt of an invoice. Payment
+                        shall be made into the bank account of the Lessor,
+                        <t t-set="bank_name_cfg" t-value="env['ir.config_parameter'].sudo().get_param('rental_management.bank_name') or 'CRDB BANK (T) LTD'"/>
+                        <t t-set="usd_acc" t-value="env['ir.config_parameter'].sudo().get_param('rental_management.bank_account_usd')"/>
+                        <t t-set="tzs_acc" t-value="env['ir.config_parameter'].sudo().get_param('rental_management.bank_account_tzs')"/>
+                        <t t-if="usd_acc">Account No. <strong><t t-esc="usd_acc"/> (USD)</strong> held with <strong><t t-esc="bank_name_cfg"/></strong> Bank</t>
+                        <t t-if="usd_acc and tzs_acc"> or </t>
+                        <t t-if="tzs_acc">Account No. <strong><t t-esc="tzs_acc"/> (TZS)</strong> held with <strong><t t-esc="bank_name_cfg"/></strong> Bank</t>,
+                        in the names of the Lessor.
+                    </p>
+                    <p style="text-align: justify;">
+                        Any changes to payment account shall be communicated to the Lessee before the next payment due date.
+                    </p>
+                </div>
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div class="my-4">
+                    <span class="d-inline-block me-3"> 4.3.1</span>
+                    <strong>
+                        <span>
+                            Moneys due and owing and Interest
+                        </span>
+                    </strong>
+                </div>
+                <p style="text-align: justify;"> In the event that Lessee delays to pay rent or
+                    service charges on the date due, the Lessor shall impose interest @ <strong>[Late
+                    Payment Interest %]</strong> % per month from the date of the amount being due
+                    until payment of such money in full and shall together with the principal amount
+                    be recoverable in like manner as rent in arrears. </p>
+                <p style="text-align: justify;">
+                    In the event the rent is delayed for a period of one months at any given time,
+                    the Lessor shall be entitled to serve the Lessee a 30-day termination notice to
+                    the Lessee.
+                </p>
+                <p style="text-align: justify;">
+                    That upon expiry of the 30-day termination Notice the Lessor shall be entitled
+                    to take full possession of the demised premises without further notice to the
+                    Lessee.
+                </p>
+                <div class="mb-4">
+                    <span class="d-inline-block me-3"> 4.3.2</span>
+                    <strong>
+                        <span>
+                            With-holding tax/Stamp duty/tax
+                        </span>
+                    </strong>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-3">4.3.2.(i)</span>The Lessee
+                        shall be responsible to deduct and pay Withholding Tax on this Agreement
+                        within fourteen (14) days of the said taxes becoming due and payable and
+                        shall avail the evidence of such payment to the Lessor within Fourteen (14 )
+                        days.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-3">4.3.2.(ii)</span>In addition,
+                        the Lessee shall pay the requisite stamp duty on this Agreement. In the
+                        event that the Lessee fails to pay the stamp duty on this Agreement, the
+                        Lessor shall have a right, at its option, to pay the stamp duty on this
+                        Agreement, and invoice the Lessee for the costs and expenses incurred by the
+                        Lessor.</p>
+                </div>
+                <div class="my-4">
+                    <strong>
+                        <span class="d-inline-block me-3"> 4.4</span>
+                        <span>
+                            Security Deposit.
+                        </span>
+                    </strong>
+                    <p style="text-align: justify;"> The Lessee shall pay a security deposit for
+                        performance of obligations under this Agreement to the tune of <strong>[Security
+                        Deposit]</strong>. which shall be refunded at the end of this Agreement or
+                        upon termination subject to deductions related to damages to the demised
+                        premises, rent due or other damages or liabilities that may have accrued. </p>
+                    <p style="text-align: justify;"><span class="me-3">4.4.1</span>The Lessor shall
+                        refund the Security Deposit at the end of this Agreement or upon termination
+                        of this Agreement subject to ensuring that the Demised Premises are in the
+                        order they were handed over at the commencement of this Agreement and after
+                        assessing and deducting any rent or costs for damages that might have
+                        accrued during the period.</p>
+                </div>
+                <div class="my-4">
+                    <strong>
+                        <span class="d-inline-block me-3"> 4.5</span>
+                        <span>
+                            Rent review.
+                        </span>
+                    </strong>
+                    <p style="text-align: justify;">
+                        Rent review shall be done after the end of the contractual period upon
+                        further
+                        renewal for another term and rent will escalate to meet the minimum market
+                        trend.
+                    </p>
+                </div>
+                <div class="my-4">
+                    <strong>
+                        <span class="d-inline-block me-3"> 5.1</span>
+                        <span>
+                            Covenants of the Lessee to Lessor.
+                        </span>
+                    </strong>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.2</strong>To be
+                        responsible and to indemnify the Lessor against any damages or liabilities
+                        that may be occasioned to the Demised Premises by any act of default or
+                        negligence on the part of the Lessee, Lessee’s employees, agents, customers
+                        or persons acting under the instruction of the Lessee.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.3</strong>Not to make any
+                        structural alterations or additions to the Demised Premises without the
+                        prior written consent of the Lessor which consent shall not be unreasonably
+                        withheld.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.4</strong>To keep the
+                        Demised Premises including all structures, furnishing and fittings in good
+                        repairable condition with fair wear and tear accepted.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.5</strong>Not to use the
+                        Demised Premises or any part thereof for unlawful or immoral act or Purpose.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.6</strong>Not to keep any
+                        dog, cat or other animal, reptile, fish or bird in the Demised Premises
+                        without the prior written consent of the Lessor, and to keep the Premises
+                        free of pests, rodents, vermin and insects.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.7</strong>Not to do or
+                        permit to be done any act or thing which may become a nuisance to or give
+                        cause for reasonable complaint from the occupants of the other parts of the
+                        building or to the lessees and occupiers of adjoining and neighboring
+                        properties.</p>
+                </div>
+            </div>
+            <div class="page">
+                <div class="mb-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.8</strong>Not to hold in
+                        or on the Demised Premises any religious activities, exhibition, public
+                        meeting, or public entertainment.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">5.9</strong>Not to permit or cause to be permitted the
+                        placing or parking of bicycles, motor cycles or scooters, trolleys and other
+                        wheeled vehicles and/or the stocking or storage or littering of goods or
+                        things in the Common Areas and to keep all such internal and external parts
+                        of the Building clear and free of all obstruction at all times.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">5.10</strong>Not to place or take into the passenger
+                        lifts or escalators any baggage, parcels, sacks, bags or other goods save
+                        only for light articles such as briefcases, attached cases and handbags.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.11</strong>Not to solicit
+                        business, display or distribute advertising materials in the car parks or
+                        other Common Areas, or in the public walkway outside the building.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.12</strong>To observe and
+                        perform or cause to be observed and performed the rules and regulations from
+                        time to time made by the Lessor in connection with the orderly and proper
+                        use of the lobbies, corridors, staircases, lifts, hoists, lavatories and
+                        other Common Areas in the Building and access ways and service areas to the
+                        Building and also in connection with the proper management and security of
+                        the building.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">5.13</strong>Not to permit trade vehicles while being
+                        used for the delivery to and picking up of goods from the Premises to be
+                        driven, parked or stopped at any place or within the building except within
+                        the loading bay of the Building and at such other place or places and at
+                        such time or times as the Lessor may specifically allow and the Lessee shall
+                        prohibit its employees, service suppliers and others over whom it may
+                        control from parking delivery vehicles during loading or unloading in any
+                        place other than the permitted areas, and from obstructing in any manner
+                        howsoever the entrances, exits, and driveways and the pedestrian footways in
+                        or to the Common Areas.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.14</strong>Not to erect
+                        or install in the Demised Premises any machinery which causes fumes or
+                        vibration which can be smelled or felt outside the Demised Premises.</p>
+                </div>
+            </div>
+
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.15</strong>To pay all
+                        fees, rates and charges for the use of water and sewage from DAWASCO or any
+                        other body that may be in force, electricity from TANESCO or any other power
+                        generating body that may be in force and Electricity from Generator (DG) in
+                        case of power failure in respect of Demised Premises during the said Lease
+                        period (If DG is offered by lessor). failure of which shall amount to
+                        non-provision of such services and any delay in payment within three days
+                        upon receipt of the notice shall attract an interest rate amounting to 10%
+                        of the amount delayed. (Amount in arrears).</p>
+                    <p style="text-align: justify;">
+                        In respect of this paragraph, Lessor reserves the right to terminate all
+                        Utility
+                        services if not paid for, within seven days of presenting the invoice and
+                        any
+                        due loss arising out of such disconnection shall not be the responsibility
+                        of
+                        the Lessor.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.16</strong> To avail the
+                        Demised Premises to the Lessor or its agents or nominees at the expiration
+                        of the Contractual Period in good and tenable condition (In the state it was
+                        before contractual period) in accordance with the covenants herein before
+                        contained allowing for normal wear and tear.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.17</strong> Not to hold
+                        the Lessor responsible for any loss or damage suffered by the Lessee due to
+                        failure, disconnection or otherwise lack of water or electricity to the
+                        Demised Premises. Provided that such lack of water or electricity has not
+                        arisen from the Lessor’s carelessness or negligence.</p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align: justify;"><strong class="me-3">5.18</strong> Not to keep
+                        or permit to be kept or use on the Demised Premises Petrol, any materials
+                        dangerous or explosive in nature or the keeping of which may contravene any
+                        law, Subject to the provisions of this Clause, the Lessee has an obligation
+                        to strictly observe the following.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(i)</span> Maintenance of
+                        high-level degree of hygiene including the World Health Organization and the
+                        Ministry of health-Tanzania rules, regulations and directions on Corvid 19
+                        prevention and other pandemics.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(ii)</span>Should any
+                        infections illness transpire in or within the Premises to forthwith give
+                        written notice thereof to the Lessor, and to thoroughly fumigate and
+                        disinfect the Demised Premises at the Lessee's own costs and expense to the
+                        satisfaction of the Lessor and the relevant authorities.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(iii)</span>Garbage
+                        collection and disposal to the disposal/collection bin, must be done
+                        hygienically, timely and on daily basis, and in a way that it shall not
+                        cause a nuisance/disturbance to the neighborhood, passersby, guests, and
+                        customers in the property. <em>Failure of daily collection will result in
+                        penalties imposed by the Lessor to cover the cost incurred in collecting it.
+                        Proper waste management disposal/collection bins with lids shall be supplied
+                        by the Lessor and must be maintained in good hygienic condition on daily
+                        basis by the Lessee.</em></p>
+                    <p style="text-align: justify;">
+                        Lessee must not cause any land, roads or pavements abutting the Demised
+                        Premises to be untidy and shall not dump garbage, waste or any other
+                        materials on them.
+                    </p>
+                    <p style="text-align: justify;">
+                        This sub-clause precludes and or excludes the Lessee’s whose demised
+                        premises are in respect of the businesses’ of restaurants, cafeterias,
+                        hotels and supermarkets whereas in that case, all costs in respect of
+                        garbage collection shall be done by respective lessee at their own costs and
+                        liabilities with the respective Municipal government’s authorized garbage
+                        collectors.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(iv)</span>Gas cylinder’s and
+                        other kitchen equipment’s must be safely arranged during storage and use.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(v)</span>Electrical
+                        appliances such as sockets, electrical wires etc shall not be interfered
+                        with without approval from the Lessor and any rectification must be done by
+                        a registered electrician duly authorized by the Parties.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(vi)</span>Firefighting and
+                        risk hazard laws and regulations of the United Republic of Tanzania must be
+                        strictly observed. Lessee shall always employ a qualified fire and safety
+                        officer, failure of which shall render the Lessor to offer those services at
+                        the Lessee’s Demised premises” and at the Lessee’s costs.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(vii)</span>Not to install or
+                        erect any exterior lighting, shade, canopy or awning or other structure in
+                        front of or elsewhere outside the Demised Premises without the prior written
+                        consent of the Lessor and the approval of and/or licence(s) from the
+                        relevant authorities in relation thereto. All fees and other charges in
+                        connection therewith shall be paid by the Lessee.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(x)</span>Before any safe,
+                        furniture, partition or fitting is moved into or out of the building, to
+                        give due notice of the intention to move the same to the Lessor and shall
+                        not move the same otherwise than under the supervision of the Lessor or its
+                        employee or agent and at a time approved of by the Lessor.</p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align: justify;"><span class="me-5">(xi)</span>Health, safety
+                        &#38; environment.</p>
+                    <p style="text-align: justify;">Lessee shall maintain its own fully documented
+                        environmental, health and safety policies and shall operate in accordance
+                        with those policies and indemnify the Lessor against any costs, claims and
+                        liabilities arising as a result of the breach of applicable laws referable
+                        to health, safety and environmental matters.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><span class="me-5">(xii)</span>The Lessee must
+                        not cause any land, roads or pavements abutting the Demised Premises to be
+                        untidy and in particular, but without prejudice to the generality of the
+                        foregoing, must not deposit garbage, waste or any other materials on them.</p>
+                    <p style="text-align: justify;">Failure to observe the above shall amount to
+                        immediate termination of this Agreement without refund of advance rent paid
+                        and security deposit. This shall commence upon failure to rectify the
+                        defaults/defects and after lessor issuing and lapse of three days default
+                        notice of rectification to the Lessee. Lessor shall not be liable for
+                        damages or any claim from Lessee whatsoever by reason of such action.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">6.1</strong>To always
+                        provide quiet enjoyment to the other neighborhood, tenants, Property
+                        managers and the Lessor by strictly avoiding any direct or indirect
+                        disturbance or nuisance arising from the Lessee’s Demised Premises, his
+                        employees, customers and any other person acting under Lessee’s instruction,
+                        following the above;</p>
+                    <p style="text-align: justify;"><span class="me-5">(i)</span>Persons with
+                        indecent character and the use of the Demised Premise as a brothel is
+                        strictly not allowed.</p>
+                    <p style="text-align: justify;"><span class="me-5">(ii)</span>Smoking and
+                        drinking of alcohol is only allowed on designated areas only.</p>
+                    <p style="text-align: justify;"><span class="me-5">(iii)</span>Prohibited drugs
+                        are strictly not allowed in the entire Property.</p>
+
+                </div>
+
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">6.2</strong>To permit the
+                        Lessor or its agents or servants by reasonable prior notice, and at all
+                        reasonable hours to enter and view the condition of the Demised Premises and
+                        in the event of any repairs being necessary to carry the same within a
+                        reasonable time of receiving a notice to do so.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">6.3</strong>The Lessee
+                        hereby agrees and undertakes not to use the Demised Premises or any part
+                        thereof otherwise than for the Lessee's business under the business or trade
+                        name specified in this agreement or such other business or trade name as may
+                        be approved by the Lessor. Provided always that the Lessee shall not use the
+                        Demised Premises for the aforesaid purposes unless and until the Lessee have
+                        applied for and obtained the necessary permits, approval and licences from
+                        the relevant authorities as may be necessary or required by any applicable
+                        statute, rule, order, regulation or by-law, and all fees and other charges
+                        connected therewith shall have been paid by the Lessee.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;"><strong class="me-3">6.4</strong>In the case of
+                        a company as the Lessee any misdemeanors or breaches of the occupants shall
+                        be automatically imputed upon the Lessee. Such breach includes those
+                        committed by the agents, and employees of the Lessee, whether intentionally,
+                        carelessly, or negligently.</p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">7.</strong>
+                        <strong>Advertisements and Signs</strong>
+                    </p>
+                    <p style="text-align-justify;">
+                        The Lessee shall display or exhibit its name or its business or trade name
+                        on a signboard erected on or affixed to the exterior of the Demised Premises
+                        and capable of illumination by electrical or such other means as shall be
+                        approved by the Lessor. Such signboard and any other signs, lights,
+                        embellishments, names or notices shall be erected or affixed or exhibited
+                        only with the prior approval in writing of the Lessor as to design, quality,
+                        size, colour, appearance, type and location. The Lessee shall at its own
+                        cost keep such signboard always illuminated during the normal business hours
+                        and for such other hours as the Lessor may direct.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">8.</strong>
+                        <strong>Restriction on Use of Name of Building</strong>
+                    </p>
+                    <p style="text-align-justify;">
+                        The Lessee shall not, without the Lessor's prior written consent, use the
+                        name of the Building or any picture or likeness of the Building or the
+                        Premises in its company, business or trading name or for any advertising or
+                        purpose other than as the address and place of business of the Lessee.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">9.</strong>
+                        <strong>Voidance of policy and additional premium</strong>
+                    </p>
+                    <p style="text-align-justify;">
+                        Not to do or permit to be done anything whereby any insurance of the Demised
+                        Premises against loss or damage by fire in or other risks covered by the
+                        Lessor’s or Lessee’s insurance policy may become void or voidable or whereby
+                        the rate of premium for such insurance may be increased and, in such case,
+                        to reimburse the Lessor all such excess premium and to make good any losses
+                        suffered due to non-coverage of such occurrence.
+                    </p>
+                    <p style="text-align-justify;">
+                        <span class="me-3">9.1</span> To insure and keep insured its business,
+                        employees, invitees and the Demised Premises against loss or damage by fire
+                        or such other risk as are commonly insured with a recognized insurance
+                        company in Tanzania. The Lessor shall have the right to request for a copy
+                        of the insurance policy and the Lessee shall avail the same on demand. </p>
+                </div>
+
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">10.</strong>
+                        <strong>Assignment and Subletting</strong>
+                    </p>
+                    <p style="text-align-justify;"><span class="me-3">10.1</span>The Lessee hereby
+                        agrees and undertakes not to transfer, assign, sublet mortgage or encumber
+                        this Agreement or the Demised Premises or any part thereof and shall not
+                        license, part with or share possession or occupation of the whole or any
+                        part of the Premises or grant to third parties any rights over the Demised
+                        Premises without the prior written consent of the Lessor, For the purpose of
+                        this Clause, where the Lessee is a company, any amalgamation and/or
+                        reconstruction effected by the Lessee or any change in the majority or
+                        controlling shareholders of the Lessee shall be deemed an assignment of this
+                        Agreement. The Lessor shall be free (Without the Lessee's consent) to assign
+                        or transfer the whole or any part of this Agreement to any party as the
+                        Lessor deems fit. </p>
+                    <p style="text-align-justify;">
+                        <span class="me-3">10.2</span>To pay for the fuel consumption of generator
+                        used when electricity from the national grid is interrupted on a pro-rata
+                        basis and upon issuance of a reasonable notice from the Lessor, failure of
+                        which shall amount to non- provision of such services. </p>
+                    <p style="text-align-justify;">
+                        <span class="me-3">10.3</span>To engage security systems/personnel in
+                        respect of the Demised Premises at its own costs and/or expenses. </p>
+                    <p style="text-align-justify;">
+                        <span class="me-3">10.4</span>Lessee shall not discharge into the pipes
+                        serving the Demised Premises any oil or grease or any dangerous objects or
+                        poisonous explosive matter or substance and to take all reasonable measures
+                        to ensure that any effluent so discharged into the pipes will not be
+                        corrosive or otherwise harmful to the pipes or cause obstruction or deposit
+                        in them.</p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">11.</strong>
+                        <strong>Weight and stresses</strong>
+                    </p>
+                    <p style="text-align-justify;">All damage caused to the Property or any part
+                        thereof or to the lifts by the Lessee, or anyone on his behalf, by taking in
+                        or putting out any machinery, equipment, safe, furniture, goods or other
+                        articles, which produce concentrates, loadings to any part of the floors of
+                        the Property or causing the Demised Premises to a weight greater than the
+                        designated load shall be made good by the Lessee, or if the Lessor so
+                        elects, by the Lessor at the expense of the Lessee. The Lessee shall pay to
+                        the Lessor the costs of such repairs within seven (7) days of the Lessor
+                        notifying the Lessee of the amount thereof.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">12.</strong>
+                        <strong>Abandonment of the Demised Premises</strong>
+                    </p>
+                    <p style="text-align-justify;">The Lessee shall not cease carrying on business
+                        in the Demised Premises or abandon the Demised Premises continuously for one
+                        (1) month without notifying the Lessor in writing for the reasons for such
+                        abandonment of Demised Premises and indicating the date upon which the
+                        Lessee intends to resume occupation. During the period that the Demised
+                        Premises shall remain unoccupied, the Lessee shall take care of the Demised
+                        Premises including making security arrangements as the Lessor shall
+                        reasonably require and the insurers shall require in order to protect the
+                        Demised Premises from vandalism, theft, damage or unlawful occupation or any
+                        material breakdown of the Demised Premises. Whatever occurs the Lessee shall
+                        have no claim against the Lessor.</p>
+                </div>
+
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">13.1</strong>
+                        <strong>Conduct of business</strong>
+                    </p>
+                    <p style="text-align-justify;">The Lessee hereby agrees and undertakes as
+                        follows:</p>
+                    <p style="text-align-justify;">
+                        <span class="me-3">13.2</span>To refer to the Property by its proper name
+                        wherever the Lessee designates or refers to the Property in any newspaper or
+                        other advertising stationery or other printed material. </p>
+                    <p style="text-align-justify;">
+                        <span class="me-3">13.3</span>To be responsible for obtaining and keeping in
+                        force all governmental approvals, licenses and permits necessary for the
+                        conduct of its business at the Demised Premises and for ensuring that the
+                        terms and conditions of such approvals, licenses and permits are strictly
+                        adhered to and shall indemnify the Lessor against any consequences or
+                        proceedings arising from the Lessee's default in complying with the
+                        provisions of this Clause. </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">14.</strong>
+                        <strong>Compliance with Statutes</strong>
+                    </p>
+                    <p style="text-align-justify;">The Lessee shall, at all times during the term,
+                        promptly comply at the Lessee's expense with all such requirements as may be
+                        imposed on the occupier of the Demised Premises by any applicable statute,
+                        rule, order, regulation or by-law now or hereafter in force affecting or
+                        relating to the use of the Demised Premises, and forthwith on receipt by the
+                        Lessee of any notice, order, requisition or direction made or issued by any
+                        government or any statutory , public or municipal authority affecting the
+                        Premises or the occupier thereof, to give full particulars of such notice to
+                        the Lessor and to keep the Lessor indemnified in respect of all such matters
+                        referred to in this Clause</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">15.0</strong>
+                        <strong>Covenants of the Lessor to Lessee.</strong>
+                    </p>
+                    <p style="text-align-justify;"><span class="me-3">15.1</span>The Lessor shall
+                        permit the Lessee to peacefully and quietly hold and enjoy the Demised
+                        Premises without any interruption or disturbance from or by the Lessor or
+                        any person in the care of the Lessor including but not limited to suppliers,
+                        agents or employees of the Lessor.</p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align-justify;"><span class="me-3">15.2</span>To insure and keep
+                        insured the Property, (except Lessee’s Properties, business and all that
+                        belonging or connected to lessee) against loss or damage by fire or such
+                        other risk as are commonly insured with a recognized insurance company in
+                        Tanzania.</p>
+                    <p style="text-align-justify;"><span class="me-3">15.3</span>If at any time the
+                        Demised Premises are rendered unfit for use by accidental fire or other
+                        cause beyond the control of the Lessee, the Lessor shall allow the Lessee to
+                        apportion all or part of the said rent proportionate to the existence and
+                        duration of the damage until the Demised Premises shall be fit for use
+                        again.</p>
+                    <p style="text-align-justify;"><span class="me-3">15.4</span>To pay all existing
+                        and future land rents, property taxes and all dues in respect of the
+                        Property as stipulated by law, regulations and Municipal by-laws.</p>
+                    <p style="text-align-justify;"><span class="me-3">15.5</span>To ensure the
+                        common area generator operation, repairs and routine maintenance are timely
+                        done.</p>
+                </div>
+
+            </div>
+
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">16.0</strong>
+                        <strong>UNTENANTABILITY Suspension of Rent</strong>
+                    </p>
+                    <p style="text-align-justify;">If during the Term the whole or any part of the
+                        Building shall be destroyed or damaged by fire, water, riot, civil
+                        commotion, acts of terrorism or any other cause beyond the control of the
+                        Lessor (except where such damage or destruction has been caused by, or the
+                        policy or policies of insurance in relation to the Demised Premises shall
+                        have been vitiated or payment of the policy moneys withheld in whole or in
+                        part in consequence of some act or default of the Lessee or by any of the
+                        Lessee's employees, contractors, agents sub-lessees, invitees or licensees)
+                        so as to render the Demised Premises substantially unfit for the use or
+                        occupation of the Lessee or so as to deprive the Lessee of substantial use
+                        of the Demised Premises, the Rent and Service Charge reserved by this
+                        Agreement or a fair and just proportion thereof according to the nature and
+                        extent of the damage sustained shall be suspended until the Demised Premises
+                        shall again be rendered fit for occupation and use.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">17.0</strong>
+                        <strong>Rules and Regulations</strong>
+                    </p>
+                    <p style="text-align-justify;">The rules and regulations relating to the
+                        Property and the Demised Premises set out in Schedule 1 (including any
+                        amendment or modification thereof by the Lessor from time to time) are
+                        deemed to form part of this Agreement and the Lessee covenants to observe
+                        and comply with such rules and regulations. The failure by the Lessee to
+                        keep and observe all such rules and regulations shall constitute a breach of
+                        the terms of this Agreement in the same manner as if such rules and
+                        regulations were contained herein.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">18.0</strong>
+                        <strong>LESSOR NOT LIABLE</strong>
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-3">18.1</span> Accidents </p>
+                    <p>
+                        The Lessor shall not be responsible to the Lessee or to the Lessee's
+                        employees, independent contractors, agents, invitees, licensees nor to any
+                        other persons for any: -
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(a)</span> Accident, happening, injury suffered or death
+                        occurring in the Demised Premises or in the Property or, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(b)</span> Damage to or loss of any goods or property
+                        sustained in the Demised Premises or in the Property or, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(c)</span> Act, omission or negligence of any employee,
+                        servant, agent, independent contractor, invitee or licensee of the Lessor in
+                        respect of the Property howsoever occurring. </p>
+
+                </div>
+                <div class="mb-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">18.2</strong>
+                        <strong>No Claim by Lessee</strong>
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-3">18.2.1</span> Notwithstanding anything herein contained
+                        the Lessor shall not be liable to the Lessee or others nor shall the Lessee
+                        have any claim against the Lessor in respect of: - </p>
+                </div>
+            </div>
+
+            <div class="page" style="page-break-before:always;">
+                <div>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(a)</span> any failure or inability of or delay by the
+                        Lessor in fulfilling any of its obligations under this Agreement or any
+                        interruption in any of the services herein agreed to be provided by the
+                        Lessor by reason of necessary repair or maintenance of any installation or
+                        apparatus or damage thereto or destruction thereof by fire, water, act of
+                        god, or any other cause beyond the control of the Lessor or by reason of
+                        mechanical or other defect or breakdown or by reason of a strike of workmen
+                        or others or a shortage of fuel, material, water or labor, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(b)</span>any act, omission, default, misconduct or
+                        negligence of any porter, attendant or other servant or employee,
+                        independent contractor or agent of the Lessor in or about the performance or
+                        purported performance of any duty relating to the provision of the services
+                        to be provided by the Lessor under this Agreement or, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(c)</span> any damage, injury or loss arising out of the
+                        leakage or defect of the piping, wiring or sprinkler system in the Property
+                        and/or the structure of the building or, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(d)</span> any damage, injury or loss caused by other
+                        lessees, occupiers or persons in the Property or, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(e)</span> any damage, injury or loss arising from or in
+                        connection with the use of the car parks in the Property. </p>
+                    <p style="text-align: justify;">
+                        Provided always that any act, omission, default, misconduct or negligence of
+                        any contractor, nominated or approved by the Lessor pursuant to any
+                        provision in this Agreement, and any such contractor so appointed shall not
+                        be deemed to be an agent or employee of the Lessor. </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">
+                            19.0
+                        </strong>
+                        <strong>
+                            HOLDING OVER
+                        </strong>
+                    </p>
+                    <p style="text-align: justify;">
+                        If the Lessee continues to occupy the Demised Premises beyond the expiration
+                        or determination of the Term or fails to deliver vacant possession thereof
+                        to the Lessor after the expiration or determination of the Term with the
+                        Lessor's acquiescence and without any express agreement between the Lessor
+                        and Lessee, the Lessee shall do so as a monthly Lessee and shall pay to the
+                        Lessor for every month of such holding over double the amount of Rent and
+                        Service Charge, and such holding over shall not constitute a renewal of this
+                        Agreement and there shall be no renewal of this Agreement by operation of
+                        law or pursuant to the provisions of this Agreement. </p>
+                    <p style="text-align: justify;">
+                        During the period of such holding over all other provisions of this
+                        Agreement shall be and remain in effect. This Agreement shall be
+                        determinable at any time by either party giving to the other one (1) months’
+                        notice in writing before the expiry of existing Agreement. The provision
+                        herein shall not be construed as the Lessor's consent for the Lessee to hold
+                        over after the expiration or determination of the Term.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">
+                            20.
+                        </strong>
+                        <strong>
+                            REMOVAL OF PROPERTY AFTER DETERMINATION OF TERM
+                        </strong>
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">
+                            20.1
+                        </strong>
+                        <strong>
+                            Lessor's Right to Remove Property.
+                        </strong>
+                    </p>
+                    <p style="text-align: justify;">
+                        If at such time as the Lessee has vacated the Demised Premises after the
+                        determination of this Agreement, any property of the Lessee which remain in
+                        or on the Demised Premises and the Lessee fails to remove the same within
+                        seven (7) days after being requested by the Lessor to do so by a notice to
+                        that effect, then the Lessor may as the agent of the Lessee dispose it
+                        without any claims whatsoever from the Lessee.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">
+                            21.
+                        </strong>
+                        <strong>
+                            LESSOR'S RIGHT IN RELATION TO THE PROPERTY.
+                        </strong>
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-3">
+                            21.1
+                        </span> The Lessor
+                        shall have the right at all times without obtaining the prior consent from
+                        the Lessee to alter, reconstruct or modify in any way whatsoever or change
+                        the use of any part or parts of the Property (including all fixtures,
+                        fittings, machinery and apparatus therein and thereto), so long as proper
+                        means and access to and egress from the Demised Premises are afforded and
+                        essential services are maintained at all times. </p>
+                    <p style="text-align: justify;">
+                        Nothing contained in this Agreement shall confer on the Lessee any right to
+                        enforce any covenant or agreement relating to other part or parts of the
+                        Property whether or not demised by the Lessor to others, or limit or affect
+                        the right of the Lessor in respect of any such other premises to deal with
+                        the same and impose and vary such terms and conditions in respect thereof as
+                        the Lessor may think fit.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">
+                            22.
+                        </strong>
+                        <strong>
+                            PROVIDED ALWAYS AND IT IS HEREBY AGREED AND DECLARED THAT:
+                        </strong>
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-3">
+                            22.1
+                        </span> Lessor to
+                        provide the Lessee a parking place for only One (1) car in the Parking Lot.</p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">
+                            22.1.1
+                        </span> The
+                        parking is restricted to the labelled one and not otherwise.</p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">
+                            22.1.2
+                        </span> Any
+                        obstruction or wrong parking shall amount to trespass with consequences.</p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">
+                            22.1.3
+                        </span> Parking
+                        allocated shall be at car owner’s risk and not the liability of the Lessor
+                        or the management.</p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">
+                            22.1.4
+                        </span> The
+                        parking lot allocated shall not be used as a garage or any other activities
+                        but shall be used as a car park only.</p>
+                    <p style="text-align: justify;">
+                        <span class="me-3">
+                            22.2
+                        </span> The Lessor
+                        shall not be responsible nor liable for any loss, damage, security or safe
+                        keeping of the Lessee’s goods, property or the goods or property of its
+                        guests or clients in the Property or the Demised Premises.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <strong class="me-3">
+                            23.
+                        </strong>
+                        <strong>
+                            Indemnity
+                        </strong>
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-3">23.1</span> The Lessee shall indemnify and keep
+                        indemnified and hold harmless the Lessor from any losses, damages, claims,
+                        demands, proceedings, actions, costs, expenses, interests and penalties
+                        suffered or incurred by the Lessor arising from any claim, demand,
+                        proceedings or actions that may be made or instituted by the Authorities in
+                        respect of Demised premises resulting from the failure or delay on the part
+                        of the Lessee in the payment and discharge of any taxes, levies or </p>
+                    <p style="text-align: justify;">
+                        <span class="me-3">23.2</span> The Lessee shall indemnify the Lessor against
+                        all damages, losses, costs (including all legal costs incurred by the
+                        lessor), expenses, actions proceedings, claims and liabilities made against
+                        or suffered or incurred by the Lessor arising directly out of: </p>
+                </div>
+            </div>
+
+            <div class="page" style="page-break-before:always;">
+                <div class="mb-3">
+                    <p style="text-align: justify;">
+                        <span class="me-5">a)</span> Any act, omission or negligence of the Lessee,
+                        the Lessee’s employees, customers or agents at the Demised Premises
+                        expressly or impliedly with or without the Lessee’s authority and under the
+                        Lessee’s control or, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">b)</span> Any breach or non-observance by the Lessee of
+                        the convents, conditions or other provisions of this Agreement or any other
+                        related matters. Such acts shall amount to immediate termination. </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">c)</span> Overflow or leakage of water (including rain
+                        water) in or from the Demised Premises or any equipment or fixtures therein
+                        or caused or contributed to by any act, omission, default, negligence or
+                        breach on the part of the Lessee, its employees, agents, contractors,
+                        invitees, sub-lessees, licensees or other persons as aforesaid. </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">d)</span>loss, damage or injury from any cause whatsoever
+                        to property or person caused or contributed to by the use of the Demised
+                        Premises by Lessee or its employees, agents, contractors, invitees,
+                        sub-lessees, licensees or other persons as aforesaid. </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">e)</span>loss, damage or injury from any cause whatsoever
+                        to property or person occasioned or contributed to by any act, omission,
+                        default, negligence or breach on the part of the Lessee or its employees,
+                        agents, contractors, invitees, sub-lessees, licensees or other persons as
+                        aforesaid. </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">24.0</strong>
+                        <strong>Termination</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        If any one of the following occurs;
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(a)</span> A rent payment or any other payment due from
+                        Lessee to Lessor is delayed and remain unpaid in whole or in part for a
+                        period of thirty (30) days after same is due and payable, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(b)</span>Lessee violates or defaults on any of the
+                        covenants in this Agreement and such violations or default continue for a
+                        period of thirty (30) days after written notice from the Lessor of such
+                        violation or default, </p>
+                    <p style="text-align: justify;">
+                        The Lessor shall terminate this Agreement and forfeit the Security deposit
+                        which shall not be limited to attach and sell of the Lessee properties that
+                        the Lessor may deem necessary to use to recover outstanding rent and other
+                        charges due. The Lessor shall also exercise any other remedies available at
+                        their disposal under the law.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align: justify;">
+                        <span class="me-3">24.1</span> Either Party may by giving <strong>one (1)
+                        month</strong> written notice assigning reasons, terminate this Agreement,
+                        reasons which should not be unreasonably withheld, and any advance amount
+                        paid for the unexpired period of the Lease shall be refunded after deducting
+                        all the taxes paid and any damages assessed. </p>
+                    <p style="text-align: justify;">
+                        <span class="me-3">24.2</span> In the event that the Lessee shall desire to
+                        terminate this Agreement before the expiry of the first Six Months of
+                        commencement of the Agreement the Lessee shall pay to the Lessor the monthly
+                        rental instalments for the full months of one (1) month from the date of the
+                        commencement of the Agreement. Failure of which the Lessor shall have the
+                        right to exercise distress and or invoke any other provisions of this
+                        Agreement in order to recover the amount. </p>
+                </div>
+
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">25.0</strong>
+                        <strong>Yielding up at the end of the Term</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        At the end or sooner determination of the term hereby created,
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(i)</span> To surrender to the Lessor all keys giving
+                        access to all parts of the Demised Premises irrespective of whether the same
+                        have been supplied by the Lessor, </p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align: justify;">
+                        <span class="me-5">(ii)</span> Quietly to yield up the Demised Premises and
+                        the Lessor's fittings and fixtures to the reasonable satisfaction of the
+                        Lessor (after removal of all Lessee’s fittings which during the term and
+                        with the Demised Premises repaired and cleaned in accordance with the
+                        Lessee's covenants contained in this Agreement), </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(iii)</span> Without prejudice to the generality of the
+                        foregoing provisions, to reinstate all air-conditioning installations,
+                        sprinkler system and other electrical and electronic installations therein
+                        to its original condition to the reasonable satisfaction of the Lessor, such
+                        reinstatement work and all other reinstatement works as required under this
+                        Agreement shall be carried out at the Lessee's costs and expense by a
+                        contractor appointed by the Lessee and approved by the Lessor, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(iv)</span>To redecorate the Premises to the reasonable
+                        satisfaction of the Lessor, with two coats of good quality oil paint or
+                        emulsion paint and with wall paper for those part normally wall papered and
+                        other appropriate treatment of all internal parts of the Demised Premises
+                        including the ceiling and floor in a good workmanlike manner using suitable
+                        and appropriate materials as the Lessor may reasonably and properly require, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(v)</span>At any time upon the written request of the
+                        Lessor, to remove any signs, names, advertisements or notices erected upon
+                        or affixed to, within or outside the Demised Premises or the exterior walls
+                        of the building and to make good any damage or disfigurement caused by
+                        reason of such erection, affixing and/or removal thereof, </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">(vi)</span>To keep the Demised premises in a good state
+                        of repair and condition and to repair any damage to the Demised Premises
+                        caused by the Lessee, its employees, agents, clients or third parties either
+                        within or outside the scope of the Lessee’s business activities. </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">26.0</strong>
+                        <strong>Costs and Expenses</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        The Lessee shall pay to the Lessor all legal costs (on an indemnity basis)
+                        and expenses in connection with demanding and/or enforcing any provision of
+                        this Agreement in the event of non-compliance or breach by the Lessee, or in
+                        connection with any claim for damages by the Lessor in respect of any breach
+                        of this Agreement by the Lessee.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">27.0</strong>
+                        <strong>Notice "To Let"</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        To permit the Lessor during the one (1) month immediately preceding the
+                        determination of this Agreement to affix and retain without interference
+                        upon any part of the Demised Premises a notice for re-letting or selling the
+                        same and during the said period to permit all persons with written authority
+                        from the Lessor or its agents at reasonable time of the day upon prior
+                        appointment to view the Premises.
+                    </p>
+                </div>
+
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div>
+                    <p style="text-align:justify;">
+                        <strong class="me-3">28.0</strong>
+                        <strong>Notices.</strong>
+                    </p>
+                    <p style="text-align:justify;"><span class="me-3">28.1</span> Any notice
+                        required or permitted to be given or made under this Agreement and any other
+                        Agreement between the Parties shall be in writing, and any such notice shall
+                        be deemed to have been duly given or made when it shall be delivered by hand
+                        or by post, telegram, cable, email, fax or telex to the Party to which it is
+                        required or permitted to be given or made at such Party’s address specified
+                        in this Agreement or at such other address as such Party shall have
+                        designated by notice to the Party giving such notice. </p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align:justify;"><span class="me-3">28.2</span>For the purpose of
+                        service of notice under Clause 28.0 hereinabove the addresses of the Parties
+                        are as set out herein below: </p>
+                </div>
+            </div>
+            <div class="my-3">
+                <table class="table-borderless">
+                    <tr>
+                        <td width="200">
+                            <strong>
+                                For the Lessor:
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                [LANDLORD]
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="my-3">
+                <table class="table-borderless">
+                    <tr>
+                        <td width="200">
+                            <strong>
+                                Postal Address:
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                [Landlord Address].
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <strong>
+                                Telephone:
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                [Landlord Telephone]
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <strong>
+                                E-mail:
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                [Landlord Email]
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="my-3">
+                <table class="table-borderless">
+                    <tr>
+                        <td width="200">
+                            <strong>
+                                For the Lessee:
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                [Tenant]
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <strong>
+                                Postal Address:
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                [Tenant Address].
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <strong>
+                                Telephone:
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                [Tenant Telephon]
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <strong>
+                                E-mail:
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                [Tenant Email]
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">29.0</strong>
+                        <strong>Confidentiality</strong>
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">29.1</strong>
+                        <strong>Confidentiality of the information.</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        During the subsistence of this Agreement, each Party and/or its affiliate(s)
+                        shall receive and maintain all confidential information in the strictest
+                        confidence that upon disclosure of any information by the Lessee it shall
+                        amount to breach of the contractual terms and the Lessor shall be entitled
+                        to review the terms and conditions herein including increase of Rent amount
+                        and shall have a right to forfeit the Security Deposit and impose any other
+                        penalties that it may deem fit and reasonable depending on the extent of
+                        damage suffered due to disclosure of information contained herein by the
+                        Lessee, its assignees, agents, suppliers or employees or any other person
+                        who may have access to this Agreement.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">29.2</strong>
+                        <strong>Limit to Disclose.</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        Each Party and/or its affiliate(s) shall limit disclosure of any
+                        confidential information to those of its employees, agents, and
+                        representatives on a need - to-know basis. Either Party prior to making
+                        disclosure of any confidential information shall exert best efforts to cause
+                        the receiving entity(ies) to execute papers and documents to effect
+                        substantial compliance with the provisions of this clause.
+                    </p>
+                </div>
+
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">29.3</strong>
+                        <strong>Legal Obligation to Disclose.</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        In case Party and/or its affiliate(s) or any of their employees, agents or
+                        representatives, becomes legally compelled to disclose any confidential
+                        information, such Party shall give sufficient notice to the other Party so
+                        as to permit such other Party to seek a timely protective order or other
+                        appropriate relief. If such order or order relief cannot be obtained, the
+                        Party being compelled to make disclosure shall only make disclosure of that
+                        which is legally required and no more.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">29.4</strong>
+                        <strong>Information in public domain.</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        The obligation of confidentiality in respect of confidential information
+                        shall not apply to confidential information, which is now in, or hereafter
+                        comes into, the public domain otherwise than by breach of this Agreement.
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">29.5</strong>
+                        <strong>Copies</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        Each Party and/or its affiliate(s) shall make only such notes, sketches,
+                        drawings, photocopies or other written or photographic records relating to
+                        all confidential information as are necessary. All such materials shall
+                        belong to the Party and/or its affiliates to which the confidential
+                        information relates and, together with all other tangible expressions of
+                        confidential information held by any Party and/or its affiliates(s) shall be
+                        returned to the owner forthwith upon the termination of this Agreement.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">30.0</strong>
+                        <strong>Force Majeure</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        For the purpose of this contract “Force Majeure” means an event which is
+                        beyond the reasonable control of a Party and which makes a Party’s
+                        performance of its obligations hereunder impossible or so impracticable as
+                        reasonably to be considered impossible under the circumstances and includes,
+                        but is not limited to Government Gazette Notice, war, earthquakes, fire,
+                        explosion, storm flood or other adverse weather conditions, strikes,
+                        lockouts or other industrial action (except where such invoking Force
+                        Majeure to prevent), confiscation or any other action by Government
+                        agencies.
+                    </p>
+                    <p style="text-align: justify;">
+                        Force Majeure shall not include.
+                    </p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">i)</span> Any event, which is caused by the negligence or
+                        intentional acts of the Parties.</p>
+                    <p style="text-align: justify;">
+                        <span class="me-5">ii)</span> Any event in which a diligent Party could
+                        reasonably have been expected to take both into consideration at the time of
+                        conclusion of this Contract and avoid or overcome in the performance of its
+                        obligation herein.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">30.1</strong>
+                        <strong>Breach of Contract</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        The failure of either Party to fulfil any of its obligations shall not be
+                        considered as breach or default under this contract in so far as such
+                        inability that may arise from an event of Force Majeure provided that the
+                        Party affected by an event has taken all the reasonable precaution, due care
+                        and the alternative measures with the objective of carrying out the terms
+                        and conditions of this Agreement.
+                    </p>
+                </div>
+
+            </div>
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">30.2</strong>
+                        <strong>Measures to be taken</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        <span class="me-5">i)</span> Either Party affected by an event of Force
+                        Majeure shall take all the reasonable measures to remove such inability to
+                        fulfil its obligation with minimum of delay. </p>
+                    <p style="text-align:justify;">
+                        <span class="me-5">ii)</span> The affected Party shall give thirty (30)
+                        days’ notice as to the occurrence and evidence of the event and specify
+                        measure taken to restore the situation. </p>
+                    <p style="text-align:justify;">
+                        <span class="me-5">iii)</span> The Parties shall take all reasonable
+                        measures to minimize the consequences of any occurrence of Force Majeure. </p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">31.0</strong>
+                        <strong>Miscellaneous provisions</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        <strong>Alterations and additions</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        The Lessee at its own costs and written notice to the Lessor, may be
+                        permitted subjecttoLessor’s consentand approval to alter the interior of the
+                        Demised Premises in accordance with its standard interior decor including
+                        installation of additional partitioning. in case of such undertaking, Lessee
+                        shall comply with all building codes and by-laws when altering the interior
+                        of the demised premises.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">32.0</strong>
+                        <strong>Dispute resolution</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        <span class="me-3">32.1</span> If any dispute arises in connection with this
+                        Agreement, both parties shall, within fourteen (14) days of a written
+                        request from one party to the other, meet in good faith to resolve the
+                        dispute. </p>
+                    <p style="text-align:justify;">
+                        <span class="me-3">32.2</span> If the dispute is not resolved at that
+                        meeting, the parties will attempt to settle it by arbitration, however,
+                        incase of a dispute involving non-payment of rent, service and utility
+                        charges, and the amounts are in arrears of more than one month, the Lessor
+                        shall take the possession of the Demised premises and exercise distress or
+                        other legal means to recover the amount in arrears, for avoidance of doubt
+                        the cause for relief through arbitration shall not apply in recovery of
+                        rental and other payments in arrears. </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">33.0</strong>
+                        <strong>Governing law and Jurisdiction</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        <span class="me-3">33.1</span>This Agreement shall be legally binding, and
+                        all negotiations and any legal agreements prepared in connection with it and
+                        any dispute or claim arising out of or in connection with them or their
+                        formation (including non-contractual disputes or claims) shall be governed
+                        by, and construed in accordance with the laws of the United Republic of
+                        Tanzania.</p>
+                    <p style="text-align:justify;">
+                        <span class="me-3">33.2</span> In the event of any dispute arising between
+                        the Parties in relation to or arising out of this Agreement other than
+                        rental, service charges, utility charges and other payments in arrears
+                        (defaults), the Parties shall upon receipt of a notice in writing from the
+                        Party claiming such dispute, attempt to resolve the dispute through good
+                        faith negotiations. If the Parties are unable to settle the dispute, the
+                        matter shall be exclusively referred to and finally resolved by arbitration
+                        in accordance to the Arbitration Act (CAP 15 R.E2020) which Rules are deemed
+                        to be incorporated by reference into this clause. </p>
+
+                </div>
+            </div>
+
+            <div class="page" style="page-break-before:always;">
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <span class="me-3">33.3</span> The Arbitration shall be by one Arbitrator
+                        appointed by the Tanzania Institute of Arbitrators (TIA). The choice of
+                        arbitrator shall be final and binding on the Parties and the venue of the
+                        arbitration shall be in Dar es Salaam conducted in the English language. </p>
+                    <p style="text-align:justify;">
+                        <span class="me-3">33.4</span> The Parties undertake that all arbitral
+                        proceedings conducted shall be kept strictly confidential as well as all
+                        Confidential Information disclosed therein which shall be used solely for
+                        those proceedings.</p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">34.0</strong>
+                        <strong>Waiver</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        No failure or delay by any Party to exercise any of his rights herein shall
+                        operate as a waiver thereof nor shall any single or partial exercise of any
+                        such right preclude further exercise thereof.
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">35.0</strong>
+                        <strong>Amendment</strong>
+                    </p>
+                    <p style="text-align:justify;">
+                        The provisions of this Agreement may be amended from time to time by the
+                        Parties and such modifications as the Lessor and Lessee may agree shall be
+                        in writing and supplemental to this Agreement.
+                    </p>
+                </div>
+                <div class="my-3">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">36.0</strong>
+                        <strong>Bankruptcy of Lessee.</strong>
+                    </p>
+                    <p class="mb-4" style="text-align:justify;">
+                        If a substantial portion of the Properties of the Lessee on the Demised
+                        premises at any time during the term are;
+                    </p>
+                    <p style="text-align:justify;">
+                        <span class="me-5">(i)</span> Seized or taken in execution or attachment by
+                        a creditor of the Lessee, </p>
+                    <p style="text-align:justify;">
+                        <span class="me-5">(ii)</span> or a receiver manager is appointed to control
+                        the conduct of the business of the Lessee at the Demised Premises or, </p>
+                    <p style="text-align:justify;">
+                        <span class="me-5">(iii)</span> If the Lessee becomes bankrupt or insolvent
+                        or an order is made for the winding up of the Lessee business or, </p>
+                    <p style="text-align:justify;">
+                        <span class="me-5">(iv)</span> The Demised premise is used by any other
+                        person other than those entitled to use under the terms of this Agreement
+                        for the next three (3) ensuing months, </p>
+                    <p class="mt-4" style="text-align:justify;">
+                        The Lessor shall be at the option of exercising his rights by written notice
+                        to the Lessee and forthwith determine this Agreement, rent will be recovered
+                        in the manner herein reserved as if the same rent was in arrears. </p>
+                </div>
+            </div>
+            <div class="page" style="page-break-before:always;">
+
+                <div class="my-5">
+                    <p style="text-align:justify;">
+                        <strong class="me-3">37.0</strong>
+                        <strong>ACKNOWLEDGEMENT</strong>
+                    </p>
+                    <p style="text-align:justify;">The Lessee has read and understood all the terms
+                        and conditions of this Agreement and undertakes to abide by them at all
+                        times. The Lessee understands that the Demised Premises are part of a
+                        property where the rights of other lessees may be affected if he fails to
+                        conform to the terms and conditions of this Agreement.</p>
+                    <p style="text-align:justify;">The Lessee acknowledges that notwithstanding its
+                        investments, the Lessee does not have an automatic right to remain in the
+                        Demised Premises after the expiration of the Term. The Lessee agrees
+                        undertakes that he will vacate the Demised Premises and surrender them to
+                        the Lessor immediately upon expiration or earlier termination of this
+                        Agreement.</p>
+                    <p style="text-align:justify;">The Lessee will not dispute the Lessor's right to
+                        terminate this Agreement, or to allow it to expire according to its terms
+                        and conditions. The Lessee acknowledges that it has entered into this
+                        Agreement after obtaining independent legal advice in respect of the Party’s
+                        rights and obligations under this Lease.</p>
+                </div>
+            </div>
+
+            <div class="page" style="page-break-before:always;">
+                <div class="my-5">
+                    <p>
+                        <strong>
+                            IN WITNESS WHEREOF
+                        </strong>
+                        this Agreement has been executed and delivered as in the manner and on the
+                        date and year appearing. </p>
+                </div>
+                <table class="table-borderless my-5">
+                    <tr>
+                        <td class="text-start" width="500">
+                            <p>
+                                <strong>SEALED with</strong> the <strong>COMMON SEAL of [LANDLORD]</strong>
+                                and <strong>
+                                    DELIVERED
+                                </strong>
+                                in our presence on <strong>
+                                    This__________day of__________, 2023.
+                                </strong>
+                            </p>
+                        </td>
+                        <td class="text-end" width="300">
+                            <span class="d-block">
+                                _______________________
+                            </span>
+                            <strong class="me-5">
+                                SEAL
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table-borderless my-5">
+                    <tr>
+                        <td width="200">
+                            <span class="my-2">
+                                Full Name:
+                            </span>
+                        </td>
+                        <td>
+                            ___________________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2"> Signature: </span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2"> Postal Address: </span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2">Designation:</span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                </table>
+                <table class="table-borderless my-5">
+                    <tr>
+                        <td width="200">
+                            <span class="my-2">
+                                Full Name:
+                            </span>
+                        </td>
+                        <td>
+                            ___________________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2"> Signature: </span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2"> Postal Address: </span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2">Designation:</span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                </table>
+                <table class="table-borderless my-5">
+                    <tr>
+                        <td class="text-start" width="500">
+                            <p>
+                                <strong>SEALED with</strong> the <strong>COMMON SEAL of [TENANT]</strong>
+                                and <strong>
+                                    DELIVERED
+                                </strong>
+                                in our presence on <strong>
+                                    This__________day of__________, 2023.
+                                </strong>
+                            </p>
+                        </td>
+                        <td class="text-end" width="300">
+                            <span class="d-block">
+                                _______________________
+                            </span>
+                            <strong class="me-5">
+                                SEAL
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table-borderless my-5">
+                    <tr>
+                        <td width="200">
+                            <span class="my-2">
+                                Full Name:
+                            </span>
+                        </td>
+                        <td>
+                            ___________________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2"> Signature: </span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2"> Postal Address: </span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2">Designation:</span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                </table>
+                <table class="table-borderless my-5">
+                    <tr>
+                        <td width="200">
+                            <span class="my-2">
+                                Full Name:
+                            </span>
+                        </td>
+                        <td>
+                            ___________________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2"> Signature: </span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2"> Postal Address: </span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200">
+                            <span class="my-2">Designation:</span>
+                        </td>
+                        <td>
+                            _______________________________________
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <record id="commercial_lease_agreement_template_report_id" model="ir.actions.report">
+        <field name="name">Commercial Lease Agreement</field>
+        <field name="model">tenancy.details</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rental_management.commercial_lease_agreement_template</field>
+        <field name="report_file">rental_management.commercial_lease_agreement_template</field>
+        <field name="binding_model_id" ref="model_tenancy_details" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Commercial Lease Agreement'</field>
+    </record>
+
+</odoo>

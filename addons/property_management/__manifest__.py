@@ -1,0 +1,147 @@
+# -*- coding: utf-8 -*-
+# Copyright 2024 Digital Hut Africa.
+# Part of Digital Hut Africa. See LICENSE file for full copyright and licensing details.
+{
+    "name": "Advanced Property Sale & Rental Management",
+    "description": """
+        - Property Sale
+        - Property Rental
+        - Lease Contract
+        - Landlord Management
+        - Customer Management
+        - Property Maintenance
+        - Customer Recurring Invoice
+        - Property List
+    """,
+    "summary": "Property Sale & Rental Management",
+    "version": "18.0.6.4",
+    "author": "Digital Hut Africa",
+    "company": "Digital Hut Africa",
+    "maintainer": "Digital Hut Africa",
+    "website": "https://www.diha.co.tz",
+    "category": "Industry",
+    "depends": [
+        "base",
+        "mail",
+        "documents",
+        "contacts",
+        "account",
+        "hr",
+        "maintenance",
+        "crm",
+        "website",
+        "frontdesk",
+        "whatsapp",
+    ],
+    "data": [
+        # Security
+        "security/groups.xml",
+        "security/ir.model.access.csv",
+        "security/security_update.xml",
+        "security/security_manager.xml",
+        # Data
+        "data/ir_cron.xml",
+        "data/sequence.xml",
+        "data/property_product_data.xml",
+        # Wizard Actions (must come before views that reference them)
+        "wizard/property_maintenance_wizard_view.xml",
+        "wizard/contract_wizard_view.xml",
+        "wizard/property_payment_wizard_view.xml",
+        "wizard/extend_contract_wizard_view.xml",
+        "wizard/property_vendor_wizard_view.xml",
+        "wizard/booking_wizard_view.xml",
+        "wizard/property_sale_tenancy_xls_report_view.xml",
+        "wizard/landlord_tenancy_sold_xls_view.xml",
+        "wizard/booking_inquiry_view.xml",
+        "wizard/active_contract_view.xml",
+        "wizard/utility_bill_register_wizard.xml",
+        "wizard/property_terminate_wizard_view.xml",
+        "wizard/invoice_xls_report_wizard_view.xml",
+        "wizard/property_occupancy_xls_report_wizard_view.xml",
+        "wizard/upload_utility_excel_wizard_view.xml",
+        "wizard/utility_bill_send_views.xml",
+        "wizard/agreement_template_preview_wizard_view.xml",
+        # Views
+        "views/assets.xml",
+        "views/property_details_view.xml",
+        "views/property_document_view.xml",
+        "views/user_type_view.xml",
+        "views/contract_sub_stage_view.xml",
+        "views/tenancy_details_view.xml",
+        "views/contract_duration_view.xml",
+        "views/rent_invoice_view.xml",
+        "views/property_amenities_view.xml",
+        "views/property_specification_view.xml",
+        "views/property_vendor_view.xml",
+        "views/certificate_type_view.xml",
+        "views/parent_property_view.xml",
+        "views/property_tag_view.xml",
+        "views/product_product_inherit_view.xml",
+        "views/property_invoice_inherit.xml",
+        "views/res_config_setting_view.xml",
+        "views/property_res_city.xml",
+        "views/nearby_connectivity_view.xml",
+        "views/agreement_template_view.xml",
+        "views/meter_type.xml",
+        "views/handover_property.xml",
+        "views/utility_bill.xml",
+        "views/maintenance_template_view.xml",
+        "views/property_inspection.xml",
+        "views/account_payment_inherit_view.xml",
+        # Inherit Views
+        "views/maintenance_product_inherit.xml",
+        "views/property_maintenance_view.xml",
+        "views/property_crm_lead_inherit_view.xml",
+        "views/maintenance_equipment_inherit_views.xml",
+        "views/maintenance_equipment_category_inherit_views.xml",
+        # Reports
+        "report/report_invoice_template.xml",
+        "report/tenancy_details_report_template.xml",
+        "report/property_details_report.xml",
+        "report/property_sold_report.xml",
+        "report/lease_agreement_report.xml",
+        "report/handover_property_report.xml",
+        "report/utility_bill_report_template.xml",
+        "report/utility_bill_report.xml",
+        "report/commercial_lease_agreement_report.xml",
+        "report/expiring_contract_list_report.xml",
+        "report/equipment_qr_code_report.xml",
+        "report/payment_receipt_report.xml",
+        # Mail Templates
+        "data/active_contract_mail_template.xml",
+        "data/tenancy_reminder_mail_template.xml",
+        "data/property_book_mail_template.xml",
+        "data/property_sold_mail_template.xml",
+        "data/sale_invoice_mail_template.xml",
+        "data/agreement_expiry_alert_mail_template.xml",
+        "data/invoice_raise_alert_mail_template.xml",
+        "data/payment_followup_alert_mail_template.xml",
+        "data/expiring_contract_list.xml",
+        "data/payment_prior_alert.xml",
+        "data/maintenance_request_notification_mail_template.xml",
+        "data/property_report_mails.xml",
+        "data/utility_bill_mail_template.xml",
+        "data/register_payment_mail_template.xml",
+        "views/property_manager_view.xml",
+        "views/templates/landlord_portal.xml",
+        # Menus (last — depends on all views)
+        "views/menus.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "rental_management/static/src/js/property_dashboard.js",
+            "rental_management/static/src/xml/property_dashboard.xml",
+        ],
+        "web.assets_frontend": [
+            "rental_management/static/src/js/portal.js",
+            "rental_management/static/src/css/lib/portal_style.css",
+        ],
+    },
+    "images": [
+        "static/description/property-rental.gif",
+    ],
+    "license": "OPL-1",
+    "installable": True,
+    "application": True,
+    "auto_install": False,
+}

@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="property_details_qweb_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h1 style="text-align:center">
+                                Property Information
+                            </h1>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-5">
+                                    <t t-if="doc.image">
+                                        <img t-att-src="image_data_uri(doc.image)" class="mt-2"
+                                             style="width:inherit;border-radius: 4%;margin: 5px;"
+                                             alt="Image"/>
+                                    </t>
+                                </div>
+                                <div class="col-5">
+                                    <ul>
+                                        <li>
+                                            <h3>
+                                                <span t-field="doc.name"/>
+                                            </h3>
+                                        </li>
+                                        <t t-if="doc.is_parent_property">
+                                            <li>
+
+                                                <span t-field="doc.parent_property_id.name"/>
+                                            </li>
+                                        </t>
+                                        <li>
+                                            <span t-field="doc.type"/>
+                                        </li>
+                                        <li>
+                                            <t t-if="doc.sale_lease=='for_sale'">
+                                                For Sale -
+                                                <span t-field="doc.sale_price"/>
+                                            </t>
+                                            <t t-else="">
+                                                For Lease -
+                                                <span t-field="doc.tenancy_price"/>
+                                                <t t-if="doc.rent_unit">/<t t-esc="doc.rent_unit" /></t>
+                                            </t>
+                                        </li>
+                                        <li>
+                                            Landlord :
+                                            <span t-field="doc.landlord_id.name"/>
+                                        </li>
+                                        <t t-if="doc.is_parent_property">
+                                            <li>
+                                                <span t-field="doc.parent_website"/>
+                                            </li>
+                                        </t>
+                                        <t t-else="">
+                                            <li>
+                                                <span t-field="doc.website"/>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </div>
+                            </div>
+                            <hr/>
+                            <t t-if="doc.type=='land'">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="4" style="text-align:center;" class="table-active">
+                                            <h4>
+                                                Land Details
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:25%">
+                                            Name
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.land_name"/>
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            Area
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.area_hector"/>
+                                                Hector
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Facilities
+                                        </td>
+                                        <td colspan="3">
+                                            <strong>
+                                                <span t-field="doc.land_facilities"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-if="doc.type=='residential'">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="4" style="text-align:center;" class="table-active">
+                                            <h4>
+                                                Residential Details
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:25%">Type of Residence</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.residence_type"/>
+                                            </strong>
+                                        </td>
+                                        <td>Bedroom</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.bed"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:25%">Total Floor</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.total_floor"/>
+                                            </strong>
+                                        </td>
+                                        <td>Bathroom</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.bathroom"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:25%">Tower Building</td>
+                                        <td>
+                                            <strong>
+                                                <t t-if="doc.towers">
+                                                    <span t-field="doc.no_of_towers"/>
+                                                    Tower
+                                                </t>
+                                                <t t-else="">
+                                                    No
+                                                </t>
+                                            </strong>
+                                        </td>
+                                        <td>Parking</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.parking"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:25%">Furnishing</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.furnishing"/>
+                                            </strong>
+                                        </td>
+                                        <td>Facing</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.facing"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <center>
+                                                <strong>
+                                                    General Information
+                                                </strong>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Flat No.</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.room_no"/>
+                                            </strong>
+                                        </td>
+                                        <td>Floor</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.floor"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Sqft.</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.total_square_ft"/>
+                                                sqft.
+                                            </strong>
+                                        </td>
+                                        <td>Usable Sqft.</td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.usable_square_ft"/>
+                                                sqft.
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Facilities</td>
+                                        <td colspan="3">
+                                            <strong>
+                                                <span t-field="doc.facilities"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-if="doc.type=='commercial'">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="4" style="text-align:center;" class="table-active">
+                                            <h4>
+                                                Commercial Details
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:25%;">
+                                            Commercial/Shop Name
+                                        </td>
+                                        <td style="width:25%;">
+                                            <strong>
+                                                <span t-field="doc.commercial_name"/>
+                                            </strong>
+                                        </td>
+                                        <td style="width:25%;">
+                                            Used For
+                                        </td>
+                                        <td style="width:25%;">
+                                            <strong>
+                                                <span t-field="doc.used_for"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Commercial Type
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.commercial_type"/>
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            Floor
+                                        </td>
+                                        <td>
+                                            <t t-if="doc.commercial_type=='full_commercial'">
+                                                <strong>
+                                                    <span t-field="doc.total_floor_commercial"/>
+                                                </strong>
+                                            </t>
+                                            <t t-else="">
+                                                <strong>
+                                                    <span t-field="doc.floor_commercial"/>
+                                                </strong>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Facilities
+                                        </td>
+                                        <td colspan="3">
+                                            <strong>
+                                                <span t-field="doc.commercial_facilities"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-if="doc.type=='industrial'">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="4" style="text-align:center;" class="table-active">
+                                            <h4>
+                                                Industrial Details
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:25%;">
+                                            Industry Name
+                                        </td>
+                                        <td style="width:25%;">
+                                            <strong>
+                                                <span t-field="doc.industry_name"/>
+                                            </strong>
+                                        </td>
+                                        <td style="width:25%;">
+                                            Location
+                                        </td>
+                                        <td style="width:25%;">
+                                            <strong>
+                                                <span t-field="doc.industry_location"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Usage as
+                                        </td>
+                                        <td>
+                                            <strong>
+                                                <span t-field="doc.industrial_used_for"/>
+                                            </strong>
+                                        </td>
+                                        <t t-if="doc.industrial_used_for=='other'">
+                                            <td>
+                                                Usage
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    <span t-field="doc.other_usages"/>
+                                                </strong>
+                                            </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td colspan="2">
+                                                #
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Facilities
+                                        </td>
+                                        <td colspan="3">
+                                            <strong>
+                                                <span t-field="doc.industrial_facilities"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-if="doc.type=='residential'">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;" class="table-active">
+                                            <h4>
+                                                Area Measurement
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>House Section</strong>
+                                        </td>
+                                        <td>
+                                            <strong>No of unit.</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Length(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Width(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Height(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Carpet Area(ft2)</strong>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="doc.room_measurement_ids" t-as="r">
+                                        <tr>
+                                            <td>
+                                                <span t-field="r.type_room"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.no_of_unit"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.length"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.width"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.height"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.carpet_area"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </t>
+                            <t t-if="doc.type=='commercial'">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;" class="table-active">
+                                            <h4>
+                                                Shops Measurement
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Shops</strong>
+                                        </td>
+                                        <td>
+                                            <strong>No of unit.</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Length(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Width(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Height(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Carpet Area(ft2)</strong>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="doc.commercial_measurement_ids" t-as="r">
+                                        <tr>
+                                            <td>
+                                                <span t-field="r.shops"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.no_of_unit"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.length"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.width"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.height"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.carpet_area"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </t>
+                            <t t-if="doc.type=='industrial'">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;" class="table-active">
+                                            <h4>
+                                                Asset Measurement
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Industrial Asset</strong>
+                                        </td>
+                                        <td>
+                                            <strong>No of unit.</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Length(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Width(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Height(ft)</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Carpet Area(ft2)</strong>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="doc.industrial_measurement_ids" t-as="r">
+                                        <tr>
+                                            <td>
+                                                <span t-field="r.asset"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.no_of_unit"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.length"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.width"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.height"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="r.carpet_area"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </t>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td style="text-align: center; font-size: 12px; background-color: #F8F8F8;">
+                                        <h4>
+                                            Nearby Connectivity
+                                        </h4>
+                                    </td>
+                                </tr>
+                                <t t-set="ap_tag" t-value="str('&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;')"/>
+                                <t t-set="img_count" t-value="0"/>
+                                <tr>
+                                    <td>
+                                        <t t-foreach="doc.nearby_connectivity_ids" t-as="img">
+                                            <t t-set="img_count" t-value="img_count + 1"/>
+                                            <div style="width:12.5rem;display: inline-block;text-align:center;">
+                                                <t t-if="img.image">
+                                                    <img t-att-src="image_data_uri(img.image)"
+                                                         style="width: 100px; height: 100px;"/>
+                                                </t>
+                                                <br/>
+                                                <h6>
+                                                    <span t-field="img.name"/>
+                                                </h6>
+                                                <h5>
+                                                    <strong>
+                                                        <span t-field="img.distance" style="color:#00A09D;"/>
+                                                    </strong>
+                                                </h5>
+                                            </div>
+                                            <t t-if="img_count % 4 == 0">
+                                                <t t-raw="ap_tag"/>
+                                            </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td colspan="2" style="text-align:center;" class="table-active">
+                                        Facilities
+                                    </td>
+                                </tr>
+                                <t t-if="doc.is_parent_property">
+                                    <t t-foreach="doc.parent_specification_ids" t-as="ps">
+                                        <tr>
+                                            <td style="width:25%;">
+                                                <t t-if="ps.image">
+                                                    <img t-att-src="image_data_uri(ps.image)" class="mt-2"
+                                                         style="width:210px;height:135px;"
+                                                         alt="Image"/>
+                                                </t>
+                                            </td>
+                                            <td style="width:75%;">
+                                                <h5>
+                                                    <span t-field="ps.title"/>
+                                                </h5>
+                                                <hr/>
+                                                <ul>
+                                                    <t t-if="ps.description_line1">
+                                                        <li>
+                                                            <span t-field="ps.description_line1"/>
+                                                        </li>
+                                                    </t>
+                                                    <t t-if="ps.description_line2">
+                                                        <li>
+                                                            <span t-field="ps.description_line2"/>
+                                                        </li>
+                                                    </t>
+                                                    <t t-if="ps.description_line3">
+                                                        <li>
+                                                            <span t-field="ps.description_line3"/>
+                                                        </li>
+                                                    </t>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <t t-foreach="doc.property_specification_ids" t-as="ps">
+                                        <tr>
+                                            <td style="width:25%;">
+                                                <t t-if="ps.image">
+                                                    <img t-att-src="image_data_uri(ps.image)" class="mt-2"
+                                                         style="width:210px;height:135px;"
+                                                         alt="Image"/>
+                                                </t>
+                                            </td>
+                                            <td style="width:75%;">
+                                                <h5>
+                                                    <span t-field="ps.title"/>
+                                                </h5>
+                                                <hr/>
+                                                <ul>
+                                                    <t t-if="ps.description_line1">
+                                                        <li>
+                                                            <span t-field="ps.description_line1"/>
+                                                        </li>
+                                                    </t>
+                                                    <t t-if="ps.description_line2">
+                                                        <li>
+                                                            <span t-field="ps.description_line2"/>
+                                                        </li>
+                                                    </t>
+                                                    <t t-if="ps.description_line3">
+                                                        <li>
+                                                            <span t-field="ps.description_line3"/>
+                                                        </li>
+                                                    </t>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </table>
+                            <p style="page-break-before:always;"/>
+                            <h4 style="text-align:center;padding:20px;">
+                                Floor Plan
+                            </h4>
+                            <t t-foreach="doc.floreplan_ids" t-as="i">
+                                <div class="card" style="width:100%;text-align:center;">
+                                    <t t-if="i.image">
+                                        <h5 style="text-align:left;padding-left: 15px; padding-top: 15px;">
+                                            <strong>
+                                                <span t-field="i.title"/>
+                                            </strong>
+                                        </h5>
+                                        <hr/>
+                                        <img t-att-src="image_data_uri(i.image)" class="mt-2"
+                                             style="width:inherit;border-radius: 4%;margin: 5px;"
+                                             alt="Image"/>
+                                    </t>
+                                </div>
+                                <p style="page-break-before:always;"/>
+                            </t>
+                            <p style="page-break-before:always;"/>
+                            <h4 style="text-align:center;padding:20px;">
+                                Property Images
+                            </h4>
+                            <t t-foreach="doc.property_images_ids" t-as="p">
+                                <div class="card" style="width:100%;text-align:center;">
+                                    <t t-if="p.image">
+                                        <h5 style="text-align:left;padding-left: 15px; padding-top: 15px;">
+                                            <strong>
+                                                <span t-field="p.title"/>
+                                            </strong>
+                                        </h5>
+                                        <hr/>
+                                        <img t-att-src="image_data_uri(p.image)" class="mt-2"
+                                             style="width:50rem;height:40rem;border-radius: 4%;margin: 5px;"
+                                             alt="Image"/>
+                                    </t>
+                                </div>
+                                <p style="page-break-before:always;"/>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="property_details_report_id" model="ir.actions.report">
+            <field name="name">Property Details</field>
+            <field name="model">property.details</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">rental_management.property_details_qweb_report_template</field>
+            <field name="report_file">rental_management.property_details_qweb_report_template</field>
+            <field name="binding_model_id" ref="model_property_details"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Property Details'</field>
+        </record>
+    </data>
+</odoo>

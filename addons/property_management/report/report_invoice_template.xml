@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Paper Format-->
+    <record id="freight_booking_paper_format" model="report.paperformat">
+        <field name="name">Booking Paper</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">35</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">30</field>
+        <field name="dpi">90</field>
+    </record>
+    <!--     Inherit Action-->
+    <record id="account.account_invoices" model="ir.actions.report">
+        <field name="paperformat_id" ref="rental_management.freight_booking_paper_format"/>
+    </record>
+
+    <record id="account.account_invoices_without_payment" model="ir.actions.report">
+        <field name="paperformat_id" ref="rental_management.freight_booking_paper_format"/>
+    </record>
+
+
+    <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@id='informations']" position="replace">
+            <div id="informations" class="row mt-4 mb-4">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_date" name="invoice_date">
+                    <t t-if="o.move_type == 'out_invoice'">
+                        <strong>Invoice Date:</strong>
+                    </t>
+                    <t t-elif="o.move_type == 'out_refund'">
+                        <strong>Credit Note Date:</strong>
+                    </t>
+                    <t t-elif="o.move_type == 'out_receipt'">
+                        <strong>Receipt Date:</strong>
+                    </t>
+                    <t t-else="">
+                        <strong>Date:</strong>
+                    </t>
+                    <p class="m-0" t-field="o.invoice_date"/>
+                </div>
+
+                <div class="col-auto col-3 mw-100 mb-2"
+                     t-if="o.tenancy_property_id and o.move_type == 'out_invoice' and o.invoice_period_to_date and o.invoice_period_from_date and  o.state == 'posted'"
+                     name="due_date">
+                    <strong>Invoice Period :</strong>
+                    <div class="row row-cols-auto">
+                        <div class="col">
+                            <p class="m-0" t-field="o.invoice_period_to_date"/>
+                        </div>
+                        <div class="col mx-2 mt-1">
+                            To
+                        </div>
+                        <div class="col">
+                            <p class="m-0" t-field="o.invoice_period_from_date"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2"
+                     t-if="o.tenancy_property_id and o.move_type == 'out_invoice' and o.state == 'posted'"
+                     name="due_date">
+                    <strong>Property :</strong>
+                    <p class="m-0" t-field="o.tenancy_property_id"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_origin" name="origin">
+                    <strong>Source:</strong>
+                    <p class="m-0" t-field="o.invoice_origin"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.ref" name="customer_code">
+                    <strong>Customer Code:</strong>
+                    <p class="m-0" t-field="o.partner_id.ref"/>
+                </div>
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.ref" name="reference">
+                    <strong>Reference:</strong>
+                    <p class="m-0" t-field="o.ref"/>
+                </div>
+            </div>
+            <hr/>
+        </xpath>
+
+        <xpath expr="//div[@id='right-elements']" position="before">
+            <div class="col-6 mt-3">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>
+                            <strong class="fw-bold">
+                                Amount Total in Words:
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span t-field="o.amount_total_in_words"/>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </xpath>
+        <!--        <xpath expr="//div[@id='right-elements']" position="attributes">-->
+        <!--            <attribute name="t-attf-class">col-6 text-end</attribute>-->
+        <!--        </xpath>-->
+        <xpath expr="//div[@id='qrcode']" position="after">
+            <div class="footer row">
+                <table class="col table table-borderless text-start" style="width:40%;">
+                    <tr>
+                        <td style="width:50%;">
+                            _____________________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;">
+                            Customer's Seal and Signature
+                        </td>
+                    </tr>
+                </table>
+                <table class="col table table-borderless text-end" style="width:60%;">
+                    <tr>
+                        <td style="width:50%;">
+                            _____________________________________________
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%;">
+                            <span t-field="o.company_id.name"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+    </template>
+    <template id="address_layout_inherit" inherit_id="web.address_layout">
+        <xpath expr="//t[@t-set='colclass']" position="attributes">
+            <attribute name="t-value">('col-sm-5' if report_type == 'html' else 'col-5')</attribute>
+        </xpath>
+    </template>
+    <template id="custom_purchase_header_footer" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[1]" position="replace">
+            <div t-attf-class="o_company_#{company.id}_layout header" t-att-style="report_header_style">
+                <div class="row">
+                    <div class="col-9" name="company_address">
+                        <ul class="list-unstyled">
+
+                            <li t-if="company.is_company_details_empty">
+                                <t t-esc="company.partner_id"
+                                   t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                            </li>
+                            <li t-else="" style="margin:0px !important;">
+                                <t t-esc="company.company_details"/>
+                            </li>
+                            <li>
+                                <div class="row row-cols-auto">
+                                    <div class="col">
+                                        <t t-if="company.email">
+                                            <span>
+                                                Email:
+                                            </span>
+                                            <t t-esc="company.email"/>
+                                        </t>
+                                    </div>
+                                    <div class="col ms-2">
+                                        <t t-if="company.phone">
+                                            <span>
+                                                Phone:
+                                            </span>
+                                            <t t-esc="company.phone"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <t t-if="company.vat" t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                                <span t-if="company.vat" t-esc="company.vat"/>
+                                <t t-set="vrn" t-value="company.partner_id.vrn_no"/>
+                                <t t-if="vrn">
+                                    VRN No:
+                                    <t t-esc="company.partner_id.vrn_no"/>
+                                </t>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3 mb4" style="text-align: right;">
+                        <img class="float-right" t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                             style="max-height: 60px; float-right" alt="Logo"/>
+                    </div>
+                    <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+                </div>
+                <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                    <div class="col-12">
+                        <div style="border-bottom: 1px solid black;"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+    <template id="document_tax_totals_inherit" inherit_id="account.document_tax_totals">
+        <xpath expr="//tr[hasclass('o_total')]" position="after">
+            <tr class="border-black o_subtotal_company_currency">
+                <td>
+                    <strong>Untaxed Amount</strong>
+                </td>
+                <td class="text-end">
+                    <span t-esc="o.currency_id._convert(o.amount_untaxed, o.company_id.currency_id, o.company_id, o.create_date)"
+                          t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/>
+                </td>
+            </tr>
+            <tr class="o_total_tax_company_currency">
+                <td>
+                    <t t-esc="o.invoice_line_ids.tax_ids.name"/>
+                </td>
+                <td class="text-end">
+                    <span t-esc="o.currency_id._convert(o.amount_tax, o.company_id.currency_id, o.company_id, o.create_date)"
+                          t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/>
+                </td>
+            </tr>
+            <tr class="border-black o_total_company_currency">
+                <td>
+                    <strong>Total</strong>
+                </td>
+                <td class="text-end">
+                    <span t-esc="o.currency_id._convert(o.amount_total, o.company_id.currency_id, o.company_id, o.create_date)"
+                          t-options="{'widget': 'monetary', 'display_currency': o.company_id.currency_id}"/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+</odoo>

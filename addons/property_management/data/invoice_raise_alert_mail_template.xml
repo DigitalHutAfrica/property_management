@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_raise_alert_mail_template" model="mail.template">
+            <field name="name">Rental Management: Invoice raise alert before 3 days of the due date</field>
+            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="subject">Urgent: Invoice Generation Alert</field>
+            <field name="email_from">{{object.tenancy_id.property_landlord_id.email}}</field>
+            <field name="body_html" type="html">
+                <table style="width:100%">
+                    <br/>
+                    <tr>
+                        <td>
+                            Dear
+                            <strong>
+                                <t t-esc="object.env.context.get('team_member')"/>,
+                            </strong>
+                            <br/>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <p>
+                    This is to notify you that an invoice for the upcoming
+                    <span t-field="object.tenancy_id.contract_type_name"/>
+                    payment
+                    <strong>
+                        <t t-out="object.property_id.room_no"/>
+                    </strong>
+                    in
+                    <strong>
+                        <t t-out="object.property_id.name"/>
+                    </strong>
+                    is scheduled to be raised shortly. Please ensure all details are accurate and verify
+                    the information before finalizing the invoice.
+                </p>
+                <br/>
+                <p>
+                    If you encounter any discrepancies or have questions, kindly address them at the earliest.
+                </p>
+                <br/>
+                <p>
+                    Thank you.
+                </p>
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>
