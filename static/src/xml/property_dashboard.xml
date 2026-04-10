@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+<t t-name="rental_management.PropertyDashboard">
+<div class="pd">
+<style>
+.pd{
+  --bg:#F8FAFC;--surf:#FFFFFF;--txt:#111827;--sub:#374151;--muted:#6B7280;--bdr:#E5E7EB;
+  --pri:#2563EB;--suc:#16A34A;--war:#F59E0B;--err:#DC2626;--pur:#7C3AED;--cyn:#06B6D4;
+  background:var(--bg);
+  padding:14px 18px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  color:var(--txt);
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  overflow:hidden;
+}
+.pd *{box-sizing:border-box;}
+.o_dark .pd{--bg:#0F172A;--surf:#1E293B;--txt:#F1F5F9;--sub:#CBD5E1;--muted:#64748B;--bdr:#334155;}
+
+.spin-wrap{display:flex;align-items:center;justify-content:center;gap:10px;flex:1;color:var(--muted);font-size:14px;}
+.spin{width:20px;height:20px;border:2px solid var(--bdr);border-top-color:var(--pri);border-radius:50%;animation:sp .7s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.hdr{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.hdr h1{margin:0;font-size:17px;font-weight:700;color:var(--txt);}
+.hdr p{margin:2px 0 0;font-size:11px;color:var(--muted);}
+.live-pill{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;
+  color:var(--suc);background:rgba(22,163,74,.1);padding:5px 12px;border-radius:20px;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--suc);animation:pu 2s infinite;}
+@keyframes pu{0%,100%{opacity:1}50%{opacity:.3}}
+
+.row1{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;flex-shrink:0;}
+.row2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);gap:10px;flex:1;min-height:0;}
+.row3{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:10px;flex:1;min-height:0;}
+
+.kpi{background:var(--surf);border:1px solid var(--bdr);border-radius:10px;
+  padding:10px 12px;position:relative;overflow:hidden;}
+.kpi-stripe{height:2px;position:absolute;top:0;left:0;right:0;}
+.kpi-lbl{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:4px;}
+.kpi-val{font-size:18px;font-weight:800;line-height:1.1;color:var(--txt);}
+.kpi-sub{font-size:10px;margin-top:3px;color:var(--muted);}
+.c-b{color:var(--pri)!important;}.c-s{color:var(--suc)!important;}
+.c-r{color:var(--err)!important;}.c-a{color:var(--war)!important;}.c-p{color:var(--pur)!important;}
+
+.card{background:var(--surf);border:1px solid var(--bdr);border-radius:10px;
+  padding:12px 14px;display:flex;flex-direction:column;min-height:0;overflow:hidden;}
+.card-hdr{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-shrink:0;}
+.card-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.card-title{font-size:12px;font-weight:700;color:var(--txt);}
+
+.bars{display:flex;align-items:flex-end;gap:6px;flex:1;min-height:0;padding-bottom:2px;}
+.bar-g{display:flex;flex-direction:column;align-items:center;flex:1;gap:3px;}
+.bar-p{display:flex;gap:2px;align-items:flex-end;flex:1;min-height:0;}
+.bar{width:13px;border-radius:3px 3px 0 0;min-height:2px;}
+.bar-lbl{font-size:9px;color:var(--muted);flex-shrink:0;}
+.leg{display:flex;gap:10px;margin-bottom:8px;flex-shrink:0;}
+.leg-i{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);}
+.leg-sq{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+
+.pr{margin-bottom:7px;}
+.pr:last-child{margin-bottom:0;}
+.pr-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;}
+.pr-lbl{color:var(--muted);}.pr-val{font-weight:700;color:var(--txt);}
+.pb{height:5px;background:var(--bdr);border-radius:3px;overflow:hidden;}
+.pf{height:100%;border-radius:3px;}
+
+.ur{display:flex;justify-content:space-between;align-items:center;
+  padding:5px 0;border-bottom:1px solid var(--bdr);font-size:11px;}
+.ur:last-child{border-bottom:none;}
+.ul{color:var(--muted);}.uv{font-weight:700;color:var(--txt);}
+
+.dc{display:flex;flex-direction:column;align-items:center;flex:1;justify-content:center;}
+.donut-leg{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px;}
+
+.tbl{width:100%;border-collapse:collapse;}
+.tbl td{padding:5px 0;border-bottom:1px solid var(--bdr);font-size:11px;}
+.tbl tr:last-child td{border-bottom:none;}
+.t-name{font-weight:500;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.t-type{color:var(--muted);font-size:10px;padding:0 6px;text-transform:capitalize;}
+.t-amt{text-align:right;font-weight:700;font-size:11px;}
+
+.act-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--bdr);}
+.act-row:last-child{border-bottom:none;}
+.act-dot{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.act-text{font-size:11px;color:var(--txt);line-height:1.3;}
+.act-meta{font-size:10px;color:var(--muted);margin-top:2px;}
+
+.bdg{display:inline-block;font-size:10px;font-weight:600;padding:1px 7px;border-radius:20px;}
+.bdg-s{background:rgba(22,163,74,.12);color:#15803d;}
+.bdg-b{background:rgba(37,99,235,.12);color:#1d4ed8;}
+.bdg-r{background:rgba(220,38,38,.12);color:#b91c1c;}
+.bdg-a{background:rgba(245,158,11,.12);color:#b45309;}
+.bdg-n{background:var(--bdr);color:var(--muted);}
+.empty{text-align:center;padding:16px 0;color:var(--muted);font-size:12px;}
+.scroll-y{overflow-y:auto;}
+</style>
+
+<t t-if="state.loading">
+  <div class="spin-wrap"><div class="spin"></div>Loading...</div>
+</t>
+<t t-else="">
+
+  <!-- Header -->
+  <div class="hdr">
+    <div><h1>Property dashboard</h1><p>Avomeru Real Estate — live data</p></div>
+    <div class="live-pill"><span class="live-dot"></span>Live</div>
+  </div>
+
+  <!-- 8 KPIs in one strip -->
+  <div class="row1">
+    <div class="kpi"><div class="kpi-stripe" style="background:var(--pri);"></div>
+      <div class="kpi-lbl">Properties</div><div class="kpi-val c-b"><t t-esc="state.total"/></div>
+      <div class="kpi-sub c-s">↑ <t t-esc="state.available"/> free</div></div>
+    <div class="kpi"><div class="kpi-stripe" style="background:var(--suc);"></div>
+      <div class="kpi-lbl">On lease</div><div class="kpi-val c-s"><t t-esc="state.on_lease"/></div>
+      <div class="kpi-sub"><t t-esc="state.occupancy"/>% occupancy</div></div>
+    <div class="kpi"><div class="kpi-stripe" style="background:var(--war);"></div>
+      <div class="kpi-lbl">Booked</div><div class="kpi-val c-a"><t t-esc="state.booked"/></div>
+      <div class="kpi-sub"><t t-esc="state.sold"/> sold</div></div>
+    <div class="kpi"><div class="kpi-stripe" style="background:var(--pur);"></div>
+      <div class="kpi-lbl">Contracts</div><div class="kpi-val c-p"><t t-esc="state.running"/></div>
+      <div class="kpi-sub"><t t-esc="state.draft_c"/> draft</div></div>
+    <div class="kpi"><div class="kpi-stripe" style="background:#F59E0B;"></div>
+      <div class="kpi-lbl">Revenue</div><div class="kpi-val" style="color:#B45309;">TZS <t t-esc="fmt(state.revenue)"/></div>
+      <div class="kpi-sub c-s">↑ this month</div></div>
+    <div class="kpi"><div class="kpi-stripe" style="background:var(--err);"></div>
+      <div class="kpi-lbl">Outstanding</div><div class="kpi-val c-r">TZS <t t-esc="fmt(state.outstanding)"/></div>
+      <div class="kpi-sub c-r"><t t-esc="state.overdueCount"/> overdue</div></div>
+    <div class="kpi"><div class="kpi-stripe" style="background:var(--cyn);"></div>
+      <div class="kpi-lbl">Utility bills</div><div class="kpi-val" style="color:#0E7490;"><t t-esc="state.util_paid"/>/<t t-esc="state.util_total"/></div>
+      <div class="kpi-sub c-s"><t t-esc="utilPct"/>% paid</div></div>
+    <div class="kpi"><div class="kpi-stripe" style="background:var(--war);"></div>
+      <div class="kpi-lbl">Maintenance</div><div class="kpi-val c-a"><t t-esc="state.maint_open"/></div>
+      <div class="kpi-sub c-s"><t t-esc="state.maint_done"/> done</div></div>
+  </div>
+
+  <!-- Middle row: bar chart + donut + contract status -->
+  <div class="row2">
+    <div class="card">
+      <div class="card-hdr"><span class="card-dot" style="background:var(--pri);"></span><span class="card-title">Monthly revenue — TZS millions</span></div>
+      <div class="leg">
+        <div class="leg-i"><div class="leg-sq" style="background:var(--pri);"></div>Collected</div>
+        <div class="leg-i"><div class="leg-sq" style="background:var(--err);"></div>Outstanding</div>
+      </div>
+      <div class="bars">
+        <t t-foreach="state.monthly" t-as="m" t-key="m.label">
+          <div class="bar-g">
+            <div class="bar-p">
+              <div class="bar" t-att-style="'background:var(--pri);height:'+Math.max(Math.round((m.c/maxBar)*100)+'%','3px')"></div>
+              <div class="bar" t-att-style="'background:var(--err);height:'+Math.max(Math.round((m.o/maxBar)*100)+'%','3px')"></div>
+            </div>
+            <div class="bar-lbl"><t t-esc="m.label"/></div>
+          </div>
+        </t>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><span class="card-dot" style="background:var(--pur);"></span><span class="card-title">Property types</span></div>
+      <div class="dc">
+        <svg viewBox="0 0 36 36" style="width:90px;height:90px;transform:rotate(-90deg);">
+          <circle cx="18" cy="18" r="15.9" fill="none" stroke="#E5E7EB" stroke-width="4"/>
+          <t t-foreach="typeDonuts" t-as="seg" t-key="seg.label">
+            <circle cx="18" cy="18" r="15.9" fill="none" t-att-stroke="seg.color" stroke-width="4" t-att-stroke-dasharray="seg.da" t-att-stroke-dashoffset="seg.do_"/>
+          </t>
+        </svg>
+        <div class="donut-leg">
+          <t t-foreach="typeDonuts" t-as="seg" t-key="seg.label">
+            <div class="leg-i"><div class="leg-sq" t-att-style="'background:'+seg.color"></div><t t-esc="seg.label"/> <t t-esc="seg.pct"/>%</div>
+          </t>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><span class="card-dot" style="background:var(--pri);"></span><span class="card-title">Contract status</span></div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+        <t t-foreach="[['Running',state.running,'var(--pri)'],['Draft',state.draft_c,'#9CA3AF'],['Expired',state.expired_c,'var(--war)'],['Terminated',state.close_c,'var(--err)'],['Cancelled',state.cancel_c,'var(--pur)']]" t-as="row" t-key="row[0]">
+          <div class="pr">
+            <div class="pr-row"><span class="pr-lbl"><t t-esc="row[0]"/></span><span class="pr-val"><t t-esc="row[1]"/></span></div>
+            <div class="pb"><div class="pf" t-att-style="'width:'+cPct(row[1])+'%;background:'+row[2]"></div></div>
+          </div>
+        </t>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom row: top properties + activity -->
+  <div class="row3">
+    <div class="card">
+      <div class="card-hdr"><span class="card-dot" style="background:var(--suc);"></span><span class="card-title">Top properties by revenue</span></div>
+      <t t-if="!state.topProps.length"><div class="empty">No invoice data yet</div></t>
+      <table class="tbl scroll-y" t-else="">
+        <t t-foreach="state.topProps" t-as="p" t-key="p.name">
+          <tr>
+            <td class="t-name"><t t-esc="p.name"/></td>
+            <td class="t-type"><t t-esc="p.type"/></td>
+            <td><span class="bdg" t-att-class="stageCls(p.stage)"><t t-esc="stageLabel(p.stage)"/></span></td>
+            <td class="t-amt">TZS <t t-esc="fmt(p.amt)"/></td>
+          </tr>
+        </t>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr"><span class="card-dot" style="background:var(--err);"></span><span class="card-title">Recent activity</span></div>
+      <t t-if="!state.activity.length"><div class="empty">No recent activity</div></t>
+      <div class="scroll-y" style="flex:1;min-height:0;" t-else="">
+        <t t-foreach="state.activity" t-as="act" t-key="act_index">
+          <div class="act-row">
+            <div class="act-dot" t-att-style="'background:'+dotColor(act.state)"></div>
+            <div>
+              <div class="act-text"><t t-esc="act.text"/></div>
+              <div class="act-meta">
+                <span class="bdg" t-att-class="payCls(act.state)"><t t-esc="payLabel(act.state)"/></span>
+                <t t-if="act.amt > 0"> · TZS <t t-esc="fmt(act.amt)"/></t>
+                · <t t-esc="act.date"/>
+              </div>
+            </div>
+          </div>
+        </t>
+      </div>
+    </div>
+  </div>
+
+</t>
+</div>
+</t>
+</templates>

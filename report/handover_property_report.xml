@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--  Report PaperFormat -->
+        <record id="paperformat_handover_form_report" model="report.paperformat">
+            <field name="name">Handover Property Report</field>
+            <field name="default" eval="True"/>
+                <field name="format">A4</field>
+                <field name="page_height">0</field>
+                <field name="page_width">0</field>
+                <field name="orientation">Portrait</field>
+                <field name="margin_top">25</field>
+                <field name="margin_bottom">20</field>
+                <field name="margin_left">7</field>
+                <field name="margin_right">7</field>
+                <field name="header_line" eval="False"/>
+                <field name="header_spacing">20</field>
+                <field name="dpi">90</field>
+        </record>
+
+        <record id="handover_property_report_action" model="ir.actions.report">
+            <field name="name">Handover Property</field>
+            <field name="model">handover.property</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">rental_management.handover_property_qweb_report_template</field>
+            <field name="report_file">rental_management.handover_property_qweb_report_template</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Handover Property'</field>
+            <field name="paperformat_id" ref="rental_management.paperformat_handover_form_report"/>
+        </record>
+
+        <template id="handover_property_qweb_report_template">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                	<t t-foreach="docs" t-as="doc">
+               	        <div class="page" style="page-break-before: always;">
+                        	<div class="header">
+    	                        <div class="row">
+    	                            <div class="col-10 text-left"/>
+    	                            <div class="col-2 text-right">
+                                        <img t-attf-src="/logo.png?company={{doc.property_id.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 100px;" t-att-alt="doc.property_id.company_id.name"/>
+    	                            </div>
+    	                        </div>
+    	                    </div>
+
+                            <div style="font-size:18px;">
+                                <div class="row" style="padding-top:10px;font-family:Arial;">
+                                    <div class="col-8 text-left" style="text-decoration:underline;font-weight:bold;">
+                                		<h4><span>NEW TENANT HANDOVER REPORT</span></h4>
+                                    </div>
+                                    <div class="col-4 text-right" style="font-size:18px;">
+                                		<span><strong>Serial No:</strong></span>
+                                        <span><t t-esc="doc.handover_seq"/></span>
+                                	</div>
+                                </div>
+
+                                <div class="row" style="font-family:Arial;">
+                                    <div class="col-8 text-left"/>
+                                    <div class="col-4 text-right" style="font-size:18px;">
+                                        <strong><span>Date :</span></strong>
+                                        <span><t t-esc="doc.date" t-options='{"widget": "date"}'/></span>
+                                    </div>
+                                </div>
+
+                                <div style="font-size:18px;padding-top:30px;font-family:Arial;">
+                                    <div>
+                                        <p>
+                                            <b><span>Apartment / Villa Number : </span></b> <span><t t-esc="doc.property_id.room_no"/></span> <b><span>Location</span></b> <span><t t-esc="doc.property_id.street"/></span> 
+
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <p>
+                                            <b><span>Tenant : </span></b> <span><t t-esc="doc.property_id.room_no"/></span>
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <p>
+                                            <b><span>Electricity Reading : </span></b> <span><t t-esc="doc.electric_reading"/></span>
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <p>
+                                            <b><span>Generator Reading : </span></b> <span><t t-esc="doc.generator_reading"/></span>
+                                        </p>
+                                    </div>
+
+                                    <div>
+                                        <p>
+                                            <b><span>Inspection Report : </span></b> <span><t t-esc="doc.inspection_report"/></span>
+                                        </p>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row" style="font-size:18px;padding-top:25px;font-family:Arial;">
+                                    <div class="col-5 text-left">
+                                        <p>
+                                            <b><span>Inventory and other items Missing / Damaged </span></b>
+                                        </p>
+                                        <p>
+                                            <span>________________________________</span>
+                                            <span>________________________________</span>
+                                            <span>________________________________</span>
+                                            <span>________________________________</span>
+                                            <span>________________________________</span>
+                                            
+                                           
+                                        </p>
+                                    </div>
+                                    <div class="col-1 text-right"/>
+                                    <div class="col-5 text-right">
+                                        <div>
+                                            <div><strong><span>No. of Keys Hand Over :</span></strong></div>
+                                            <div><span><t t-esc="doc.no_of_key"/></span></div>
+                                        </div>
+
+                                        <div>
+                                            <div><b><span>Barrier Card :</span></b>
+                                                <span><t t-esc="doc.barrier_card"/></span>
+                                            </div>
+
+                                            <div><b><span>Barrier Card No :</span></b>
+                                                <span><t t-esc="doc.barrier_card_no"/></span>
+                                            </div>
+
+                                            <div><b><span>Access Card :</span></b>
+                                                <span><t t-esc="doc.access_card"/></span>
+                                            </div>
+
+                                            <div><b><span>Access Card No :</span></b>
+                                                <span><t t-esc="doc.access_card_no"/></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="font-size:18px;padding-top:25px;font-family:Arial;">
+                                    <div class="col-6">
+                                        <div style="font-weight:bold;padding-bottom:60px;">Reason for vacating property</div>
+                                        <div>___________________________</div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="font-size:18px;padding-bottom:25px;font-family:Arial;">
+                                    <div class="col-6 text-left">
+                                        <div style="padding-top:60px;">___________________________</div>
+                                        <div style="font-weight:bold;padding-top:5px;">Tenant's Signature</div>
+                                    </div>
+
+                                    <div class="col-6 text-right">
+                                        <div style="padding-top:60px;">___________________________</div>
+                                        <div style="font-weight:bold;padding-top:5px;">For ENDOW Management</div>
+                                    </div>
+                                </div>
+
+                                <div style="border:1px solid black !important;"/>
+                                <div></div>
+
+
+                                <div class="row" style="font-size:18px;font-family:Arial;padding-top:30px;">
+                                    <div class="col-6 text-left">
+                                        <div style="font-weight:bold;padding-top:5px;">FOR OFFICE USE</div>
+                                        <div style="padding-top:5px;">Approved for refund of deposite</div>
+                                        <div style="padding-top:5px;">Electricity / Water Bills</div>
+                                        <div style="padding-top:5px;">Deduction to be make for</div>
+
+                                        <div style="padding-top:50px;">
+                                            Date  ____________________________
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 text-left">
+                                        <div style="padding-top:5px;">YES / NO / N.A</div>
+                                        <div style="padding-top:5px;">Deduct / paid by Tenant / Raise D/N</div>
+                                        <div style="padding-top:5px;">________________________________</div>
+                                        <div style="padding-top:5px;">________________________________</div>
+                                        <div style="padding-top:5px;">________________________________</div>
+                                        <div style="padding-top:5px;">________________________________</div>
+
+                                        <div style="padding-top:20px;">
+                                            REAL ESTATE MARKETING MANAGER
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br/><br/><br/><br/><br/>
+                            <div>
+                                <div style="font-size:18px;font-family:Arial;padding-top:30px;">
+                                    <div>
+                                        <b><span>TENANT NAME : </span></b>
+                                        <span><t t-esc="doc.tenant_id.name"/></span>
+                                    </div> 
+
+                                    <div style="padding-top:10px;">
+                                        <b><span>VILLA / APT NO : </span></b>
+                                        <span><t t-esc="doc.property_id.room_no"/></span>
+                                    </div> 
+
+                                    <div style="padding-top:10px;">
+                                        <b><span>Location : </span></b>
+                                        <span><t t-esc="doc.property_id.street"/></span>
+                                    </div> 
+
+                                    <div style="padding-top:10px;">
+                                        <b><span>Date : </span></b>
+                                        <span><t t-esc="doc.date"/></span>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div style="padding-top:20px;">
+                                <h2 style="text-decoration:underline;font-weight:bold" class="text-center">HAND OVER INVENTORY OF FURNITURE, FIXTURES &amp; FITTINGS</h2>
+                            </div>
+
+                            <div style="padding-top:20px;font-size:18px;font-family:Arial;">
+                                <table class="table table-sm o_main_table table-borderless mt-4">
+                                    <thead style="display: table-row-group">
+                                        <tr style="border: 1px solid black;">
+                                            <th style="border: 1px solid black;" name="th_description" class="text-start">Description</th>
+                                            <th style="border: 1px solid black;" name="th_quantity" class="text-end">Available Quantity</th>
+                                            <th style="border: 1px solid black;" name="th_remark" class="text-end">Remark(Details,Conditions,Etc.)</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody class="sale_tbody">
+                                        <t t-foreach="doc.assets_ids" t-as="line">
+                                            <tr style="border: 1px solid black;" t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                                <t t-if="not line.display_type">
+                                                    <td style="border: 1px solid black;" name="td_name"><span t-field="line.name"/></td>
+                                                    <td style="border: 1px solid black;" name="td_quantity" class="text-end">
+                                                        <span t-field="line.Prod_qty"/>
+                                                    </td>
+                                                    <td style="border: 1px solid black;" name="td_name"><span t-field="line.remark"/></td>
+                                                </t>
+                                                <t t-elif="line.display_type == 'line_section'">
+                                                    <td style="border: 1px solid black;" name="td_section_line" colspan="99">
+                                                        <span t-field="line.name"/>
+                                                    </td>
+                                                    <t t-set="current_section" t-value="line"/>
+                                                    <t t-set="current_subtotal" t-value="0"/>
+                                                </t>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="row" style="font-size:18px;padding-top:50px;font-family:Arial;">
+                                <div class="col-5 text-left"/>
+                                <div class="col-7 text-right">
+                                    <div><b>TENANT SIGNATURE : ___________________________ </b></div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="font-size:18px;padding-top:70px;font-family:Arial;">
+                                <div class="col-5 text-left"/>
+                                <div class="col-7 text-right">
+                                    <div><b>FOR ENDOW MGT    : ______________________________ </b></div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

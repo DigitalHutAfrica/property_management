@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="landlord_portal_my_home" inherit_id="portal.portal_my_home" name="Landlord Portal Home">
+    <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+      <t t-if="landlord_property_count" t-call="portal.portal_docs_entry">
+        <t t-set="title">My Properties</t>
+        <t t-set="url">/my/landlord</t>
+        <t t-set="count" t-value="landlord_property_count"/>
+      </t>
+    </xpath>
+  </template>
+
+  <template id="landlord_portal_dashboard" name="Landlord Portal Dashboard">
+    <t t-call="portal.portal_layout">
+      <t t-set="breadcrumbs_searchbar" t-value="True"/>
+      <t t-call="portal.portal_searchbar">
+        <t t-set="title">My Properties</t>
+      </t>
+
+      <div class="container py-4">
+
+        <!-- KPI strip -->
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <div class="card border-0 bg-light h-100 p-3 text-center">
+              <div class="text-muted small mb-1">Properties</div>
+              <div class="fw-bold fs-4 text-primary"><t t-esc="total_properties"/></div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card border-0 bg-light h-100 p-3 text-center">
+              <div class="text-muted small mb-1">Active contracts</div>
+              <div class="fw-bold fs-4 text-success"><t t-esc="active_contracts"/></div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card border-0 bg-light h-100 p-3 text-center">
+              <div class="text-muted small mb-1">Rent collected</div>
+              <div class="fw-bold fs-4 text-success">
+                <t t-esc="currency.symbol"/><t t-esc="'{:,.0f}'.format(total_collected)"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card border-0 bg-light h-100 p-3 text-center">
+              <div class="text-muted small mb-1">Outstanding</div>
+              <div class="fw-bold fs-4 text-danger">
+                <t t-esc="currency.symbol"/><t t-esc="'{:,.0f}'.format(total_outstanding)"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary stats -->
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <div class="card border-0 bg-light p-3 text-center">
+              <div class="text-muted small mb-1">Maintenance open</div>
+              <div class="fw-bold text-warning fs-5"><t t-esc="maintenance_open"/></div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card border-0 bg-light p-3 text-center">
+              <div class="text-muted small mb-1">Maintenance done</div>
+              <div class="fw-bold text-success fs-5"><t t-esc="maintenance_done"/></div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card border-0 bg-light p-3 text-center">
+              <div class="text-muted small mb-1">Utility bills paid</div>
+              <div class="fw-bold text-success fs-5"><t t-esc="utility_paid"/></div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card border-0 bg-light p-3 text-center">
+              <div class="text-muted small mb-1">Utility bills unpaid</div>
+              <div class="fw-bold text-danger fs-5"><t t-esc="utility_unpaid"/></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buildings list -->
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white border-bottom">
+            <h5 class="mb-0">My Buildings</h5>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Building</th>
+                  <th>Type</th>
+                  <th>City</th>
+                  <th>Property Manager</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <t t-foreach="buildings" t-as="b">
+                  <tr>
+                    <td class="fw-500"><t t-esc="b.name"/></td>
+                    <td><span class="badge bg-secondary text-capitalize"><t t-esc="b.type"/></span></td>
+                    <td><t t-esc="b.city_id.name or b.city or ''"/></td>
+                    <td><t t-esc="b.property_manager_id.name or 'Not assigned'"/></td>
+                    <td class="text-end">
+                      <a t-attf-href="/my/landlord/building/#{b.id}" class="btn btn-sm btn-outline-primary">View</a>
+                    </td>
+                  </tr>
+                </t>
+                <t t-if="not buildings">
+                  <tr><td colspan="5" class="text-center text-muted py-4">No buildings found</td></tr>
+                </t>
+              </tbody>
+            </table>
+          </div>
+          <t t-call="portal.pager"/>
+        </div>
+      </div>
+    </t>
+  </template>
+
+  <template id="landlord_building_detail" name="Landlord Building Detail">
+    <t t-call="portal.portal_layout">
+      <t t-call="portal.portal_searchbar">
+        <t t-set="title" t-value="building.name"/>
+      </t>
+
+      <div class="container py-4">
+        <div class="row g-4">
+
+          <!-- Building info -->
+          <div class="col-md-4">
+            <div class="card border-0 shadow-sm p-3">
+              <h6 class="fw-bold mb-3">Building info</h6>
+              <div class="small text-muted mb-1">Type</div>
+              <div class="mb-2 text-capitalize"><t t-esc="building.type"/></div>
+              <div class="small text-muted mb-1">Property Manager</div>
+              <div class="mb-2 fw-500"><t t-esc="building.property_manager_id.name or 'Not assigned'"/></div>
+              <div class="small text-muted mb-1">Total units</div>
+              <div class="mb-2"><t t-esc="len(properties)"/></div>
+              <div class="small text-muted mb-1">Active contracts</div>
+              <div class="mb-2 text-success fw-500"><t t-esc="len(contracts)"/></div>
+            </div>
+          </div>
+
+          <!-- Properties/units -->
+          <div class="col-md-8">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom">
+                <h6 class="mb-0">Units / Properties</h6>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead class="table-light">
+                    <tr><th>Unit</th><th>Type</th><th>Stage</th><th>Rent</th></tr>
+                  </thead>
+                  <tbody>
+                    <t t-foreach="properties" t-as="p">
+                      <tr>
+                        <td><t t-esc="p.name"/></td>
+                        <td class="text-capitalize"><t t-esc="p.type"/></td>
+                        <td>
+                          <span t-att-class="'badge ' + ('bg-success' if p.stage == 'on_lease' else 'bg-warning text-dark' if p.stage == 'booked' else 'bg-danger' if p.stage == 'sold' else 'bg-secondary')">
+                            <t t-esc="p.stage.replace('_', ' ').title()"/>
+                          </span>
+                        </td>
+                        <td>
+                          <t t-if="p.tenancy_price">
+                            <t t-esc="currency.symbol"/><t t-esc="'{:,.0f}'.format(p.tenancy_price)"/>
+                          </t>
+                        </td>
+                      </tr>
+                    </t>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rent invoices -->
+          <div class="col-12">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom d-flex justify-content-between">
+                <h6 class="mb-0">Rent invoices</h6>
+                <span class="text-muted small"><t t-esc="len(invoices)"/> total</span>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead class="table-light">
+                    <tr><th>Date</th><th>Tenant</th><th>Description</th><th>Amount</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <t t-foreach="invoices" t-as="inv">
+                      <tr>
+                        <td><t t-esc="inv.invoice_date"/></td>
+                        <td><t t-esc="inv.customer_id.name"/></td>
+                        <td><t t-esc="inv.description or ''"/></td>
+                        <td><t t-esc="currency.symbol"/><t t-esc="'{:,.0f}'.format(inv.amount)"/></td>
+                        <td>
+                          <span t-att-class="'badge ' + ('bg-success' if inv.payment_state == 'paid' else 'bg-danger' if inv.payment_state == 'not_paid' else 'bg-warning text-dark')">
+                            <t t-esc="(inv.payment_state or '').replace('_', ' ').title()"/>
+                          </span>
+                        </td>
+                      </tr>
+                    </t>
+                    <t t-if="not invoices">
+                      <tr><td colspan="5" class="text-center text-muted py-3">No invoices</td></tr>
+                    </t>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maintenance + Utility side by side -->
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom">
+                <h6 class="mb-0">Maintenance requests</h6>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead class="table-light">
+                    <tr><th>Request</th><th>Property</th><th>Stage</th></tr>
+                  </thead>
+                  <tbody>
+                    <t t-foreach="maintenance" t-as="m">
+                      <tr>
+                        <td><t t-esc="m.name"/></td>
+                        <td><t t-esc="m.property_id.name"/></td>
+                        <td><span class="badge bg-secondary"><t t-esc="m.stage_id.name"/></span></td>
+                      </tr>
+                    </t>
+                    <t t-if="not maintenance">
+                      <tr><td colspan="3" class="text-center text-muted py-3">No requests</td></tr>
+                    </t>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom">
+                <h6 class="mb-0">Utility bills</h6>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead class="table-light">
+                    <tr><th>Ref</th><th>Tenant</th><th>Amount</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <t t-foreach="utilities" t-as="u">
+                      <tr>
+                        <td><t t-esc="u.bill_seq"/></td>
+                        <td><t t-esc="u.tenant_name.name"/></td>
+                        <td><t t-esc="currency.symbol"/><t t-esc="'{:,.0f}'.format(u.total_amount)"/></td>
+                        <td>
+                          <span t-att-class="'badge ' + ('bg-success' if u.r_payment_state == 'Paid' else 'bg-danger')">
+                            <t t-esc="u.r_payment_state or 'Draft'"/>
+                          </span>
+                        </td>
+                      </tr>
+                    </t>
+                    <t t-if="not utilities">
+                      <tr><td colspan="4" class="text-center text-muted py-3">No bills</td></tr>
+                    </t>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Handover records -->
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom d-flex justify-content-between">
+                <h6 class="mb-0">Handover records</h6>
+                <span class="text-muted small"><t t-esc="len(handovers)"/> total</span>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead class="table-light">
+                    <tr><th>Ref</th><th>Property</th><th>Tenant</th><th>Date</th></tr>
+                  </thead>
+                  <tbody>
+                    <t t-foreach="handovers" t-as="h">
+                      <tr>
+                        <td><t t-esc="h.handover_seq"/></td>
+                        <td><t t-esc="h.property_id.name"/></td>
+                        <td><t t-esc="h.tenant_id.name"/></td>
+                        <td><t t-esc="h.date"/></td>
+                      </tr>
+                    </t>
+                    <t t-if="not handovers">
+                      <tr><td colspan="4" class="text-center text-muted py-3">No handover records</td></tr>
+                    </t>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Property sales / bookings -->
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom d-flex justify-content-between">
+                <h6 class="mb-0">Sales and bookings</h6>
+                <span class="text-muted small"><t t-esc="len(sold)"/> total</span>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead class="table-light">
+                    <tr><th>Ref</th><th>Property</th><th>Customer</th><th>Stage</th><th>Sale price</th></tr>
+                  </thead>
+                  <tbody>
+                    <t t-foreach="sold" t-as="s">
+                      <tr>
+                        <td><t t-esc="s.sold_seq"/></td>
+                        <td><t t-esc="s.property_id.name"/></td>
+                        <td><t t-esc="s.customer_id.name"/></td>
+                        <td>
+                          <span t-att-class="'badge ' + ('bg-success' if s.stage == 'sold' else 'bg-warning text-dark' if s.stage == 'booked' else 'bg-secondary')">
+                            <t t-esc="(s.stage or '').title()"/>
+                          </span>
+                        </td>
+                        <td><t t-esc="currency.symbol"/><t t-esc="'{:,.0f}'.format(s.sale_price)"/></td>
+                      </tr>
+                    </t>
+                    <t t-if="not sold">
+                      <tr><td colspan="5" class="text-center text-muted py-3">No sales or bookings</td></tr>
+                    </t>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- All active contracts detail -->
+          <div class="col-12">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-white border-bottom d-flex justify-content-between">
+                <h6 class="mb-0">Active contracts</h6>
+                <span class="text-muted small"><t t-esc="len(contracts)"/> running</span>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead class="table-light">
+                    <tr><th>Ref</th><th>Tenant</th><th>Property</th><th>Start</th><th>End</th><th>Rent/month</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <t t-foreach="contracts" t-as="c">
+                      <tr>
+                        <td><t t-esc="c.tenancy_seq"/></td>
+                        <td><t t-esc="c.tenancy_id.name"/></td>
+                        <td><t t-esc="c.property_id.name"/></td>
+                        <td><t t-esc="c.start_date"/></td>
+                        <td><t t-esc="c.end_date"/></td>
+                        <td><t t-esc="currency.symbol"/><t t-esc="'{:,.0f}'.format(c.amount_month)"/></td>
+                        <td>
+                          <span t-att-class="'badge ' + ('bg-success' if c.contract_type == 'running_contract' else 'bg-warning text-dark')">
+                            <t t-esc="c.contract_type.replace('_contract','').replace('_',' ').title()"/>
+                          </span>
+                        </td>
+                      </tr>
+                    </t>
+                    <t t-if="not contracts">
+                      <tr><td colspan="7" class="text-center text-muted py-3">No active contracts</td></tr>
+                    </t>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </t>
+  </template>
+
+</odoo>

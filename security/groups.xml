@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <data noupdate="0">
+            <record id="module_rental_management" model="ir.module.category">
+                <field name="name">Rental Management</field>
+                <field name="description">Access rights for Rental Management</field>
+            </record>
+            <record id="property_rental_officer" model="res.groups">
+                <field name="name">Officer</field>
+                <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+                <field name="category_id" ref="module_rental_management"/>
+            </record>
+            <record id="property_rental_manager" model="res.groups">
+                <field name="name">Manager</field>
+                <field name="implied_ids" eval="[(4, ref('property_rental_officer'))]"/>
+                <field name="category_id" ref="module_rental_management"/>
+                <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            </record>
+            <record id="base.default_user" model="res.users">
+                <field name="groups_id" eval="[(4,ref('property_rental_manager'))]"/>
+            </record>
+
+            <record model="ir.rule" id="base.res_partner_rule">
+                <field name="name">res.partner company</field>
+                <field name="model_id" ref="base.model_res_partner"/>
+                <!-- We exclude partners that have internal users (`partner_share` field) from
+                the multi-company rule because it might interfere with the user's company rule
+                and make some users unselectable in relational fields. This means that partners
+                of internal users are always visible, not matter the company setting. -->
+                <field name="domain_force">['|', '|', ('partner_share', '=', False), ('company_id', 'in', company_ids),
+                    ('company_id', '=', False)]
+                </field>
+                <field name="active" eval="False"/>
+            </record>
+
+            <record model="ir.rule" id="multi_company_wise_utility_bill">
+                <field name="name">Utility Bill - multi Company</field>
+                <field name="model_id" ref="model_utility_bill"/>
+                <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            </record>
+
+            <record model="ir.rule" id="multi_company_wise_property_details">
+                <field name="name">Property Details - multi Company</field>
+                <field name="model_id" ref="model_property_details"/>
+                <field name="domain_force">['|',('pro_company_id', 'in', company_ids),('maintanance_company_id', 'in',
+                    company_ids)]
+                </field>
+            </record>
+
+            <record model="ir.rule" id="multi_company_wise_main_property_details">
+                <field name="name">Main Property Details - multi Company</field>
+                <field name="model_id" ref="model_parent_property"/>
+                <field name="domain_force">[(1, '=', 1)]</field>
+            </record>
+
+            <record model="ir.rule" id="multi_company_wise_contract">
+                <field name="name">Contract - multi Company</field>
+                <field name="model_id" ref="model_tenancy_details"/>
+                <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            </record>
+
+            <record model="ir.rule" id="multi_company_wise_rent_invoice">
+                <field name="name">Rent Invoice - multi Company</field>
+                <field name="model_id" ref="model_rent_invoice"/>
+                <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            </record>
+
+            <record model="ir.rule" id="multi_company_wise_handover_property">
+                <field name="name">Handover Property - multi Company</field>
+                <field name="model_id" ref="model_handover_property"/>
+                <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+            </record>
+
+            <record model="ir.rule" id="multi_company_wise_contact">
+                <field name="name">contact - multi Company</field>
+                <field name="model_id" ref="model_res_partner"/>
+                <field name="domain_force">[(1, '=', 1)]</field>
+                <!--                <field name="domain_force">['|',('company_id', 'in', company_ids),('company_id', '=', False)]</field>-->
+            </record>
+
+        </data>
+    </data>
+</odoo>

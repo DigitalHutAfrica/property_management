@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="user_type_inherit_view" model="ir.ui.view">
+            <field name="name">user.type.inherit.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group" position="before">
+                    <group>
+                        <field name="user_type" widget="radio" options="{'horizontal': true}" invisible="1"/>
+                        <div class="d-flex">
+                            <field name="is_landlord" string="Landlord"/>
+                            <label for="is_landlord" class="fw-bold"/>
+                        </div>
+                        <div class="d-flex">
+                            <field name="is_customer" string="Customer"/>
+                            <label for="is_customer" class="fw-bold"/>
+                            <field name="is_maintenance_team" string="Maintenance Team"/>
+                            <label for="is_maintenance_team" class="fw-bold"/>
+                        </div>
+                        <field name="is_tenancy" invisible="1"/>
+                        <field name="is_sold_customer" invisible="1"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="vrn_no"/>
+                    <field name="brokerage_company_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='schedule_meeting']" position="before">
+                    <button class="oe_stat_button" type="object" name="action_view_contracts"
+                            invisible="not is_customer"
+                            icon="fa-file-text">
+                        <field name="contracts_count" string='Contracts' widget="statinfo"/>
+                    </button>
+                </xpath>
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Other Details" invisible="company_type != 'person'">
+                        <group>
+                            <group>
+                                <field name="access_card_no"/>
+                                <field name="barrier_card_no"/>
+                                <field name="parking_no"/>
+                            </group>
+                            <group>
+                                <field name="dada_name"/>
+                                <field name="dada_nida_no" string="Dada NIDA No"/>
+                                <field name="vehicle_registration_no"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object" name="action_properties"
+                            invisible="is_customer"
+                            icon="fa-picture-o">
+                        <field name="properties_count" string='Properties' widget="statinfo"/>
+                    </button>
+                </div>
+            </field>
+        </record>
+        <record id="landlord_details_action" model="ir.actions.act_window">
+            <field name="name">Landlord</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('is_landlord','=', True)]</field>
+            <field name="context">{'default_user_type':'landlord', 'default_is_landlord': True}</field>
+            <field name="view_mode">kanban,list,form,activity</field>
+        </record>
+
+        <record id="customer_details_action" model="ir.actions.act_window">
+            <field name="name">Customer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('is_customer','=', True)]</field>
+            <field name="context">{'default_user_type':'customer', 'default_is_customer': True }</field>
+            <field name="view_mode">kanban,list,form,activity</field>
+        </record>
+
+        <record id="view_company_form_inherit" model="ir.ui.view">
+            <field name="name">res.company.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='general_info']/group/group/field[@name='currency_id']"
+                       position="after">
+                    <field name="is_show_all_customer" invisible="1"/>
+                    <field name="is_maintenance_company"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Mail Alerts" name="mail_alerts">
+                        <group>
+                            <field name="agreement_expiring_in_forty_five_days" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                            <field name="agreement_expiring_in_ninty_days_ids" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                            <field name="payment_reminder_after_seven_days_ids" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                            <field name="upcoming_installment_before_fifteen_days_ids" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

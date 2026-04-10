@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="maintenance_equipment_qr_code">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <div class="text-center" t-esc="doc.name" style="font-size:1.4rem;"/>
+                    <hr class="border"/>
+                    <div class="mx-auto" style="height:250px; width:250px;">
+                        <img t-att-src="image_data_uri(doc.qr_code)"
+                             class="img img-responsive w-100 h-100 p-4"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="paperformat_equipment_qr_code" model="report.paperformat">
+        <field name="name">Custom Paper</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">80</field>
+        <field name="page_width">80</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5.00</field>
+        <field name="margin_bottom">5.00</field>
+        <field name="margin_left">5.0</field>
+        <field name="margin_right">5.0</field>
+        <field name="header_line" eval="False"/>
+        <field name="disable_shrinking" eval="False"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="equipment_qr_code" model="ir.actions.report">
+        <field name="name">QR Code</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">rental_management.maintenance_equipment_qr_code</field>
+        <field name="report_file">rental_management.maintenance_equipment_qr_code</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_equipment"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="rental_management.paperformat_equipment_qr_code"/>
+        <field name="print_report_name">'Equipment QR - %s' %(object.name)</field>
+    </record>
+</odoo>

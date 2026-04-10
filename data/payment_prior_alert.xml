@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="payment_prior_alert_mail_template" model="mail.template">
+            <field name="name">Rental Management: 15 days &amp; 3 Days prior alert on the due date of Payment</field>
+            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="subject">Important Reminder: Rental Payment Due in {{ object.env.context.get('remaining_days') }} Days</field>
+            <field name="email_from">{{ (object.company_id.email or user.company_id.email or '') }}</field>
+            <field name="email_to">{{ object.customer_id.email }}</field>
+            <field name="body_html" type="html">
+                <table style="width:100%">
+                    <tr>
+                        <td>
+                            Dear
+                            <t t-out="object.customer_id.name"/>,
+                            <br/>
+                            <br/>
+                            <span>
+                                Greetings!
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <p>
+                    This is a friendly reminder that your upcoming payment for the
+                    <span t-field="object.tenancy_id.contract_type_name"/>
+                    on
+                    <t t-out="object.property_id.parent_property_id.name"/>
+                    in
+                    <t t-out="object.property_id.name"/>
+                    is due in
+                    <t t-out="object.env.context.get('remaining_days')"/>
+                    days, on
+                    <span t-field="object.invoice_date"/>.
+                </p>
+                <br/>
+                <p>
+                    Please ensure that the necessary arrangements are made to process the payment on time to avoid any
+                    inconvenience. The tax invoices would be shared on the due date. If you have any queries or concerns
+                    regarding the payment, feel free to reach out to us.
+                </p>
+                <br/>
+                <p>
+                    Thank you.
+                </p>
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="equipment_category_inherit_views" model="ir.ui.view">
+        <field name="name">equipment.category.inherit.views</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//sheet" position="inside">
+                <!-- Add your fields or attributes here -->
+                <notebook>
+                    <page string="Inspection Parameters" invisible="1">
+                        <field name="inspection_parameter_ids">
+                            <list editable="bottom">
+                                <field name="name" required="1"/>
+                                <field name="inspection_frequency" required="1"/>
+                                <field name="param_val"/>
+                                <field name="param_unit_id" required="1"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+
+
+        </field>
+    </record>
+</odoo>

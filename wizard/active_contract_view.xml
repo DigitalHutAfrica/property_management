@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="active_contract_view_form" model="ir.ui.view">
+            <field name="name">active.contract.form.view</field>
+            <field name="model">active.contract</field>
+            <field name="arch" type="xml">
+                <form string="Booking">
+                    <group>
+                        <label for="type"/>
+                        <div class="d-inline-block">
+                            <field name="type" widget="radio" required="1"/>
+                        </div>
+                    </group>
+                    <footer>
+                        <button string="Create Contract" type="object" class="btn btn-outline-success"
+                                name="action_create_contract"/>
+                        <button string="Cancel" special="cancel" class="btn btn-outline-danger"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="active_contract_action" model="ir.actions.act_window">
+            <field name="name">Active Contract</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">active.contract</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
