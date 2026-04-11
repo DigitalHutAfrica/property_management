@@ -342,9 +342,9 @@
                         month in advance</strong> on the first day of every calendar Month and
                         strictly within 7 days upon the Lessee's receipt of an invoice. Payment
                         shall be made into the bank account of the Lessor,
-                        <t t-set="bank_name_cfg" t-value="env['ir.config_parameter'].sudo().get_param('rental_management.bank_name') or 'CRDB BANK (T) LTD'"/>
-                        <t t-set="usd_acc" t-value="env['ir.config_parameter'].sudo().get_param('rental_management.bank_account_usd')"/>
-                        <t t-set="tzs_acc" t-value="env['ir.config_parameter'].sudo().get_param('rental_management.bank_account_tzs')"/>
+                        <t t-set="bank_name_cfg" t-value="env['ir.config_parameter'].sudo().get_param('property_management.bank_name') or 'CRDB BANK (T) LTD'"/>
+                        <t t-set="usd_acc" t-value="env['ir.config_parameter'].sudo().get_param('property_management.bank_account_usd')"/>
+                        <t t-set="tzs_acc" t-value="env['ir.config_parameter'].sudo().get_param('property_management.bank_account_tzs')"/>
                         <t t-if="usd_acc">Account No. <strong><t t-esc="usd_acc"/> (USD)</strong> held with <strong><t t-esc="bank_name_cfg"/></strong> Bank</t>
                         <t t-if="usd_acc and tzs_acc"> or </t>
                         <t t-if="tzs_acc">Account No. <strong><t t-esc="tzs_acc"/> (TZS)</strong> held with <strong><t t-esc="bank_name_cfg"/></strong> Bank</t>,
@@ -1938,8 +1938,8 @@
         <field name="name">Commercial Lease Agreement</field>
         <field name="model">tenancy.details</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">rental_management.commercial_lease_agreement_template</field>
-        <field name="report_file">rental_management.commercial_lease_agreement_template</field>
+        <field name="report_name">property_management.commercial_lease_agreement_template</field>
+        <field name="report_file">property_management.commercial_lease_agreement_template</field>
         <field name="binding_model_id" ref="model_tenancy_details" />
         <field name="binding_type">report</field>
         <field name="print_report_name">'Commercial Lease Agreement'</field>
