@@ -18,11 +18,11 @@
     </record>
     <!--     Inherit Action-->
     <record id="account.account_invoices" model="ir.actions.report">
-        <field name="paperformat_id" ref="rental_management.freight_booking_paper_format"/>
+        <field name="paperformat_id" ref="property_management.freight_booking_paper_format"/>
     </record>
 
     <record id="account.account_invoices_without_payment" model="ir.actions.report">
-        <field name="paperformat_id" ref="rental_management.freight_booking_paper_format"/>
+        <field name="paperformat_id" ref="property_management.freight_booking_paper_format"/>
     </record>
 
 
