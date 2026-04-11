@@ -36,7 +36,7 @@
     "data": [
         # Security
         "security/groups.xml",
-        "security/ir.model.access.csv",
+        #"security/ir.model.access.csv",
         "security/security_update.xml",
         "security/security_manager.xml",
         # Data
@@ -129,12 +129,12 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "rental_management/static/src/js/property_dashboard.js",
-            "rental_management/static/src/xml/property_dashboard.xml",
+            "property_management/static/src/js/property_dashboard.js",
+            "property_management/static/src/xml/property_dashboard.xml",
         ],
         "web.assets_frontend": [
-            "rental_management/static/src/js/portal.js",
-            "rental_management/static/src/css/lib/portal_style.css",
+            "property_management/static/src/js/portal.js",
+            "property_management/static/src/css/lib/portal_style.css",
         ],
     },
     "images": [
