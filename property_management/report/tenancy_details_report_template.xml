@@ -281,10 +281,10 @@
         <field name="name">Tenancy Details</field>
         <field name="model">tenancy.details</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">rental_management.tenancy_details_qweb_report_template</field>
-        <field name="report_file">rental_management.tenancy_details_qweb_report_template</field>
-        <field name="paperformat_id" ref="rental_management.freight_booking_paper_format"/>
-        <field name="binding_model_id" ref="model_tenancy_details"/>
+        <field name="report_name">property_management.tenancy_details_qweb_report_template</field>
+        <field name="report_file">property_management.tenancy_details_qweb_report_template</field>
+        <field name="paperformat_id" ref="property_management.freight_booking_paper_format"/>
+        <field name="binding_model_id" ref="property_management.model_tenancy_details"/>
         <field name="binding_type">report</field>
         <field name="print_report_name">'%s Information' %(object.tenancy_seq)</field>
     </record>
