@@ -3,7 +3,7 @@
     <data>
         <record id="payment_followup_alert_mail_template" model="mail.template">
             <field name="name">Rental Management: Follow up on payment alert after 7 days of invoice date</field>
-            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="model_id" ref="property_management.model_rent_invoice"/>
             <field name="subject">Follow-up: Outstanding Payment Reminder [{{ object.property_id.name }}]</field>
             <field name="email_from">{{object.tenancy_id.property_landlord_id.email}}</field>
             <field name="partner_to">{{ object.customer_id.id }}</field>
