@@ -3,7 +3,7 @@
     <data>
         <record id="agreement_expiry_alert_mail_template" model="mail.template">
             <field name="name">Rental Management: 90 Days, 60 Days &amp; 30 Days Prior Agreement Expiry Alert</field>
-            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="model_id" ref="property_management.model_tenancy_details"/>
             <field name="subject">Notice: Lease Agreement Expiry in {{ object.env.context.get('remaining_days') }} Days [{{ object.property_id.name }} - {{ object.property_id.parent_property_id.name }}]</field>
             <field name="email_from">{{ (object.company_id.email or user.company_id.email or '') }}</field>
             <field name="partner_to">{{ object.tenancy_id.id }}</field>
