@@ -23,12 +23,12 @@
             <field name="name">Handover Property</field>
             <field name="model">handover.property</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">rental_management.handover_property_qweb_report_template</field>
-            <field name="report_file">rental_management.handover_property_qweb_report_template</field>
-            <field name="binding_model_id" eval="False"/>
+            <field name="report_name">property_management.handover_property_qweb_report_template</field>
+            <field name="report_file">property_management.handover_property_qweb_report_template</field>
+            <field name="binding_model_id" ref="property_management.model_handover_property"/>
             <field name="binding_type">report</field>
             <field name="print_report_name">'Handover Property'</field>
-            <field name="paperformat_id" ref="rental_management.paperformat_handover_form_report"/>
+            <field name="paperformat_id" ref="property_management.paperformat_handover_form_report"/>
         </record>
 
         <template id="handover_property_qweb_report_template">
