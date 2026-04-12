@@ -6,7 +6,7 @@
     <record id="property_manager_own" model="res.groups">
       <field name="name">Property Manager (Own Properties)</field>
       <field name="implied_ids" eval="[(4, ref('property_rental_officer'))]"/>
-      <field name="category_id" ref="module_rental_management"/>
+      <field name="category_id" ref="module_property_management"/>
     </record>
 
     <!-- Record rules for Property Manager group -->
