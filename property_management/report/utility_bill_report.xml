@@ -19,8 +19,8 @@
         <field name="name">Utility Bill</field>
         <field name="model">utility.bill</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">rental_management.report_utility_bill_tmpl</field>
-        <field name="report_file">rental_management.report_utility_bill_tmpl</field>
+        <field name="report_name">property_management.report_utility_bill_tmpl</field>
+        <field name="report_file">property_management.report_utility_bill_tmpl</field>
         <field name="print_report_name">'Utility Bill - %s' % (object.dn_no)</field>
         <field name="binding_model_id" ref="model_utility_bill"/>
         <field name="binding_type">report</field>
