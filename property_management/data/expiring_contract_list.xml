@@ -3,7 +3,7 @@
     <data>
         <record id="contract_expiry_list_alert_mail_template" model="mail.template">
             <field name="name">Rental Management: List of Contract Agreement expiring in next 45 days</field>
-            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="model_id" ref="property_management.model_tenancy_details"/>
             <field name="subject">Alert: Lease Agreements Expiring in 45 Days</field>
             <field name="body_html" type="html">
                 <table style="width:100%">
