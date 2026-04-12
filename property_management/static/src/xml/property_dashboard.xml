@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-<t t-name="rental_management.PropertyDashboard">
+<t t-name="property_management.PropertyDashboard">
 <div class="pd">
 <style>
 .pd{
