@@ -1,217 +1,217 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Main Menu -->
-    <menuitem id="main_menu_rental_management"
+    <menuitem id="main_menu_property_management"
               name="Real Estate"
-              action="rental_management.action_property_dashboard"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
-              web_icon="rental_management,static/description/icon.png"/>
+              action="property_management.action_property_dashboard"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
+              web_icon="property_management,static/description/icon.png"/>
 
     <!-- Dashboard -->
     <menuitem name="Dashboard"
               id="menu_dashboard"
-              parent="main_menu_rental_management"
-              action="rental_management.action_property_dashboard"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              parent="main_menu_property_management"
+              action="property_management.action_property_dashboard"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="0"/>
 
     <!-- Property Menu -->
     <menuitem name="Properties"
               id="menu_property"
-              parent="main_menu_rental_management"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              parent="main_menu_property_management"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="1"/>
     <menuitem name="Properties"
               id="menu_property_details"
               parent="menu_property"
               action="property_details_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="1"/>
     <menuitem name="Main Properties"
               id="menu_parent_property"
               parent="menu_property"
               action="parent_property_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="2"/>
 
     <menuitem name="Handover Properties"
               id="menu_handover_property"
               parent="menu_property"
               action="handover_property_details_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="3"/>
 
     <menuitem name="Utility Bills"
               id="menu_utility_bills"
               parent="menu_property"
               action="utility_bill_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="4"/>
     <menuitem name="Import Utility Bill"
               id="menu_import_utility_bill"
               parent="menu_property"
               action="upload_utility_excel_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="5"/>
 
     <menuitem name="Lead"
               id="menu_property_lead"
-              parent="main_menu_rental_management"
+              parent="main_menu_property_management"
               sequence="2"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
     <menuitem name="Property Lead"
               id="menu_inquiry_inquiry"
               parent="menu_property_lead"
               action="crm.crm_lead_all_leads"
               sequence="1"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
     <menuitem name="Opportunities"
               id="menu_inquiry_pipeline"
               parent="menu_property_lead"
               action="property_inquiry_action"
               sequence="2"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
 
     <menuitem name="Contract"
               id="menu_tenancy_details"
-              parent="main_menu_rental_management"
+              parent="main_menu_property_management"
               action="tenancy_details_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="3"/>
 
 
     <menuitem name="Customers"
               id="menu_customer_details"
-              parent="main_menu_rental_management"
+              parent="main_menu_property_management"
               action="customer_details_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="5"/>
 
 
     <menuitem name="Vendors"
               id="menu_property_broker_landlord"
-              parent="main_menu_rental_management"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              parent="main_menu_property_management"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="6"/>
     <menuitem name="Landlords"
               id="menu_landlord_details"
               parent="menu_property_broker_landlord"
               action="landlord_details_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="1"/>
 
 
     <menuitem name="Invoices"
               id="menu_rent_invoice"
-              parent="main_menu_rental_management"
+              parent="main_menu_property_management"
               action="rent_invoice_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="7"/>
 
     <menuitem id="menu_property_maintenance"
               name="Maintenances"
-              parent="main_menu_rental_management"
+              parent="main_menu_property_management"
               action="property_maintenance_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="8"/>
 
     <menuitem id="menu_property_inspection"
               name="Asset Inspection"
               parent="maintenance.menu_m_request"
               action="property_inspection_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="9"/>
 
     <menuitem name="Employee"
               id="menu_employee"
-              parent="main_menu_rental_management"
+              parent="main_menu_property_management"
               action="hr.open_view_employee_list_my"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="10"/>
 
     <menuitem name="Reports"
               id="menu_print_report"
-              parent="main_menu_rental_management"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              parent="main_menu_property_management"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="11"/>
     <menuitem name="Property Reports"
               id="menu_tenancy_print_report"
               parent="menu_print_report"
               action="property_xls_report_wizard_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="1"/>
     <menuitem name="Landlord wise Report"
               id="menu_landlord_wise_report"
               parent="menu_print_report"
               action="landlord_tenancy_sold_xls_wizard_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="2"/>
     <menuitem name="Invoice Report"
               id="menu_invoice_report"
               parent="menu_print_report"
               action="print_invoice_excel_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="3"/>
     <menuitem name="Property Occupancy Report"
               id="menu_property_occupancy_report"
               parent="menu_print_report"
               action="property_occupancy_report_wizard_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="4"/>
 
 
     <!--Configuration Menu-->
     <menuitem name="Configurations"
               id="menu_configuration"
-              parent="main_menu_rental_management"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              parent="main_menu_property_management"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               sequence="12"/>
     <menuitem name="Durations"
               id="menu_contract_duration"
               parent="menu_configuration"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               action="contract_duration_action"/>
     <menuitem name="Contract Sub Stage"
               id="menu_contract_sub_stage"
               parent="menu_configuration"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"
               action="contract_sub_stage_action"/>
     <menuitem name="Amenities"
               id="menu_property_amenities"
               parent="menu_configuration"
               action="property_amenities_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
     <menuitem name="Specifications"
               id="menu_property_specification"
               parent="menu_configuration"
               action="property_specification_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
     <menuitem name="Certificate Types"
               id="menu_certificate_type"
               parent="menu_configuration"
               action="certificate_type_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
     <menuitem name="Property Tags"
               id="property_tag_menu"
               parent="menu_configuration"
               action="property_tag_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
     <menuitem name="Extras Services"
               id="property_extra_service_menu"
               parent="menu_configuration"
               action="product_extra_service_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
 
     <menuitem name="Nearby Connectivity"
               id="menu_nearby_connectivity"
               parent="menu_configuration"
               action="property_connectivity_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
     <menuitem name="Agreement Template"
               id="menu_agreement_template"
               parent="menu_configuration"
               action="agreement_template_action"
-              groups="rental_management.property_rental_manager,rental_management.property_rental_officer"/>
+              groups="property_management.property_rental_manager,property_management.property_rental_officer"/>
 
 
     <menuitem name="Meter Type"
