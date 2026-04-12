@@ -23,12 +23,12 @@
             <field name="name">Lease Agreement</field>
             <field name="model">tenancy.details</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">rental_management.lease_agreement_qweb_report_template</field>
-            <field name="report_file">rental_management.lease_agreement_qweb_report_template</field>
-            <field name="binding_model_id" ref="model_tenancy_details"/>
+            <field name="report_name">property_management.lease_agreement_qweb_report_template</field>
+            <field name="report_file">property_management.lease_agreement_qweb_report_template</field>
+            <field name="binding_model_id" ref="property_management.model_tenancy_details"/>
             <field name="binding_type">report</field>
             <field name="print_report_name">'Lease Agreement'</field>
-            <field name="paperformat_id" ref="rental_management.paperformat_lease_agreement_report"/>
+            <field name="paperformat_id" ref="property_management.paperformat_lease_agreement_report"/>
         </record>
 
 
