@@ -8,7 +8,7 @@
 
                 <div class="row">
                     <div class="col-3 text-center">
-                        <img style="width:60%;" src="/rental_management/static/description/endow_comapny.png"/>
+                        <img style="width:60%;" src="/property_management/static/description/endow_comapny.png"/>
                     </div>
                     <div class="col-7 text-center">
                         <div>
@@ -239,7 +239,7 @@
                     </t>
                     <t t-else="">
                         <div class="col-3" style="padding-left:5px;padding-top:45px;">
-                            <img src="/rental_management/static/description/placeholder.png" style="width:100%;"
+                            <img src="/property_management/static/description/placeholder.png" style="width:100%;"
                                  alt="Image"/>
                         </div>
                     </t>
@@ -253,7 +253,7 @@
     <template id="report_utility_bill_tmpl">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
-                <t t-call="rental_management.report_utility_bill_document" t-lang="doc.tenant_name.lang"/>
+                <t t-call="property_management.report_utility_bill_document" t-lang="doc.tenant_name.lang"/>
             </t>
         </t>
     </template>
