@@ -186,8 +186,8 @@
             <field name="name">Sold Information</field>
             <field name="model">property.vendor</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">rental_management.property_sold_qweb_report_template</field>
-            <field name="report_file">rental_management.property_sold_qweb_report_template</field>
+            <field name="report_name">property_management.property_sold_qweb_report_template</field>
+            <field name="report_file">property_management.property_sold_qweb_report_template</field>
             <field name="binding_model_id" ref="model_property_vendor"/>
             <field name="binding_type">report</field>
             <field name="print_report_name">'Sold Information'</field>
