@@ -4,7 +4,7 @@ import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
 
 export class PropertyDashboard extends Component {
-    static template = "rental_management.PropertyDashboard";
+    static template = "property_management.PropertyDashboard";
     static props = ["*"];
 
     setup() {
