@@ -34,11 +34,11 @@
         <field name="name">QR Code</field>
         <field name="model">maintenance.equipment</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">rental_management.maintenance_equipment_qr_code</field>
-        <field name="report_file">rental_management.maintenance_equipment_qr_code</field>
-        <field name="binding_model_id" ref="maintenance.model_maintenance_equipment"/>
+        <field name="report_name">property_management.maintenance_equipment_qr_code</field>
+        <field name="report_file">property_management.maintenance_equipment_qr_code</field>
+        <!-- <field name="binding_model_id" ref="maintenance.model_maintenance_equipment"/> -->
         <field name="binding_type">report</field>
-        <field name="paperformat_id" ref="rental_management.paperformat_equipment_qr_code"/>
+        <field name="paperformat_id" ref="property_management.paperformat_equipment_qr_code"/>
         <field name="print_report_name">'Equipment QR - %s' %(object.name)</field>
     </record>
 </odoo>
