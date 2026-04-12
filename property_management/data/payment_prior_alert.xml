@@ -3,7 +3,7 @@
     <data>
         <record id="payment_prior_alert_mail_template" model="mail.template">
             <field name="name">Rental Management: 15 days &amp; 3 Days prior alert on the due date of Payment</field>
-            <field name="model_id" ref="rental_management.model_rent_invoice"/>
+            <field name="model_id" ref="property_management.model_rent_invoice"/>
             <field name="subject">Important Reminder: Rental Payment Due in {{ object.env.context.get('remaining_days') }} Days</field>
             <field name="email_from">{{ (object.company_id.email or user.company_id.email or '') }}</field>
             <field name="email_to">{{ object.customer_id.email }}</field>
