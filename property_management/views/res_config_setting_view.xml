@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form" position="inside">
                     <app data-string="Real Estate" id="real_estate" string="Real Estate"
-                         name="real_estate" logo="rental_management/static/description/icon.png">
+                         name="real_estate" logo="property_management/static/description/icon.png">
                         <block title="Reminder Days" id="reminder_days">
                             <setting
                                     help="Reminder days for Creating Invoice">
