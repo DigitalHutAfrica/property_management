@@ -3,7 +3,7 @@
     <data>
         <record id="active_contract_mail_template" model="mail.template">
             <field name="name">Active Contract Mail Template</field>
-            <field name="model_id" ref="rental_management.model_tenancy_details"/>
+            <field name="model_id" ref="property_management.model_tenancy_details"/>
             <field name="subject">Your Tenancy Contract is Active</field>
             <field name="email_from">{{object.property_landlord_id.email}}</field>
             <field name="partner_to">{{ object.sudo().tenancy_id.id }}</field>
