@@ -2,19 +2,19 @@
 <odoo>
     <data>
         <data noupdate="0">
-            <record id="module_rental_management" model="ir.module.category">
+            <record id="module_property_management" model="ir.module.category">
                 <field name="name">Rental Management</field>
                 <field name="description">Access rights for Rental Management</field>
             </record>
             <record id="property_rental_officer" model="res.groups">
                 <field name="name">Officer</field>
                 <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-                <field name="category_id" ref="module_rental_management"/>
+                <field name="category_id" ref="module_property_management"/>
             </record>
             <record id="property_rental_manager" model="res.groups">
                 <field name="name">Manager</field>
                 <field name="implied_ids" eval="[(4, ref('property_rental_officer'))]"/>
-                <field name="category_id" ref="module_rental_management"/>
+                <field name="category_id" ref="module_property_management"/>
                 <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
             </record>
             <record id="base.default_user" model="res.users">
