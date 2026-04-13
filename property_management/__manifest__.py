@@ -36,7 +36,7 @@
     "data": [
         # Security
         "security/groups.xml",
-        #"security/ir.model.access.csv",
+        "security/ir.model.access.csv",
         "security/security_update.xml",
         "security/security_manager.xml",
         # Data

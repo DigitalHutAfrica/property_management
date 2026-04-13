@@ -43,8 +43,7 @@
             <record model="ir.rule" id="multi_company_wise_property_details">
                 <field name="name">Property Details - multi Company</field>
                 <field name="model_id" ref="model_property_details"/>
-                <field name="domain_force">['|',('pro_company_id', 'in', company_ids),('maintanance_company_id', 'in',
-                    company_ids)]
+                <field name="domain_force">[(1, '=', 1)]
                 </field>
             </record>
 
