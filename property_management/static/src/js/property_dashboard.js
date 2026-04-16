@@ -244,7 +244,7 @@ export class PropertyDashboard extends Component {
             [["property_id", "!=", false]],
             ["property_id"],          // groupBy
             ["amount:sum"],           // aggregates
-            { orderby: "amount:sum desc", limit: 6 }
+            { orderby: "amount desc", limit: 6 }
         );
 
         const props = [];
