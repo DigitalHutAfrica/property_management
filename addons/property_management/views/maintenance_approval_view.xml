@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="maintenance_request_approval_inherit" model="ir.ui.view">
+    <field name="name">maintenance.request.form.approval</field>
+    <field name="model">maintenance.request</field>
+    <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+    <field name="arch" type="xml">
+
+      <!-- ── Action buttons in header ──────────────────────────────── -->
+      <xpath expr="//header" position="inside">
+        <button name="action_submit_for_approval"
+                string="Submit for Approval"
+                type="object" class="btn-primary"
+                invisible="approval_state not in ('draft',)"/>
+        <button name="action_approve"
+                string="Approve"
+                type="object" class="btn-success"
+                invisible="approval_state not in ('pending_l1','pending_l2','pending_l3')"/>
+        <button name="action_reject"
+                string="Reject"
+                type="object" class="btn-danger"
+                invisible="approval_state not in ('pending_l1','pending_l2','pending_l3')"/>
+        <button name="action_reset_to_draft"
+                string="Reset to Draft"
+                type="object" class="btn-secondary"
+                invisible="approval_state not in ('rejected',)"/>
+        <field name="approval_state" widget="statusbar"
+               statusbar_visible="draft,pending_l1,pending_l2,pending_l3,approved"
+               invisible="approval_state == 'not_required'"/>
+      </xpath>
+
+      <!-- ── Cost + approval fields after stage_id ─────────────────── -->
+      <xpath expr="//field[@name='stage_id']" position="after">
+        <field name="estimated_cost" widget="monetary" string="Estimated Cost"/>
+        <field name="actual_cost"    widget="monetary" string="Actual Cost"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="approval_state" invisible="1"/>
+      </xpath>
+
+      <!-- ── Approval section inside notebook ──────────────────────── -->
+      <xpath expr="//notebook" position="inside">
+        <page string="Approval" name="approval_page"
+              invisible="approval_state == 'not_required'">
+
+          <!-- Current status banner -->
+          <div class="alert alert-info mb-3"
+               invisible="approval_state not in ('pending_l1','pending_l2','pending_l3')">
+            <strong>⏳ Awaiting Approval</strong> —
+            <field name="approval_summary" readonly="1" class="d-inline"/>
+          </div>
+          <div class="alert alert-success mb-3"
+               invisible="approval_state != 'approved'">
+            <strong>✅ Fully Approved</strong> — Work can proceed.
+          </div>
+          <div class="alert alert-danger mb-3"
+               invisible="approval_state != 'rejected'">
+            <strong>❌ Rejected</strong>
+          </div>
+
+          <group string="Approval Details">
+            <field name="approval_summary" readonly="1" string="Status"/>
+            <field name="current_approver_id" readonly="1" string="Waiting For"
+                   invisible="approval_state not in ('pending_l1','pending_l2','pending_l3')"/>
+            <field name="approved_by_ids" widget="many2many_tags" readonly="1"
+                   string="Approved By"
+                   invisible="not approved_by_ids"/>
+            <field name="final_approved_date" readonly="1" string="Approved On"
+                   invisible="approval_state != 'approved'"/>
+            <field name="rejection_reason" readonly="1" string="Rejection Reason"
+                   invisible="approval_state != 'rejected'"/>
+          </group>
+
+          <!-- Approval log -->
+          <group string="Approval Log">
+            <field name="approval_line_ids" readonly="1" nolabel="1">
+              <list decoration-success="state == 'approved'"
+                    decoration-danger="state == 'rejected'"
+                    decoration-warning="state == 'pending'">
+                <field name="level" string="#"/>
+                <field name="level_name" string="Level"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'approved'"
+                       decoration-danger="state == 'rejected'"
+                       decoration-warning="state == 'pending'"/>
+                <field name="approver_id" string="Actioned By"/>
+                <field name="date"        string="Date"/>
+                <field name="note"        string="Note / Reason"/>
+              </list>
+            </field>
+          </group>
+
+        </page>
+      </xpath>
+
+    </field>
+  </record>
+
+</odoo>

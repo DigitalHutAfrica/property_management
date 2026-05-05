@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <!-- Service Charge / Management Fee product -->
+    <record id="service_charge_product" model="product.product">
+      <field name="name">Property Management Fee</field>
+      <field name="type">service</field>
+      <field name="categ_id" ref="property_management.product_category_property"/>
+      <field name="description_sale">Property management service charge</field>
+    </record>
+  </data>
+</odoo>

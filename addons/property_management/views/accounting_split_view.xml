@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- Add service charge product + suspense account to tenancy form -->
+  <record id="tenancy_accounting_split_inherit" model="ir.ui.view">
+    <field name="name">tenancy.details.form.accounting.split</field>
+    <field name="model">tenancy.details</field>
+    <field name="inherit_id" ref="property_management.tenancy_details_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='installment_item_id']" position="after">
+        <field name="service_charge_product_id"
+               options="{'no_quick_create': True}"
+               invisible="rent_payment_flow == 'through_gimco'"
+               required="rent_payment_flow in ['direct_landlord', 'gepg_control']"
+               help="Product for management fee invoice line — set its income account to Management Fee Revenue."/>
+        <field name="rent_suspense_account_id"
+               options="{'no_quick_create': True}"
+               invisible="rent_payment_flow == 'through_gimco'"
+               help="Liability account for rent collected on behalf of landlord (pass-through)."/>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- Add new product records for proper accounting -->
+  <!-- These are loaded as data so users have them ready to configure -->
+
+</odoo>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- ============================================================
+       TENANCY FORM — Payment flow + GePG + Service charge config
+  ============================================================ -->
+  <record id="tenancy_passthrough_inherit" model="ir.ui.view">
+    <field name="name">tenancy.details.form.passthrough.inherit</field>
+    <field name="model">tenancy.details</field>
+    <field name="inherit_id" ref="property_management.tenancy_details_form_view"/>
+    <field name="arch" type="xml">
+
+      <!-- Add payment flow selector near the top of price details -->
+      <xpath expr="//field[@name='property_landlord_id']" position="before">
+        <field name="rent_payment_flow" widget="radio" options="{'horizontal': True}"
+               string="Rent Payment Flow"/>
+        <field name="gepg_control_number"
+               invisible="rent_payment_flow != 'gepg_control'"
+               placeholder="e.g. 993300012345"/>
+        <field name="gepg_sp_code"
+               invisible="rent_payment_flow != 'gepg_control'"
+               placeholder="e.g. SP12345"/>
+        <separator string="Service Charge Configuration"
+                   invisible="rent_payment_flow == 'through_gimco'"/>
+        <field name="service_charge_type" widget="radio" options="{'horizontal': True}"
+               invisible="rent_payment_flow == 'through_gimco'"/>
+        <field name="service_charge_percentage"
+               invisible="service_charge_type != 'percentage' or rent_payment_flow == 'through_gimco'"
+               string="Our Management Fee (%)"/>
+      </xpath>
+
+      <!-- Add YTD tracking stats to the contract stat buttons -->
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button class="oe_stat_button" type="object" name="action_invoices"
+                icon="fa-file-text-o"
+                invisible="rent_payment_flow == 'through_gimco'">
+          <div class="o_stat_info">
+            <field name="service_charge_ytd" widget="monetary" string="Service Earned"/>
+            <span class="o_stat_text">Service YTD</span>
+          </div>
+        </button>
+        <button class="oe_stat_button" type="object" name="action_invoices"
+                icon="fa-exchange"
+                invisible="rent_payment_flow == 'through_gimco'">
+          <div class="o_stat_info">
+            <field name="passthrough_rent_ytd" widget="monetary" string="Rent Pass-Through"/>
+            <span class="o_stat_text">Rent YTD</span>
+          </div>
+        </button>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- ============================================================
+       RENT INVOICE FORM — Show pass-through info + landlord disburse
+  ============================================================ -->
+  <record id="rent_invoice_passthrough_inherit" model="ir.ui.view">
+    <field name="name">rent.invoice.form.passthrough.inherit</field>
+    <field name="model">rent.invoice</field>
+    <field name="inherit_id" ref="property_management.rent_invoice_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet" position="inside">
+        <group string="Payment Flow &amp; GIMCO Revenue"
+               invisible="not is_direct_to_landlord">
+          <group>
+            <field name="is_direct_to_landlord" readonly="1" widget="boolean_toggle"/>
+            <field name="gepg_control_number" readonly="1"
+                   invisible="not gepg_control_number"/>
+            <field name="gimco_receivable" widget="monetary" readonly="1"
+                   string="GIMCO Collects (Service Charge Only)"/>
+          </group>
+          <group>
+            <field name="landlord_disbursed" widget="boolean_toggle"/>
+            <field name="landlord_disbursement_date"
+                   invisible="not landlord_disbursed"/>
+            <field name="landlord_disbursement_ref"
+                   invisible="not landlord_disbursed"
+                   placeholder="Bank transfer ref / EFT No."/>
+          </group>
+        </group>
+        <button name="action_mark_disbursed" string="Mark as Disbursed to Landlord"
+                type="object" class="btn btn-outline-info"
+                invisible="landlord_disbursed or not is_direct_to_landlord"/>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- ============================================================
+       UTILITY BILL FORM — Vendor bill link
+  ============================================================ -->
+  <record id="utility_bill_vendor_inherit" model="ir.ui.view">
+    <field name="name">utility.bill.form.vendor.inherit</field>
+    <field name="model">utility.bill</field>
+    <field name="inherit_id" ref="property_management.utility_bill_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet" position="inside">
+        <group string="Procurement — Vendor Bill">
+          <group>
+            <field name="purchase_order_id"
+                   options="{'no_quick_create': True}"
+                   placeholder="Link or create a Purchase Order..."/>
+            <field name="vendor_bill_id"
+                   options="{'no_quick_create': True}"
+                   placeholder="Or link vendor bill directly..."
+                   invisible="purchase_order_id"/>
+            <field name="vendor_bill_amount" readonly="1" widget="monetary"
+                   invisible="not vendor_bill_id"/>
+            <field name="vendor_bill_state" readonly="1"
+                   invisible="not vendor_bill_id"/>
+            <field name="vendor_bill_payment_state" readonly="1"
+                   invisible="not vendor_bill_id"/>
+          </group>
+          <group invisible="not vendor_bill_id">
+            <field name="apply_markup" widget="boolean_toggle"/>
+            <field name="markup_type" invisible="not apply_markup"/>
+            <field name="markup_amount" widget="monetary"
+                   invisible="not apply_markup or markup_type != 'fixed'"/>
+            <field name="markup_percent"
+                   invisible="not apply_markup or markup_type != 'percent'"/>
+            <field name="net_cost_to_gimco" widget="monetary" readonly="1"/>
+          </group>
+        </group>
+      </xpath>
+      <xpath expr="//header" position="inside">
+        <button name="action_create_purchase_order" string="Create Purchase Order"
+                type="object" class="btn btn-outline-secondary"
+                invisible="purchase_order_id or vendor_bill_id"/>
+        <button name="action_open_purchase_order" string="View Purchase Order"
+                type="object" class="btn btn-outline-info"
+                invisible="not purchase_order_id"/>
+        <button name="action_create_vendor_bill" string="Create Vendor Bill"
+                type="object" class="btn btn-outline-secondary"
+                invisible="vendor_bill_id or purchase_order_id"/>
+        <button name="action_open_vendor_bill" string="View Vendor Bill"
+                type="object" class="btn btn-outline-info"
+                invisible="not vendor_bill_id or purchase_order_id"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

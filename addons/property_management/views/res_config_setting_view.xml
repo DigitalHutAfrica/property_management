@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_rental" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.rental</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app string="Property Management" name="property_management">
+
+                        <block title="General">
+                            <setting string="Reminder Days"
+                                     help="Days before contract expiry to send alert">
+                                <field name="reminder_days"/>
+                            </setting>
+                            <setting string="Sale Reminder Days"
+                                     help="Days before sale contract expiry to send alert">
+                                <field name="sale_reminder_days"/>
+                            </setting>
+                            <setting string="Internal User"
+                                     help="Internal user for notifications">
+                                <field name="internal_user_id"/>
+                            </setting>
+                            <setting string="Report Email Recipients">
+                                <field name="property_report_mails"
+                                       placeholder="email1@domain.com,email2@domain.com"/>
+                            </setting>
+                            <setting string="Alert Mail Sender Email">
+                                <field name="alert_mail_sender_email"
+                                       placeholder="noreply@company.com"/>
+                            </setting>
+                        </block>
+
+                        <block title="Bank Details">
+                            <setting string="Bank Name">
+                                <field name="bank_name"
+                                       placeholder="e.g. CRDB BANK (T) LTD"/>
+                            </setting>
+                            <setting string="USD Account No.">
+                                <field name="bank_account_usd"/>
+                            </setting>
+                            <setting string="TZS Account No.">
+                                <field name="bank_account_tzs"/>
+                            </setting>
+                        </block>
+
+                        <block title="Accounting Split — Rent vs Management Fee">
+                            <setting string="Rent Payable to Landlord Account"
+                                     help="Liability account where rent collected on behalf of landlords is posted. Cleared on disbursement.">
+                                <field name="rent_suspense_account_id"
+                                       domain="[('account_type','like','liability')]"/>
+                            </setting>
+                            <setting string="Management Fee Product"
+                                     help="Service product for GIMCO management fee invoice line. Set its income account to Management Fee Revenue.">
+                                <field name="service_charge_product_id"
+                                       domain="[('type','=','service')]"/>
+                            </setting>
+                        </block>
+
+                        <block title="Maintenance Approval — Level 1">
+                            <setting string="Enable Level 1 Approval">
+                                <field name="maint_approval_l1_enabled"/>
+                            </setting>
+                            <setting string="Level 1 Name"
+                                     invisible="not maint_approval_l1_enabled">
+                                <field name="maint_approval_l1_name"
+                                       placeholder="e.g. Property Manager"/>
+                            </setting>
+                            <setting string="Level 1 Approver Group"
+                                     invisible="not maint_approval_l1_enabled">
+                                <field name="maint_approval_l1_group_id"/>
+                            </setting>
+                            <setting string="Level 1 Min Cost Threshold"
+                                     help="Requests at or above this cost require Level 1 approval. Set 0 for all requests."
+                                     invisible="not maint_approval_l1_enabled">
+                                <field name="maint_approval_l1_threshold"/>
+                            </setting>
+                        </block>
+
+                        <block title="Maintenance Approval — Level 2">
+                            <setting string="Enable Level 2 Approval">
+                                <field name="maint_approval_l2_enabled"/>
+                            </setting>
+                            <setting string="Level 2 Name"
+                                     invisible="not maint_approval_l2_enabled">
+                                <field name="maint_approval_l2_name"
+                                       placeholder="e.g. Finance Manager"/>
+                            </setting>
+                            <setting string="Level 2 Approver Group"
+                                     invisible="not maint_approval_l2_enabled">
+                                <field name="maint_approval_l2_group_id"/>
+                            </setting>
+                            <setting string="Level 2 Min Cost Threshold"
+                                     invisible="not maint_approval_l2_enabled">
+                                <field name="maint_approval_l2_threshold"/>
+                            </setting>
+                        </block>
+
+                        <block title="Maintenance Approval — Level 3">
+                            <setting string="Enable Level 3 Approval">
+                                <field name="maint_approval_l3_enabled"/>
+                            </setting>
+                            <setting string="Level 3 Name"
+                                     invisible="not maint_approval_l3_enabled">
+                                <field name="maint_approval_l3_name"
+                                       placeholder="e.g. Director"/>
+                            </setting>
+                            <setting string="Level 3 Approver Group"
+                                     invisible="not maint_approval_l3_enabled">
+                                <field name="maint_approval_l3_group_id"/>
+                            </setting>
+                            <setting string="Level 3 Min Cost Threshold"
+                                     invisible="not maint_approval_l3_enabled">
+                                <field name="maint_approval_l3_threshold"/>
+                            </setting>
+                        </block>
+
+                    </app>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

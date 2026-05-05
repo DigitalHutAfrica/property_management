@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+<t t-name="property_management.PropertyDashboard">
+<div class="pd">
+
+<!-- ── STYLES ─────────────────────────────────────────────────────── -->
+<style>
+/* base */
+.pd{--bg:#F0F4FF;--surf:#FFFFFF;--txt:#0F172A;--muted:#64748B;--bdr:#E2E8F0;
+    --pri:#2563EB;--suc:#059669;--war:#D97706;--err:#DC2626;--pur:#7C3AED;--cyn:#0891B2;
+    --rad:14px;
+    background:var(--bg);padding:20px 24px;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    color:var(--txt);min-height:100vh;overflow-y:auto;}
+.pd *{box-sizing:border-box;margin:0;padding:0;}
+.o_dark .pd{--bg:#0B1121;--surf:#131E35;--txt:#F1F5F9;--muted:#64748B;--bdr:#1E2D45;}
+
+/* loading */
+.center{display:flex;align-items:center;justify-content:center;
+  flex-direction:column;height:60vh;gap:14px;color:var(--muted);}
+.spin{width:32px;height:32px;border:3px solid var(--bdr);
+  border-top-color:var(--pri);border-radius:50%;animation:sp .7s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* header */
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.hdr-left h1{font-size:22px;font-weight:800;letter-spacing:-.3px;color:var(--txt);}
+.hdr-left p{font-size:12px;color:var(--muted);margin-top:2px;}
+.badge-live{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;
+  border-radius:20px;background:rgba(5,150,105,.1);color:var(--suc);
+  font-size:11px;font-weight:700;letter-spacing:.04em;}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--suc);
+  animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+/* grid */
+.row{display:grid;gap:12px;margin-bottom:12px;}
+.r4{grid-template-columns:repeat(4,1fr);}
+.r2{grid-template-columns:1.7fr 1fr;}
+.r3{grid-template-columns:repeat(3,1fr);}
+.r22{grid-template-columns:1fr 1fr;}
+
+/* KPI cards */
+.kpi{background:var(--surf);border-radius:var(--rad);padding:18px 20px;
+  position:relative;overflow:hidden;cursor:pointer;
+  border:1px solid var(--bdr);
+  transition:transform .15s ease,box-shadow .15s ease;}
+.kpi:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1);}
+.kpi:active{transform:translateY(-1px);}
+.kpi-accent{position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--rad) var(--rad) 0 0;}
+.kpi-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  font-size:32px;opacity:.08;}
+.kpi-label{font-size:10px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.kpi-val{font-size:32px;font-weight:900;line-height:1;letter-spacing:-.5px;}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:6px;display:flex;
+  align-items:center;gap:4px;}
+.kpi-sub b{color:var(--txt);}
+.kpi-link{font-size:10px;font-weight:700;letter-spacing:.04em;margin-top:10px;
+  display:inline-flex;align-items:center;gap:3px;opacity:.6;
+  transition:opacity .1s;}
+.kpi:hover .kpi-link{opacity:1;}
+.chip{display:inline-block;padding:2px 8px;border-radius:20px;
+  font-size:10px;font-weight:700;}
+
+/* cards */
+.card{background:var(--surf);border-radius:var(--rad);border:1px solid var(--bdr);
+  padding:16px 18px;}
+.card-hdr{font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;display:flex;align-items:center;
+  justify-content:space-between;}
+.card-hdr-dot{width:8px;height:8px;border-radius:50%;margin-right:6px;}
+
+/* bar chart */
+.bars{display:flex;align-items:flex-end;gap:8px;height:130px;}
+.bg{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px;}
+.bp{display:flex;gap:3px;align-items:flex-end;height:116px;}
+.bar{width:12px;border-radius:3px 3px 0 0;}
+.bl{font-size:9px;color:var(--muted);font-weight:600;}
+.leg{display:flex;gap:14px;margin-top:10px;}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
+.lsq{width:10px;height:10px;border-radius:3px;}
+
+/* building occupancy bars */
+.bld-row{display:flex;align-items:center;gap:10px;padding:7px 0;
+  border-bottom:1px solid var(--bdr);}
+.bld-row:last-child{border-bottom:none;}
+.bld-name{font-size:12px;font-weight:600;width:130px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;}
+.bld-track{flex:1;background:var(--bg);border-radius:4px;height:8px;overflow:hidden;}
+.bld-fill{height:100%;border-radius:4px;transition:width .6s ease;}
+.bld-pct{font-size:11px;font-weight:800;width:36px;text-align:right;flex-shrink:0;}
+
+/* action lists */
+.al-row{display:flex;align-items:center;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid var(--bdr);gap:8px;}
+.al-row:last-child{border-bottom:none;}
+.al-main{font-size:12px;font-weight:700;color:var(--txt);}
+.al-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.al-right{flex-shrink:0;text-align:right;}
+.al-amt{font-size:13px;font-weight:800;}
+.al-days{font-size:10px;font-weight:700;padding:2px 8px;
+  border-radius:20px;margin-top:3px;display:inline-block;}
+.empty{text-align:center;padding:20px;color:var(--muted);font-size:12px;}
+
+/* occupancy big ring */
+.occ-ring{position:relative;width:80px;height:80px;flex-shrink:0;}
+.occ-ring svg{transform:rotate(-90deg);}
+.occ-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:16px;font-weight:900;color:var(--txt);}
+
+/* responsive */
+@media(max-width:1100px){.r4{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:700px){.r4,.r2,.r3,.r22{grid-template-columns:1fr;}}
+</style>
+
+<!-- ── LOADING ─────────────────────────────────────────────────────── -->
+<t t-if="state.loading">
+  <div class="center">
+    <div class="spin"/>
+    <span style="font-size:13px;font-weight:600;">Loading dashboard…</span>
+  </div>
+</t>
+
+<t t-else="">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>Property Dashboard</h1>
+    <p>Real-time portfolio overview — all figures in USD millions unless stated</p>
+  </div>
+  <div class="badge-live">
+    <span class="ldot"/>
+    LIVE
+  </div>
+</div>
+
+<!-- ══ ROW 1 — 4 critical KPIs ══════════════════════════════════════ -->
+<div class="row r4">
+
+  <!-- Occupancy Rate -->
+  <div class="kpi" t-on-click="() => this.go('property_management.property_details_action')">
+    <div class="kpi-accent" style="background:var(--pri)"/>
+    <div class="kpi-icon">🏢</div>
+    <div class="kpi-label">Occupancy Rate</div>
+    <div class="kpi-val" style="color:var(--pri)">
+      <t t-esc="state.occupancy"/>%
+    </div>
+    <div class="kpi-sub">
+      <b t-esc="state.on_lease"/> leased ·
+      <b t-esc="state.available"/> available ·
+      <b t-esc="state.units"/> total
+    </div>
+    <div class="kpi-link" style="color:var(--pri)">View properties →</div>
+  </div>
+
+  <!-- Rent Collected MTD -->
+  <div class="kpi" t-on-click="() => this.go('property_management.rent_invoice_action')">
+    <div class="kpi-accent" style="background:var(--suc)"/>
+    <div class="kpi-icon">💰</div>
+    <div class="kpi-label">Rent Collected MTD</div>
+    <div class="kpi-val" style="color:var(--suc)">
+      $<t t-esc="fmt(state.collected)"/>
+    </div>
+    <div class="kpi-sub">
+      <b t-esc="state.collected_count"/> invoices paid this month
+    </div>
+    <div class="kpi-link" style="color:var(--suc)">View invoices →</div>
+  </div>
+
+  <!-- Outstanding Rent -->
+  <div class="kpi" t-on-click="() => this.go('property_management.rent_invoice_action')">
+    <div class="kpi-accent" style="background:var(--err)"/>
+    <div class="kpi-icon">⚠️</div>
+    <div class="kpi-label">Outstanding Rent</div>
+    <div class="kpi-val" style="color:var(--err)">
+      $<t t-esc="fmt(state.outstanding)"/>
+    </div>
+    <div class="kpi-sub">
+      <b t-esc="state.outstanding_count"/> unpaid invoices
+    </div>
+    <div class="kpi-link" style="color:var(--err)">Review overdue →</div>
+  </div>
+
+  <!-- Expiring Contracts -->
+  <div class="kpi" t-on-click="() => this.go('property_management.tenancy_details_action')">
+    <div class="kpi-accent" style="background:var(--war)"/>
+    <div class="kpi-icon">📋</div>
+    <div class="kpi-label">Expiring (30 days)</div>
+    <div class="kpi-val" t-att-style="'color:' + (state.expiring > 0 ? 'var(--war)' : 'var(--suc)')">
+      <t t-esc="state.expiring"/>
+    </div>
+    <div class="kpi-sub">
+      contracts need renewal action
+    </div>
+    <div class="kpi-link" style="color:var(--war)">View contracts →</div>
+  </div>
+
+</div>
+
+<!-- ══ ROW 2 — portfolio health ═════════════════════════════════════ -->
+<div class="row r4">
+
+  <!-- Units breakdown -->
+  <div class="kpi" t-on-click="() => this.go('property_management.property_details_action')">
+    <div class="kpi-accent" style="background:var(--cyn)"/>
+    <div class="kpi-label">Total Units</div>
+    <div class="kpi-val sm" style="color:var(--cyn);font-size:26px;">
+      <t t-esc="state.units"/>
+    </div>
+    <div class="kpi-sub" style="gap:8px;flex-wrap:wrap;margin-top:8px;">
+      <span class="chip" style="background:rgba(5,150,105,.1);color:var(--suc);">
+        <t t-esc="state.on_lease"/> leased
+      </span>
+      <span class="chip" style="background:rgba(37,99,235,.1);color:var(--pri);">
+        <t t-esc="state.available"/> free
+      </span>
+      <span class="chip" style="background:rgba(217,119,6,.1);color:var(--war);">
+        <t t-esc="state.booked"/> booked
+      </span>
+    </div>
+    <div class="kpi-link" style="color:var(--cyn)">All units →</div>
+  </div>
+
+  <!-- Active Contracts -->
+  <div class="kpi" t-on-click="() => this.go('property_management.tenancy_details_action')">
+    <div class="kpi-accent" style="background:var(--pur)"/>
+    <div class="kpi-label">Active Contracts</div>
+    <div class="kpi-val sm" style="color:var(--pur);font-size:26px;">
+      <t t-esc="state.active_contracts"/>
+    </div>
+    <div class="kpi-sub" style="margin-top:8px;">
+      <span class="chip" style="background:rgba(220,38,38,.1);color:var(--err);">
+        <t t-esc="state.expired_contracts"/> expired
+      </span>
+    </div>
+    <div class="kpi-link" style="color:var(--pur)">All contracts →</div>
+  </div>
+
+  <!-- Open Maintenance -->
+  <div class="kpi" t-on-click="() => this.go('property_management.property_maintenance_action')">
+    <div class="kpi-accent" t-att-style="'background:' + (state.maint_open > 5 ? 'var(--err)' : 'var(--war)')"/>
+    <div class="kpi-label">Open Maintenance</div>
+    <div class="kpi-val sm" t-att-style="'font-size:26px;color:' + (state.maint_open > 5 ? 'var(--err)' : 'var(--war)')">
+      <t t-esc="state.maint_open"/>
+    </div>
+    <div class="kpi-sub" style="margin-top:8px;">
+      requests pending resolution
+    </div>
+    <div class="kpi-link" t-att-style="'color:' + (state.maint_open > 5 ? 'var(--err)' : 'var(--war)')">
+      View requests →
+    </div>
+  </div>
+
+  <!-- Unpaid Utility Bills -->
+  <div class="kpi" t-on-click="() => this.go('property_management.utility_bill_action')">
+    <div class="kpi-accent" t-att-style="'background:' + (state.util_unpaid > 0 ? 'var(--err)' : 'var(--suc)')"/>
+    <div class="kpi-label">Unpaid Utility Bills</div>
+    <div class="kpi-val sm" t-att-style="'font-size:26px;color:' + (state.util_unpaid > 0 ? 'var(--err)' : 'var(--suc)')">
+      <t t-esc="state.util_unpaid"/>
+    </div>
+    <div class="kpi-sub" style="margin-top:8px;">
+      Total: $<t t-esc="fmt(state.util_amount)"/>
+    </div>
+    <div class="kpi-link" t-att-style="'color:' + (state.util_unpaid > 0 ? 'var(--err)' : 'var(--suc)')">
+      View bills →
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ ROW 3 — charts ════════════════════════════════════════════════ -->
+<div class="row r2">
+
+  <!-- Revenue trend -->
+  <div class="card">
+    <div class="card-hdr">
+      <span>
+        <span class="card-hdr-dot" style="background:var(--pri);display:inline-block;"/>
+        Revenue Trend — Last 6 Months
+      </span>
+    </div>
+    <div class="bars">
+      <t t-foreach="state.monthly" t-as="m" t-key="m_index">
+        <div class="bg">
+          <div class="bp">
+            <div class="bar"
+                 t-att-style="'background:var(--pri);height:' + barH(m.c) + 'px;opacity:.9;'"
+                 t-att-title="'Collected: $' + m.c + 'M'"/>
+            <div class="bar"
+                 t-att-style="'background:var(--err);height:' + barH(m.o) + 'px;opacity:.7;'"
+                 t-att-title="'Outstanding: $' + m.o + 'M'"/>
+          </div>
+          <div class="bl"><t t-esc="m.label"/></div>
+        </div>
+      </t>
+    </div>
+    <div class="leg">
+      <div class="li"><div class="lsq" style="background:var(--pri)"/>Collected</div>
+      <div class="li"><div class="lsq" style="background:var(--err)"/>Outstanding</div>
+    </div>
+  </div>
+
+  <!-- Occupancy by building -->
+  <div class="card">
+    <div class="card-hdr">
+      <span>
+        <span class="card-hdr-dot" style="background:var(--suc);display:inline-block;"/>
+        Occupancy by Building
+      </span>
+    </div>
+    <t t-if="state.buildings.length">
+      <t t-foreach="state.buildings" t-as="b" t-key="b_index">
+        <div class="bld-row">
+          <div class="bld-name" t-att-title="b.name"><t t-esc="b.name"/></div>
+          <div class="bld-track">
+            <div class="bld-fill"
+                 t-att-style="'width:' + b.pct + '%;background:' +
+                   (b.pct >= 80 ? 'var(--suc)' : b.pct >= 50 ? 'var(--war)' : 'var(--err)')"/>
+          </div>
+          <div class="bld-pct"
+               t-att-style="'color:' + (b.pct >= 80 ? 'var(--suc)' : b.pct >= 50 ? 'var(--war)' : 'var(--err)')">
+            <t t-esc="b.pct"/>%
+          </div>
+        </div>
+      </t>
+    </t>
+    <t t-else="">
+      <div class="empty">No buildings found</div>
+    </t>
+  </div>
+
+</div>
+
+<!-- ══ ROW 4 — action lists ══════════════════════════════════════════ -->
+<div class="row r22">
+
+  <!-- Contracts expiring soon -->
+  <div class="card">
+    <div class="card-hdr">
+      <span>
+        <span class="card-hdr-dot" style="background:var(--war);display:inline-block;"/>
+        Contracts Expiring Soon
+      </span>
+      <span style="font-size:11px;color:var(--muted);text-transform:none;
+                   letter-spacing:0;cursor:pointer;font-weight:600;"
+            t-on-click="() => this.go('property_management.tenancy_details_action')">
+        View all →
+      </span>
+    </div>
+    <t t-if="state.expiring_list.length">
+      <t t-foreach="state.expiring_list" t-as="item" t-key="item_index">
+        <div class="al-row">
+          <div>
+            <div class="al-main"><t t-esc="item.tenant"/></div>
+            <div class="al-sub"><t t-esc="item.property"/> · <t t-esc="item.ref"/></div>
+          </div>
+          <div class="al-right">
+            <div class="al-days"
+                 t-att-style="'background:' + urgency(item.days) + '22;color:' + urgency(item.days)">
+              <t t-esc="item.days"/> days
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px;">
+              <t t-esc="item.end"/>
+            </div>
+          </div>
+        </div>
+      </t>
+    </t>
+    <t t-else="">
+      <div class="empty">✅ No contracts expiring in 30 days</div>
+    </t>
+  </div>
+
+  <!-- Overdue invoices -->
+  <div class="card">
+    <div class="card-hdr">
+      <span>
+        <span class="card-hdr-dot" style="background:var(--err);display:inline-block;"/>
+        Overdue Invoices
+      </span>
+      <span style="font-size:11px;color:var(--muted);text-transform:none;
+                   letter-spacing:0;cursor:pointer;font-weight:600;"
+            t-on-click="() => this.go('property_management.rent_invoice_action')">
+        View all →
+      </span>
+    </div>
+    <t t-if="state.overdue_list.length">
+      <t t-foreach="state.overdue_list" t-as="item" t-key="item_index">
+        <div class="al-row">
+          <div>
+            <div class="al-main"><t t-esc="item.tenant"/></div>
+            <div class="al-sub"><t t-esc="item.property"/></div>
+          </div>
+          <div class="al-right">
+            <div class="al-amt" style="color:var(--err);">
+              $<t t-esc="item.amount"/>M
+            </div>
+            <div class="al-days"
+                 t-att-style="'background:' + urgency(item.days) + '22;color:' + urgency(item.days) + ';margin-top:3px;'">
+              <t t-esc="item.days"/> days overdue
+            </div>
+          </div>
+        </div>
+      </t>
+    </t>
+    <t t-else="">
+      <div class="empty">✅ No overdue invoices</div>
+    </t>
+  </div>
+
+</div>
+
+</t><!-- end t-else loading -->
+</div><!-- .pd -->
+</t>
+</templates>

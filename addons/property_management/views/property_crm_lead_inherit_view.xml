@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="property_lead_inherit_form_view" model="ir.ui.view">
+            <field name="name">property.lead.inherit.form.view</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <field name="sale_lease" invisible="1"/>
+                    <button name="%(booking_inquiry_action)d"
+                            type='action'
+                            string="Create Booking For Sale"
+                            class="btn btn-outline-dark"
+                            context="{'default_customer_id':partner_id,'default_property_id':property_id,'default_note':description,'default_sale_inquiry':True}"
+                            invisible="sale_inquiry_id or sale_lease == 'for_tenancy' or type != 'opportunity' or not property_id"/>
+                    <button name="%(booking_inquiry_action)d"
+                            type='action'
+                            string="Create Booking for Rent"
+                            class="btn btn-outline-dark"
+                            context="{'default_customer_id':partner_id,'default_property_id':property_id,'default_note':description,'default_sale_inquiry':False}"
+                            invisible="tenancy_inquiry_id or sale_lease == 'for_sale' or type != 'opportunity' or not property_id"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="property_id"/>
+                    <field name="sale_lease"/>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="property_id" readonly="1" force_save="1" invisible="type == 'lead'"/>
+                    <field name="sale_inquiry_id" readonly="1" force_save="1"
+                           invisible="type == 'lead' or not sale_inquiry_id"/>
+                    <field name="tenancy_inquiry_id" readonly="1" force_save="1"
+                           invisible="type == 'lead' or not tenancy_inquiry_id"/>
+                    <field name="booking_id" readonly="1" force_save="1"
+                           invisible="not booking_id"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="property_inquiry_action" model="ir.actions.act_window">
+            <field name="name">Opportunity</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.lead</field>
+            <field name="domain">[('type','=','opportunity')]</field>
+            <field name="context">{'default_type':'opportunity'}</field>
+            <field name="view_mode">list,form,kanban,activity</field>
+        </record>
+    </data>
+</odoo>

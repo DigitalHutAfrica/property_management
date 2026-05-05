@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- Add actual_cost to the maintenance request form -->
+  <record id="maintenance_request_cost_inherit" model="ir.ui.view">
+    <field name="name">maintenance.request.form.cost</field>
+    <field name="model">maintenance.request</field>
+    <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='stage_id']" position="after">
+        <field name="actual_cost" widget="monetary"
+               string="Actual Cost (TZS)"
+               help="Fill in the actual cost once the work is completed."/>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- Add maintenance cost stat button to property unit form -->
+  <record id="property_details_maint_cost_inherit" model="ir.ui.view">
+    <field name="name">property.details.form.maint.cost</field>
+    <field name="model">property.details</field>
+    <field name="inherit_id" ref="property_management.property_details_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button class="oe_stat_button" type="object"
+                name="action_maintenance_request" icon="fa-wrench">
+          <div class="o_stat_info">
+            <field name="maintenance_cost_total" widget="monetary"
+                   string="Maint. Cost"/>
+            <span class="o_stat_text">Maint. Cost</span>
+          </div>
+        </button>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- Add maintenance cost summary to main property (building) form -->
+  <record id="parent_property_maint_cost_inherit" model="ir.ui.view">
+    <field name="name">parent.property.form.maint.cost</field>
+    <field name="model">parent.property</field>
+    <field name="inherit_id" ref="property_management.parent_property_form_view"/>
+    <field name="arch" type="xml">
+      <xpath expr="//div[@class='oe_button_box' or @name='button_box']" position="inside">
+        <button class="oe_stat_button" type="object"
+                name="action_parent_maintenance" icon="fa-wrench">
+          <div class="o_stat_info">
+            <span class="o_stat_value">
+              <field name="maintenance_all_count"/>
+            </span>
+            <span class="o_stat_text">Maintenance</span>
+          </div>
+        </button>
+      </xpath>
+    </field>
+  </record>
+
+  <!-- Maintenance cost pivot/reporting view -->
+  <record id="maintenance_request_cost_pivot" model="ir.ui.view">
+    <field name="name">maintenance.request.cost.pivot</field>
+    <field name="model">maintenance.request</field>
+    <field name="type">pivot</field>
+    <field name="arch" type="xml">
+      <pivot string="Maintenance Costs">
+        <field name="parent_property_id" type="row"/>
+        <field name="property_id" type="row"/>
+        <field name="stage_id" type="col"/>
+        <field name="actual_cost" type="measure"/>
+      </pivot>
+    </field>
+  </record>
+
+  <!-- Maintenance cost action with pivot view -->
+  <record id="maintenance_cost_report_action" model="ir.actions.act_window">
+    <field name="name">Maintenance Cost Report</field>
+    <field name="res_model">maintenance.request</field>
+    <field name="view_mode">pivot,list,form</field>
+    <field name="domain">[('property_id', '!=', False)]</field>
+    <field name="context">{'search_default_group_by_property': 1}</field>
+  </record>
+
+  <!-- Add to maintenance menu -->
+  <menuitem id="menu_maintenance_cost_report"
+            name="Cost Report"
+            parent="maintenance.menu_m_request"
+            action="maintenance_cost_report_action"
+            groups="property_management.property_rental_manager,property_management.property_rental_officer"
+            sequence="20"/>
+
+</odoo>

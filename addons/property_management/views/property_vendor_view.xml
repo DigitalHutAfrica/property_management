@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="property_vendor_form_view" model="ir.ui.view">
+      <field name="name">property.vendor.form.view</field>
+      <field name="model">property.vendor</field>
+      <field name="arch" type="xml">
+        <form string="Sale / Booking">
+          <header>
+            <field name="stage" widget="statusbar"
+                   statusbar_visible="booked,sold"/>
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name="sold_seq" readonly="1"/>
+                <field name="date"/>
+                <field name="property_id"/>
+                <field name="customer_id"/>
+                <field name="sale_price" widget="monetary"/>
+              </group>
+              <group>
+                <field name="is_any_broker"/>
+                <field name="broker_id" invisible="not is_any_broker"/>
+                <field name="commission_type" invisible="not is_any_broker"/>
+                <field name="broker_commission" invisible="not is_any_broker"/>
+              </group>
+            </group>
+            <field name="notes"/>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record id="property_vendor_list_view" model="ir.ui.view">
+      <field name="name">property.vendor.list.view</field>
+      <field name="model">property.vendor</field>
+      <field name="arch" type="xml">
+        <list string="Sales &amp; Bookings">
+          <field name="sold_seq"/>
+          <field name="date"/>
+          <field name="property_id"/>
+          <field name="customer_id"/>
+          <field name="sale_price" widget="monetary"/>
+          <field name="stage"/>
+        </list>
+      </field>
+    </record>
+
+    <record id="property_vendor_action" model="ir.actions.act_window">
+      <field name="name">Property Sales &amp; Bookings</field>
+      <field name="res_model">property.vendor</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+  </data>
+</odoo>
