@@ -1,25 +1,32 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Digital Hut Africa.
-# Part of Digital Hut Africa. See LICENSE file for full copyright and licensing details.
 {
     "name": "Advanced Property Sale & Rental Management",
-    "description": """
-        - Property Sale
-        - Property Rental
-        - Lease Contract
-        - Landlord Management
-        - Customer Management
-        - Property Maintenance
-        - Customer Recurring Invoice
-        - Property List
-    """,
-    "summary": "Property Sale & Rental Management",
-    "version": "18.0.6.4",
-    "author": "Digital Hut Africa",
-    "company": "Digital Hut Africa",
-    "maintainer": "Digital Hut Africa",
-    "website": "https://www.diha.co.tz",
+    "summary": "Full Real Estate Suite: Sales, Rentals, Lease Contracts, Maintenance, and Landlord Portal.",
+    "version": "18.0.1.0.0", # Standardized for Odoo 18
     "category": "Industry",
+    "author": "Digital Hut Africa",
+    "website": "https://www.diha.co.tz",
+    "license": "OPL-1",
+    
+    # --- APP STORE PRICING ---
+    "price": 999.00,        # Set your desired price
+    "currency": "EUR",
+
+    "description": """
+Advanced Property Management for Odoo 18
+========================================
+A complete end-to-end solution for real estate companies, property managers, 
+and landlords.
+
+Key Features:
+-------------
+* **Property Sales & Rentals:** Manage the full lifecycle of property listings.
+* **Lease Contracts:** Automated contract generation and expiry tracking.
+* **Financial Management:** Recurring invoices for rent and utility bill management.
+* **Maintenance:** Integrated maintenance request and equipment tracking.
+* **Portals:** Dedicated portal for Landlords to track their property performance.
+* **Reporting:** Advanced XLS reports for occupancy and sales.
+""",
     "depends": [
         "base",
         "mail",
@@ -34,16 +41,13 @@
         "whatsapp",
     ],
     "data": [
-        # Security
         "security/groups.xml",
         "security/ir.model.access.csv",
         "security/security_update.xml",
         "security/security_manager.xml",
-        # Data
         "data/ir_cron.xml",
         "data/sequence.xml",
         "data/property_product_data.xml",
-        # Wizard Actions (must come before views that reference them)
         "wizard/property_maintenance_wizard_view.xml",
         "wizard/contract_wizard_view.xml",
         "wizard/property_payment_wizard_view.xml",
@@ -61,7 +65,6 @@
         "wizard/upload_utility_excel_wizard_view.xml",
         "wizard/utility_bill_send_views.xml",
         "wizard/agreement_template_preview_wizard_view.xml",
-        # Views
         "views/assets.xml",
         "views/property_details_view.xml",
         "views/property_document_view.xml",
@@ -88,13 +91,11 @@
         "views/maintenance_template_view.xml",
         "views/property_inspection.xml",
         "views/account_payment_inherit_view.xml",
-        # Inherit Views
         "views/maintenance_product_inherit.xml",
         "views/property_maintenance_view.xml",
         "views/property_crm_lead_inherit_view.xml",
         "views/maintenance_equipment_inherit_views.xml",
         "views/maintenance_equipment_category_inherit_views.xml",
-        # Reports
         "report/report_invoice_template.xml",
         "report/tenancy_details_report_template.xml",
         "report/property_details_report.xml",
@@ -107,7 +108,6 @@
         "report/expiring_contract_list_report.xml",
         "report/equipment_qr_code_report.xml",
         "report/payment_receipt_report.xml",
-        # Mail Templates
         "data/active_contract_mail_template.xml",
         "data/tenancy_reminder_mail_template.xml",
         "data/property_book_mail_template.xml",
@@ -124,23 +124,21 @@
         "data/register_payment_mail_template.xml",
         "views/property_manager_view.xml",
         "views/templates/landlord_portal.xml",
-        # Menus (last — depends on all views)
         "views/menus.xml",
     ],
     "assets": {
         "web.assets_backend": [
-            "rental_management/static/src/js/property_dashboard.js",
-            "rental_management/static/src/xml/property_dashboard.xml",
+            "property_management/static/src/js/property_dashboard.js",
+            "property_management/static/src/xml/property_dashboard.xml",
         ],
         "web.assets_frontend": [
-            "rental_management/static/src/js/portal.js",
-            "rental_management/static/src/css/lib/portal_style.css",
+            "property_management/static/src/js/portal.js",
+            "property_management/static/src/css/lib/portal_style.css",
         ],
     },
     "images": [
-        "static/description/property-rental.gif",
+        "static/description/banner.png", # Change from .gif to .png for better store display
     ],
-    "license": "OPL-1",
     "installable": True,
     "application": True,
     "auto_install": False,
